@@ -4,6 +4,11 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.List;
 
@@ -72,6 +77,19 @@ public class AppUtils {
         }
 
         return null;
+    }
+
+    /**
+     * Inflate a new view hierarchy from the specified xml resource.
+     *
+     * @param root         用于生成层次结构的父视图
+     * @param resource     layout id
+     * @param attachToRoot 是否附加到root
+     * @return
+     */
+    public static View inflate(@NonNull ViewGroup root, @LayoutRes int resource,
+                               boolean attachToRoot) {
+        return LayoutInflater.from(root.getContext()).inflate(resource, root, false);
     }
 
 }
