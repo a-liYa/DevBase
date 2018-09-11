@@ -31,8 +31,8 @@ dependencies {
 ext {
     publishArtifact = 'dev-base'
     publishVersion = vName
-    publishDesc = 'Android 权限申请工具类'
-    publishWebsite = 'https://github.com/a-liYa/Permission'
+    publishDesc = 'Android 开发基础库封装'
+    publishWebsite = 'https://github.com/a-liYa/DevBase'
 }
 
 apply from: "${rootDir}/publish.gradle"

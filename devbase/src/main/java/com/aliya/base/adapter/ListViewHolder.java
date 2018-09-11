@@ -24,7 +24,7 @@ public abstract class ListViewHolder<T> {
     }
 
     public ListViewHolder(ViewGroup parent, int layoutId) {
-        this(inflate(parent, layoutId, false));
+        this(inflate(layoutId, parent, false));
     }
 
     public int getPosition() {
