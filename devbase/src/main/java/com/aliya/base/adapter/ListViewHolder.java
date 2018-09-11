@@ -36,18 +36,20 @@ public abstract class ListViewHolder<T> {
     }
 
     /**
-     * 在设置数据之前。是默认的数据
+     * 设置数据
      *
-     * @param data
+     * @param data item data.
      */
     public void setData(T data) {
         this.mData = data;
-        bindView(data);
+        onBindView(data);
     }
 
     /**
-     * 刷新界面
+     * bind data to view.
+     *
+     * @param data item data.
      */
-    public abstract void bindView(T data);
+    public abstract void onBindView(T data);
 
 }

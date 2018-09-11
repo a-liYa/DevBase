@@ -1,13 +1,16 @@
 apply plugin: 'com.android.library'
 
+def vCode = 1
+def vName = '0.0.1'
+
 android {
     compileSdkVersion 27
 
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode vCode
+        versionName vName
     }
 
     buildTypes {
@@ -22,5 +25,15 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    compileOnly 'com.android.support:appcompat-v7:27.1.1'
 }
+
+ext {
+    publishArtifact = 'dev-base'
+    publishVersion = vName
+    publishDesc = 'Android 权限申请工具类'
+    publishWebsite = 'https://github.com/a-liYa/Permission'
+}
+
+apply from: "${rootDir}/publish.gradle"
+

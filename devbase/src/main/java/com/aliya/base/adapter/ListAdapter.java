@@ -54,7 +54,7 @@ public abstract class ListAdapter<T> extends BaseAdapter {
             viewHolder.itemView.setTag(R.id.tag_view_holder, viewHolder);
         }
         viewHolder.setPosition(position);
-        viewHolder.bindView(getItem(position));
+        viewHolder.onBindView(getItem(position));
         return viewHolder.itemView;
     }
 

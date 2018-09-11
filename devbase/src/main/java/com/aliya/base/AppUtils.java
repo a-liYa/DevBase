@@ -3,9 +3,10 @@ package com.aliya.base;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,48 @@ public class AppUtils {
     }
 
     /**
+     * dp 转 px
+     *
+     * @param dp dp value.
+     * @return The converted pixel value.
+     */
+    public static int dp2px(float dp) {
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
+                getContext().getResources().getDisplayMetrics()));
+    }
+
+    /**
+     * sp 转 px
+     *
+     * @param sp sp value.
+     * @return The converted pixel value.
+     */
+    public static int sp2px(float sp) {
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp,
+                getContext().getResources().getDisplayMetrics()));
+    }
+
+    /**
+     * px 转 dp
+     *
+     * @param px px value.
+     * @return The converted device independent pixels value.
+     */
+    public static float px2dp(int px) {
+        return px / getContext().getResources().getDisplayMetrics().density;
+    }
+
+    /**
+     * px 转 sp
+     *
+     * @param px px value.
+     * @return The converted scale independent pixels value.
+     */
+    public static float px2sp(float px) {
+        return (px / getContext().getResources().getDisplayMetrics().scaledDensity);
+    }
+
+    /**
      * 获取App名称
      *
      * @return app name
@@ -61,6 +104,12 @@ public class AppUtils {
         return appName;
     }
 
+    /**
+     * 获取当前进程的名字
+     *
+     * @param context context
+     * @return process name
+     */
     public static String getProcessName(Context context) {
         final int pid = android.os.Process.myPid();
 
@@ -68,28 +117,27 @@ public class AppUtils {
                 context.getSystemService(Context.ACTIVITY_SERVICE);
 
         List<ActivityManager.RunningAppProcessInfo>
-                processInfos = manager != null ? manager.getRunningAppProcesses() : null;
+                processes = manager != null ? manager.getRunningAppProcesses() : null;
 
-        if (processInfos != null) {
-            for (ActivityManager.RunningAppProcessInfo processInfo : processInfos) {
-                if (processInfo.pid == pid) return processInfo.processName;
+        if (processes != null) {
+            for (ActivityManager.RunningAppProcessInfo info : processes) {
+                if (info.pid == pid) return info.processName;
             }
         }
-
         return null;
     }
 
     /**
      * Inflate a new view hierarchy from the specified xml resource.
      *
+     * @param resource     ID for an XML layout
      * @param root         用于生成层次结构的父视图
-     * @param resource     layout id
      * @param attachToRoot 是否附加到root
-     * @return
+     * @return The root view of the inflated hierarchy.
      */
-    public static View inflate(@NonNull ViewGroup root, @LayoutRes int resource,
+    public static View inflate(@LayoutRes int resource, @NonNull ViewGroup root,
                                boolean attachToRoot) {
-        return LayoutInflater.from(root.getContext()).inflate(resource, root, false);
+        return LayoutInflater.from(root.getContext()).inflate(resource, root, attachToRoot);
     }
 
 }
