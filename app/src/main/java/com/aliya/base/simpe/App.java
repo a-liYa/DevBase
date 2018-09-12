@@ -1,7 +1,6 @@
 package com.aliya.base.simpe;
 
 import android.support.multidex.MultiDexApplication;
-import android.util.Log;
 
 import com.aliya.base.AppUtils;
 
@@ -16,7 +15,6 @@ public class App extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.e("TAG", "onApplicationCreate: ");
         AppUtils.init(this);
     }
 }

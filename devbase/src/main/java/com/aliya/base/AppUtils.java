@@ -23,9 +23,10 @@ import java.util.List;
 public class AppUtils {
 
     /**
-     * @see /build.gradle文件 属性android.buildTypes.(release/debug)#debuggable true/false 来决定
+     * @see /build.gradle文件 属性android.buildTypes.(release/debug)#debuggable true/false 来决定, 默认为true
      */
     private static boolean debuggable = true;
+    private static boolean isDebug = true;
 
     private static Context sContext;
 
@@ -42,12 +43,16 @@ public class AppUtils {
         }
     }
 
+    public static void setIsDebug(boolean isDebug) {
+        AppUtils.isDebug = isDebug;
+    }
+
     public static Context getContext() {
         return sContext;
     }
 
-    public static boolean debuggable() {
-        return debuggable;
+    public static boolean isDebuggable() {
+        return isDebug && debuggable;
     }
 
     /**
