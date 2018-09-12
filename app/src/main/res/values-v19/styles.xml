@@ -1,0 +1,9 @@
+<resources>
+
+    <!--TranslucentBar主题，仅针对API 19的设置在这-->
+    <style name="CoreTheme.Base">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+    </style>
+
+</resources>

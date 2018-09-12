@@ -1,11 +1,30 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="CoreTheme.Base">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="CoreTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <!--防止Buttom的文字变大写-->
+        <item name="android:textAllCaps">false</item>
+        <!--文字超出限制后默认显示...-->
+        <item name="android:ellipsize">end</item>
+        <!--Activity窗口的颜色-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+        <item name="android:windowContentOverlay">@null</item>
+
+        <!--边缘手势样式兼容5.0以下系统-->
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+
+    </style>
+
+    <style name="CoreTheme.Base"></style>
 
 </resources>

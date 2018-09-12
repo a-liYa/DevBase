@@ -5,11 +5,12 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
-import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.aliya.base.manager.AppManager;
 
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class AppUtils {
             } catch (Exception e) {
                 debuggable = false;
             }
+            AppManager.get();
         }
     }
 
