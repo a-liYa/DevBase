@@ -5,7 +5,6 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.aliya.base.AppUtils;
 
@@ -45,29 +44,23 @@ public class AppManager {
             new Application.ActivityLifecycleCallbacks() {
                 @Override
                 public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-                    Log.e("TAG", "onActivityCreated: " + activity.getClass().getSimpleName() + activity.hashCode());
                     get().addActivity(activity);
                 }
 
                 @Override
                 public void onActivityStarted(Activity activity) {
-                    Log.e("TAG", "onActivityStarted: " + activity.getClass().getSimpleName() + activity.hashCode());
                 }
 
                 @Override
                 public void onActivityResumed(Activity activity) {
-
-                    Log.e("TAG", "onActivityResumed: " + activity.getClass().getSimpleName() + activity.hashCode());
                 }
 
                 @Override
                 public void onActivityPaused(Activity activity) {
-                    Log.e("TAG", "onActivityPaused: " + activity.getClass().getSimpleName() + activity.hashCode());
                 }
 
                 @Override
                 public void onActivityStopped(Activity activity) {
-                    Log.e("TAG", "onActivityStopped: " + activity.getClass().getSimpleName() + activity.hashCode());
                 }
 
                 @Override
@@ -77,7 +70,6 @@ public class AppManager {
                 @Override
                 public void onActivityDestroyed(Activity activity) {
                     get().removeActivity(activity);
-                    Log.e("TAG", "onActivityDestroyed: " + activity.getClass().getSimpleName() + activity.hashCode());
                 }
             };
 
@@ -129,18 +121,6 @@ public class AppManager {
                 if (activity.getClass().equals(clazz)) return true;
             }
         return false;
-    }
-
-    /**
-     * 获取当前Activity（堆栈中最后一个压入的）
-     * TODO 待验证这个问题
-     *
-     * @return .
-     */
-    public @Nullable
-    Activity currentActivity() {
-        if (mActivityStack == null || mActivityStack.isEmpty()) return null;
-        return mActivityStack.peek();
     }
 
     /**
