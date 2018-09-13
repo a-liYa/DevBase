@@ -5,12 +5,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Point;
+import android.os.Build;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.aliya.base.manager.AppManager;
 
@@ -139,6 +143,33 @@ public class AppUtils {
         } catch (PackageManager.NameNotFoundException e) {
             return -1;
         }
+    }
+
+    /**
+     * 获取屏幕的像素大小.
+     *
+     * @param point A {@link Point} object to receive the size information.
+     * @return Math.max(point.x, point.y) 表示屏幕的高.
+     */
+    public static Point getScreenSize(Point point) {
+        /*
+        // 获取 window 宽高
+        DisplayMetrics metric = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metric);
+
+        // 等同于上面代码
+        Rect rect = new Rect();
+        getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+        */
+
+        WindowManager windowManager = (WindowManager)
+                getContext().getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) display.getRealSize(point);
+        else display.getSize(point);
+
+        return point;
     }
 
     /**
