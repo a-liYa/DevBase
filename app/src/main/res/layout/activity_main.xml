@@ -7,10 +7,10 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:onClick="onViewClick"
         android:paddingTop="50dp"
         android:text="Go SecondActivity!" />
 

@@ -7,15 +7,17 @@ import android.view.View;
 
 import com.aliya.base.simpe.activity.SecondActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        findViewById(R.id.tv).setOnClickListener(this);
     }
 
-    public void onViewClick(View v) {
+    @Override
+    public void onClick(View v) {
         startActivity(new Intent(this, SecondActivity.class));
     }
 
