@@ -1,7 +1,9 @@
 package com.aliya.base;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -26,7 +28,7 @@ import java.util.List;
  * @author a_liYa
  * @date 2018/7/30 14:48.
  */
-public class AppUtils {
+public final class AppUtils {
 
     /**
      * @see /build.gradle文件 属性android.buildTypes.(release/debug)#debuggable true/false 来决定, 默认为true
@@ -170,6 +172,22 @@ public class AppUtils {
         else display.getSize(point);
 
         return point;
+    }
+
+    /**
+     * 获取 Activity 通过 Context.
+     *
+     * @param context context shouldn't instanceof application.
+     * @return activity
+     */
+    public static Activity getActivityByContext(Context context) {
+        while (context instanceof ContextWrapper) {
+            if (context instanceof Activity) {
+                return (Activity) context;
+            }
+            context = ((ContextWrapper) context).getBaseContext();
+        }
+        return null;
     }
 
     /**
