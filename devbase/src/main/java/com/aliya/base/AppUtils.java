@@ -2,7 +2,9 @@ package com.aliya.base;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.util.TypedValue;
@@ -112,26 +114,82 @@ public class AppUtils {
     }
 
     /**
+     * 获取当前 App 版本名称
+     *
+     * @return version name, fetch failure returns null.
+     */
+    public static String getVersion() {
+        try {
+            return sContext.getPackageManager()
+                    .getPackageInfo(sContext.getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            return null;
+        }
+    }
+
+    /**
+     * 获取当前 App 版本code
+     *
+     * @return version code, fetch failure returns -1.
+     */
+    public static int getVersionCode() {
+        try {
+            return sContext.getPackageManager()
+                    .getPackageInfo(sContext.getPackageName(), 0).versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            return -1;
+        }
+    }
+
+    /**
      * 获取当前进程的名字
      *
-     * @param context context
      * @return process name
      */
-    public static String getProcessName(Context context) {
+    public static String getProcessName() {
         final int pid = android.os.Process.myPid();
 
         ActivityManager manager = (ActivityManager)
-                context.getSystemService(Context.ACTIVITY_SERVICE);
+                sContext.getSystemService(Context.ACTIVITY_SERVICE);
 
-        List<ActivityManager.RunningAppProcessInfo>
-                processes = manager != null ? manager.getRunningAppProcesses() : null;
-
-        if (processes != null) {
-            for (ActivityManager.RunningAppProcessInfo info : processes) {
-                if (info.pid == pid) return info.processName;
+        if (manager != null) {
+            List<ActivityManager.RunningAppProcessInfo>
+                    processes = manager.getRunningAppProcesses();
+            if (processes != null) {
+                for (ActivityManager.RunningAppProcessInfo info : processes) {
+                    if (info.pid == pid) return info.processName;
+                }
             }
         }
         return null;
+    }
+
+    /**
+     * 获取 MetaData 数据
+     *
+     * @param name key name.
+     * @return value string.
+     */
+    public static String getMetaData(String name) {
+        try {
+            return sContext.getPackageManager().getApplicationInfo(sContext.getPackageName(),
+                    PackageManager.GET_META_DATA).metaData.getString(name);
+        } catch (PackageManager.NameNotFoundException e) {
+            return null;
+        }
+    }
+
+    /**
+     * 通过包名开启应用
+     *
+     * @param packageName 包名
+     */
+    public static void startApp(String packageName) {
+        Intent intent = sContext.getPackageManager().getLaunchIntentForPackage(packageName);
+        if (intent != null) {
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            sContext.startActivity(intent);
+        }
     }
 
     /**
