@@ -26,9 +26,10 @@ public final class T {
      *
      * @param context context
      * @param message 显示内容, 为空不显示
+     * @return toast, {@link #isShow} = false 或 message == null 时返回 null.
      */
-    public static void showShort(Context context, CharSequence message) {
-        show(context, message, Toast.LENGTH_SHORT);
+    public static Toast showShort(Context context, CharSequence message) {
+        return show(context, message, Toast.LENGTH_SHORT);
     }
 
     /**
@@ -36,9 +37,10 @@ public final class T {
      *
      * @param context context
      * @param resId   Resource id for the string.
+     * @return toast, {@link #isShow} = false 时返回 null.
      */
-    public static void showShort(Context context, int resId) {
-        show(context, resId, Toast.LENGTH_SHORT);
+    public static Toast showShort(Context context, int resId) {
+        return show(context, resId, Toast.LENGTH_SHORT);
     }
 
     /**
@@ -46,9 +48,10 @@ public final class T {
      *
      * @param context context
      * @param message 显示内容, 为空不显示
+     * @return toast, {@link #isShow} = false 或 message == null 时返回 null.
      */
-    public static void showLong(Context context, CharSequence message) {
-        show(context, message, Toast.LENGTH_LONG);
+    public static Toast showLong(Context context, CharSequence message) {
+        return show(context, message, Toast.LENGTH_LONG);
     }
 
     /**
@@ -56,9 +59,10 @@ public final class T {
      *
      * @param context context
      * @param resId   Resource id for the string.
+     * @return toast, {@link #isShow} = false 时返回 null.
      */
-    public static void showLong(Context context, int resId) {
-        show(context, resId, Toast.LENGTH_LONG);
+    public static Toast showLong(Context context, int resId) {
+        return show(context, resId, Toast.LENGTH_LONG);
     }
 
     /**
@@ -67,10 +71,15 @@ public final class T {
      * @param context  context
      * @param message  显示内容, 为空不显示
      * @param duration 时长类型
+     * @return toast, {@link #isShow} = false 或 message == null 时返回 null.
      */
-    public static void show(Context context, CharSequence message, int duration) {
-        if (isShow && !TextUtils.isEmpty(message))
-            Toast.makeText(context, message, duration).show();
+    public static Toast show(Context context, CharSequence message, int duration) {
+        Toast toast = null;
+        if (isShow && !TextUtils.isEmpty(message)) {
+            toast = Toast.makeText(context, message, duration);
+            toast.show();
+        }
+        return toast;
     }
 
 
@@ -80,10 +89,15 @@ public final class T {
      * @param context  context
      * @param resId    Resource id for the string.
      * @param duration 时长类型
+     * @return toast, {@link #isShow} = false 时返回 null.
      */
-    public static void show(Context context, int resId, int duration) {
-        if (isShow)
-            Toast.makeText(context, resId, duration).show();
+    public static Toast show(Context context, int resId, int duration) {
+        Toast toast = null;
+        if (isShow) {
+            toast = Toast.makeText(context, resId, duration);
+            toast.show();
+        }
+        return toast;
     }
 
     /**
