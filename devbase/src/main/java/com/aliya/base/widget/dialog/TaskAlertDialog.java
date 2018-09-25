@@ -29,6 +29,7 @@ public class TaskAlertDialog extends Dialog {
     private TextView mTvToast;
     private ImageView mIvIcon;
 
+    private String alertText = "正在处理";
     private String cancelText = "双击撤销!";    // 撤销提醒内容
     private CancelListener mCancelListener;
 
@@ -58,6 +59,7 @@ public class TaskAlertDialog extends Dialog {
      * @return this
      */
     public TaskAlertDialog setText(String text) {
+        alertText = text;
         if (mTvToast != null) {
             mTvToast.setText(text);
         }
@@ -110,7 +112,6 @@ public class TaskAlertDialog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         View contentView = View.inflate(getContext(),
                 R.layout.layout_task_alert_dialog, null);
 
@@ -118,13 +119,27 @@ public class TaskAlertDialog extends Dialog {
         mIvIcon = findViewById(R.id.iv_icon);
         mTvToast = findViewById(R.id.tv_toast);
 
-        mIvIcon.setImageResource(R.mipmap.icon_task_alert_operate);
+        bindData();
+    }
 
-        RotateAnimation animation = new RotateAnimation(0, 360,
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        animation.setRepeatCount(Animation.INFINITE);
-        animation.setDuration(1200);
-        mIvIcon.startAnimation(animation);
+    private void bindData() {
+        if (mTvToast != null) {
+            mTvToast.setText(alertText);
+        }
+        if (mIvIcon != null) {
+            mIvIcon.setImageResource(R.mipmap.icon_task_alert_operate);
+            RotateAnimation animation = new RotateAnimation(0, 360,
+                    Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+            animation.setRepeatCount(Animation.INFINITE);
+            animation.setDuration(1200);
+            mIvIcon.startAnimation(animation);
+        }
+    }
+
+    @Override
+    public void show() {
+        super.show();
+        bindData();
     }
 
     private long clickTime;

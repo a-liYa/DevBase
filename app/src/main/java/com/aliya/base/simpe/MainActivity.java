@@ -13,6 +13,8 @@ import java.util.Stack;
 public class MainActivity extends Activity implements View.OnClickListener, ViewGroup
         .OnHierarchyChangeListener {
 
+    private TaskAlertDialog mAlertDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +56,21 @@ public class MainActivity extends Activity implements View.OnClickListener, View
 //        startActivity(new Intent(this, SecondActivity.class));
 //        getDecorChildView(0);
 //        printView();
+
+        if (mAlertDialog == null) {
+            mAlertDialog = new TaskAlertDialog(this);
+            mAlertDialog.setText("进行中");
+        }
+        mAlertDialog.show();
+
+        getWindow().getDecorView().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mAlertDialog != null) {
+                    mAlertDialog.finish(true);
+                }
+            }
+        }, 2000);
 
     }
 
