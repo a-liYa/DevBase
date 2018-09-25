@@ -28,8 +28,8 @@ public class ClickTracker {
 
     private long timeMillis;
 
-    private static final LruCache<String, SoftReference<ClickTracker>>
-            sClickCache = new LruCache<>(CACHE_MAX_SIZE);
+    private static final
+    LruCache<String, SoftReference<ClickTracker>> sClickCache = new LruCache<>(CACHE_MAX_SIZE);
 
     private static ReferenceQueue<ClickTracker> sReferenceQueue = new ReferenceQueue<>();
 

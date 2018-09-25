@@ -4,6 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="statusBarColor">#33000000</color>
-
+    <color name="statusBarColor">#3f000000</color>
+    <color name="system_bar_background_semi_transparent">#3f00ff00</color>
 </resources>

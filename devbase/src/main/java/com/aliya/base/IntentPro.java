@@ -70,7 +70,7 @@ public class IntentPro {
      * 设置 Flags
      *
      * @param flags The desired flags.
-     * @return return this.
+     * @return Return this.
      * @see Intent#setFlags(int)
      */
     public IntentPro setFlags(int flags) {
@@ -82,7 +82,7 @@ public class IntentPro {
      * 设置 Bundle
      *
      * @param bundle Bundle
-     * @return return this.
+     * @return Return this.
      */
     public IntentPro putAll(Bundle bundle) {
         mBundle.putAll(bundle);
@@ -90,9 +90,9 @@ public class IntentPro {
     }
 
     /**
-     * 获取 Intent.
+     * 获取 Intent
      *
-     * @return intent.
+     * @return Return intent.
      */
     public Intent intent() {
         if (mBundle != null) {
