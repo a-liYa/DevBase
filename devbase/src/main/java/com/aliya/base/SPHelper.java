@@ -78,7 +78,8 @@ public final class SPHelper {
      *
      * @param key   关键字
      * @param value 值
-     * @param <T>   泛型可为：int、float、boolean、String、long、Set<String>
+     * @param <T>   泛型可为：int、float、boolean、String、long、Set&lt;String&gt;
+     * @return this
      */
     public <T> SPHelper put(String key, T value) {
         editor = getSharedPreferencesEditor();

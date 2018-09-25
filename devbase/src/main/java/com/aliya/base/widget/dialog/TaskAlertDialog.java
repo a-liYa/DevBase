@@ -55,6 +55,7 @@ public class TaskAlertDialog extends Dialog {
      * 设置进行中显示的内容
      *
      * @param text 文本
+     * @return this
      */
     public TaskAlertDialog setText(String text) {
         if (mTvToast != null) {
@@ -67,6 +68,7 @@ public class TaskAlertDialog extends Dialog {
      * 设置取消提醒内容
      *
      * @param cancelText .
+     * @return this
      */
     public TaskAlertDialog setCancelText(String cancelText) {
         this.cancelText = cancelText;
