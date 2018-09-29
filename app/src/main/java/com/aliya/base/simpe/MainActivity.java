@@ -1,121 +1,77 @@
 package com.aliya.base.simpe;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.aliya.base.widget.dialog.TaskAlertDialog;
+import com.aliya.base.simpe.ui.MainTabLayout;
 
-import java.util.Stack;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class MainActivity extends Activity implements View.OnClickListener, ViewGroup
-        .OnHierarchyChangeListener {
+public class MainActivity extends AppCompatActivity {
 
-    private TaskAlertDialog mAlertDialog;
+    @BindView(R.id.tab_layout)
+    MainTabLayout mTabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        ButterKnife.bind(this);
         getDecorChildView(0).setFitsSystemWindows(false);
+        mTabLayout.setupBind(this, getSupportFragmentManager(), R.id.frame_layout);
+        mTabLayout.setAdapter(new MainTabAdapterImpl());
 
-        findViewById(R.id.tv).setOnClickListener(this);
+    }
 
-//        mFrameLayout = findViewById(R.id.id_frame);
-//        ViewParent parent = mFrameLayout.getParent();
-//        do {
-//            Log.e("TAG", "parent: " + parent);
-//            try {
-//                Thread.sleep(10);
-//            } catch (InterruptedException e) {
-//            }
-//            if (parent instanceof View) {
-//                if (parent.getParent() == null) {
-//                    if (parent instanceof FrameLayout) {
-//                        ((FrameLayout) parent).setOnHierarchyChangeListener(this);
-//                    }
-//                }
-//                parent = parent.getParent();
-//            } else {
-//                break;
-//
-//            }
-//        } while (true);
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-//        moveTaskToBack(true); // 返回键切至后台不关闭页面
-    }
-
-    public void onClick(View v) {
-//        startActivity(new Intent(this, SecondActivity.class));
-//        getDecorChildView(0);
-//        printView();
-
-        if (mAlertDialog == null) {
-            mAlertDialog = new TaskAlertDialog(this);
-            mAlertDialog.setText("进行中");
-        }
-        mAlertDialog.show();
-
-        getWindow().getDecorView().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (mAlertDialog != null) {
-                    mAlertDialog.finish(true);
-                }
-            }
-        }, 2000);
-
-    }
-
-    private void printView() {
-        Stack<View> stack = new Stack<>();
-        View decorView = getWindow().getDecorView();
-        decorView.setTag(R.id.all, 0);
-        stack.add(decorView);
-        while (!stack.isEmpty()) {
-            View pop = stack.pop();
-            Integer depth = (Integer) pop.getTag(R.id.all);
-            Log.e("TAG", String.format("%" + (depth * 4 + 1) + "s", "") + pop);
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-            }
-            if (pop instanceof ViewGroup) {
-                for (int i = 0; i < ((ViewGroup) pop).getChildCount(); i++) {
-                    View child = ((ViewGroup) pop).getChildAt(i);
-                    child.setTag(R.id.all, depth + 1);
-                    stack.add(child);
-                }
-            }
-        }
-    }
-
-    @Override
-    public void onChildViewAdded(View parent, View child) {
-//        if (child.getId() == android.R.id.statusBarBackground) {
-//            child.setBackgroundResource(R.color.statusBarColor);
-//        }
-        Log.e("TAG", "onChildViewAdded: " + child);
-    }
-
-    @Override
-    public void onChildViewRemoved(View parent, View child) {
-        Log.e("TAG", "onChildViewRemoved: " + child);
+        moveTaskToBack(true); // 返回键切至后台不关闭页面
     }
 
     public View getDecorChildView(int index) {
         View v = ((ViewGroup) getWindow().getDecorView()).getChildAt(index);
-        ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
-        Log.e("TAG", "pt-pb : mt-mb = " + v.getPaddingTop() + "-" + v.getPaddingBottom()
-                + " : " + lp.topMargin + "-" + lp.bottomMargin);
         return v;
+    }
+
+    class MainTabAdapterImpl implements MainTabLayout.TabAdapter {
+
+        private MainTab[] tabs = MainTab.values();
+
+        @Override
+        public int getCount() {
+            return tabs.length;
+        }
+
+        @Override
+        public MainTabLayout.TabInfo getTab(int position, ViewGroup parent) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.item_main_tab_layout, parent, false);
+
+            MainTab tab = tabs[position];
+
+            ImageView imageView = view.findViewById(R.id.iv_tab);
+            imageView.setImageResource(tab.getResIcon());
+
+            TextView textView = view.findViewById(R.id.tv_tab);
+            textView.setText(tab.getTitle());
+
+            return new MainTabLayout.TabInfo(view, tab.getClz(), null);
+        }
+
     }
 
 }
