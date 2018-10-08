@@ -15,19 +15,19 @@ import java.util.ArrayList;
  * @author a_liYa
  * @date 2016/5/21 21:17.
  */
-public class IntentPro {
+public class IntentBuilder {
 
     private Intent mIntent;
 
     private Bundle mBundle;
 
-    private IntentPro(Context context, Class<? extends Activity> clazz) {
+    private IntentBuilder(Context context, Class<? extends Activity> clazz) {
         super();
         mIntent = new Intent(context, clazz);
     }
 
-    public static IntentPro get(Class<? extends Activity> clazz) {
-        return new IntentPro(AppUtils.getContext(), clazz);
+    public static IntentBuilder get(Class<? extends Activity> clazz) {
+        return new IntentBuilder(AppUtils.getContext(), clazz);
     }
 
     /**
@@ -38,7 +38,7 @@ public class IntentPro {
      * @param <T>   泛型可为：int、float、boolean、String、long、byte、Serializable
      * @return return this.
      */
-    public <T> IntentPro put(String key, T value) {
+    public <T> IntentBuilder put(String key, T value) {
         if (mBundle == null) {
             mBundle = new Bundle();
         }
@@ -73,7 +73,7 @@ public class IntentPro {
      * @return Return this.
      * @see Intent#setFlags(int)
      */
-    public IntentPro setFlags(int flags) {
+    public IntentBuilder setFlags(int flags) {
         mIntent.setFlags(flags);
         return this;
     }
@@ -84,7 +84,7 @@ public class IntentPro {
      * @param bundle Bundle
      * @return Return this.
      */
-    public IntentPro putAll(Bundle bundle) {
+    public IntentBuilder putAll(Bundle bundle) {
         mBundle.putAll(bundle);
         return this;
     }
