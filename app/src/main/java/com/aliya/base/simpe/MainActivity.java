@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aliya.base.simpe.ui.MainTabLayout;
-import com.aliya.base.simpe.ui.activity.SecondActivity;
+import com.aliya.base.simpe.ui.activity.NormalPageActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         getDecorChildView(0).setFitsSystemWindows(false);
         mTabLayout.setupBind(this, getSupportFragmentManager(), R.id.frame_layout);
         mTabLayout.setAdapter(new MainTabAdapterImpl());
-        startActivity(new Intent(this, SecondActivity.class));
+        startActivity(new Intent(this, NormalPageActivity.class));
         finish();
     }
 
