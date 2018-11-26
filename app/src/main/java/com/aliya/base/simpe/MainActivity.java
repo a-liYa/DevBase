@@ -1,5 +1,6 @@
 package com.aliya.base.simpe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.aliya.base.simpe.ui.MainTabLayout;
+import com.aliya.base.simpe.ui.activity.SecondActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
         getDecorChildView(0).setFitsSystemWindows(false);
         mTabLayout.setupBind(this, getSupportFragmentManager(), R.id.frame_layout);
         mTabLayout.setAdapter(new MainTabAdapterImpl());
-
+        startActivity(new Intent(this, SecondActivity.class));
+        finish();
     }
 
     @Override

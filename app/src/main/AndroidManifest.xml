@@ -21,6 +21,7 @@
         </activity>
         <activity android:name=".ui.activity.SecondActivity" />
         <activity android:name=".ui.activity.NormalPageActivity" />
+        <activity android:name=".ui.activity.FullscreenPageActivity" />
     </application>
 
 </manifest>

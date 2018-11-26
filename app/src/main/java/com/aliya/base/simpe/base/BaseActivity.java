@@ -2,7 +2,10 @@ package com.aliya.base.simpe.base;
 
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
+import android.view.View;
 import android.view.ViewGroup;
+
+import com.aliya.base.simpe.R;
 
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
@@ -17,7 +20,12 @@ public class BaseActivity extends SwipeBackActivity {
     @CallSuper
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
         ((ViewGroup) getWindow().getDecorView()).getChildAt(0).setFitsSystemWindows(false);
+        View view = findViewById(R.id.action_bar_root);
+        if (view != null) {
+            view.setFitsSystemWindows(false);
+        }
+        super.onPostCreate(savedInstanceState);
     }
+
 }
