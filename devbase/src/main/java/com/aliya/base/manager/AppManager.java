@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 
 import com.aliya.base.AppUtils;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Stack;
 
 /**
@@ -21,6 +23,7 @@ public class AppManager {
     private volatile static AppManager sInstance;
 
     private Stack<Activity> mActivityStack;
+    private Set<AppFrontBackCallback> mCallbacks = new HashSet<>();
 
     private AppManager() {
         Context app = AppUtils.getContext().getApplicationContext();
@@ -42,6 +45,10 @@ public class AppManager {
 
     private static final Application.ActivityLifecycleCallbacks lifecycleCallbacks =
             new Application.ActivityLifecycleCallbacks() {
+
+                // 打开的Activity数量统计
+                private int activityStartCount = 0;
+
                 @Override
                 public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
                     get().addActivity(activity);
@@ -49,6 +56,10 @@ public class AppManager {
 
                 @Override
                 public void onActivityStarted(Activity activity) {
+                    // 数值从 0 -> 1 说明是从后台切到前台
+                    if (++activityStartCount == 1) {
+                        get().dispatchOnFront();
+                    }
                 }
 
                 @Override
@@ -61,6 +72,10 @@ public class AppManager {
 
                 @Override
                 public void onActivityStopped(Activity activity) {
+                    // 数值从 1 -> 0 说明是从前台切到后台
+                    if (--activityStartCount == 0) {
+                        get().dispatchOnBack();
+                    }
                 }
 
                 @Override
@@ -72,6 +87,26 @@ public class AppManager {
                     get().removeActivity(activity);
                 }
             };
+
+    private void dispatchOnFront() {
+        for (AppFrontBackCallback callback : mCallbacks) {
+            if (callback != null) callback.onFront();
+        }
+    }
+
+    private void dispatchOnBack() {
+        for (AppFrontBackCallback callback : mCallbacks) {
+            if (callback != null) callback.onBack();
+        }
+    }
+
+    public void registerAppFrontBackCallback(AppFrontBackCallback callback) {
+        mCallbacks.add(callback);
+    }
+
+    public void unregisterAppFrontBackCallback(AppFrontBackCallback callback) {
+        mCallbacks.remove(callback);
+    }
 
     /**
      * 添加Activity到堆栈.
@@ -188,6 +223,17 @@ public class AppManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    /**
+     * 前后台切换回调接口
+     */
+    public interface AppFrontBackCallback {
+
+        void onFront();
+
+        void onBack();
     }
 
 }
