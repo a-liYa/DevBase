@@ -10,7 +10,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.MediaStore;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
@@ -24,7 +23,6 @@ import android.view.WindowManager;
 import com.aliya.base.manager.AppManager;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.List;
 
 /**

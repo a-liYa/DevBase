@@ -1,5 +1,6 @@
 package com.aliya.base.simpe.utils;
 
+import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,13 +26,17 @@ public class Utils {
         while (!stack.isEmpty()) {
             View pop = stack.pop();
             Integer depth = (Integer) pop.getTag(R.id.all);
-            Log.e("TAG", String.format("%" + (depth * 4 + 1) + "s", "") + pop);
+            String msg = String.format("%" + (depth * 4 + 1) + "s", "") + pop;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                msg += " - " + pop.getFitsSystemWindows();
+            }
+            Log.e("TAG", msg);
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
             }
             if (pop instanceof ViewGroup) {
-                for (int i = ((ViewGroup) pop).getChildCount() - 1; i >= 0 ; i--) {
+                for (int i = ((ViewGroup) pop).getChildCount() - 1; i >= 0; i--) {
                     View child = ((ViewGroup) pop).getChildAt(i);
                     child.setTag(R.id.all, depth + 1);
                     stack.add(child);
