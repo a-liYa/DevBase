@@ -22,19 +22,18 @@ public final class Views {
      * @param enabled {@link View#setEnabled(boolean)}
      */
     public static void setViewEnabled(View view, boolean enabled) {
-        if (view == null) {
-            return;
-        }
-        Queue<View> queue = new LinkedList();
-        queue.add(view);
-        while (!queue.isEmpty()) {
-            View poll = queue.poll();
-            if (poll != null) {
-                poll.setEnabled(enabled);
-                if (poll instanceof ViewGroup) {
-                    ViewGroup parent = (ViewGroup) poll;
-                    for (int i = 0, count = parent.getChildCount(); i < count; i++) {
-                        queue.add(parent.getChildAt(i));
+        if (view != null) {
+            Queue<View> queue = new LinkedList();
+            queue.add(view);
+            while (!queue.isEmpty()) {
+                View poll = queue.poll();
+                if (poll != null) {
+                    poll.setEnabled(enabled);
+                    if (poll instanceof ViewGroup) {
+                        ViewGroup parent = (ViewGroup) poll;
+                        for (int i = 0, count = parent.getChildCount(); i < count; i++) {
+                            queue.add(parent.getChildAt(i));
+                        }
                     }
                 }
             }
