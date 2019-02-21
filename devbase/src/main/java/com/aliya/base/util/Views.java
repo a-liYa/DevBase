@@ -1,4 +1,4 @@
-package com.aliya.base.widget;
+package com.aliya.base.util;
 
 import android.view.View;
 import android.view.ViewGroup;

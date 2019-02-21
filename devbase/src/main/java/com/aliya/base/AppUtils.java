@@ -8,11 +8,9 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
-import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -22,7 +20,6 @@ import android.view.WindowManager;
 
 import com.aliya.base.manager.AppManager;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -255,28 +252,6 @@ public final class AppUtils {
     public static View inflate(@LayoutRes int resource, @NonNull ViewGroup root,
                                boolean attachToRoot) {
         return LayoutInflater.from(root.getContext()).inflate(resource, root, attachToRoot);
-    }
-
-    /**
-     * 扫描文件，加入相册预览
-     *
-     * @param path 文件绝对路径
-     * @see android.Manifest.permission_group#STORAGE 加入对sd卡操作的权限
-     */
-    public static void mediaScanFile(String path) {
-        if (TextUtils.isEmpty(path)) return;
-
-        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        intent.setData(Uri.fromFile(new File(path)));
-        sContext.sendBroadcast(intent);
-
-        // 以下是同步操作,但比较耗时 3M的照片耗时1233ms
-//        try {
-//            MediaStore.Images.Media.insertImage(sContext.getContentResolver(),
-//                    path, new File(path).getName(), null);
-//        } catch (FileNotFoundException e) {
-//            // no-op
-//        }
     }
 
 }
