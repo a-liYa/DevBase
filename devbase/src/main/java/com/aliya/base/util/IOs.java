@@ -13,14 +13,14 @@ public final class IOs {
 
     public static void close(Closeable... closeables) {
         if (closeables == null) return;
-        try {
-            for (Closeable closeable : closeables) {
-                if (closeable != null) {
+
+        for (Closeable closeable : closeables) {
+            if (closeable != null)
+                try {
                     closeable.close();
+                } catch (IOException e) {
+                    // no-op
                 }
-            }
-        } catch (IOException e) {
-            // no-op
         }
     }
 
