@@ -7,40 +7,51 @@
     android:background="@android:color/holo_blue_light"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".ui.activity.NormalPageActivity">
+    tools:context=".ui.activity.LiveEventActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="42dp"
         android:background="@android:color/holo_blue_dark"
         android:gravity="center"
-        android:text="Top Bar"
+        android:text="LiveEvent"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/tv_status_bar_color"
+        android:id="@+id/tv_bind_size"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_gravity="center_horizontal"
-        android:background="?android:selectableItemBackground"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="切换状态栏颜色" />
+        android:text="绑定个数"
+        android:textSize="18sp" />
 
     <TextView
+        android:id="@+id/tv_observe"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="普通页面" />
+        android:text="绑定"
+        android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/tv_navigation_bar_color"
+        android:id="@+id/tv_remove"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_gravity="center_horizontal"
-        android:background="?android:selectableItemBackground"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:gravity="center"
-        android:text="切换导航栏颜色" />
+        android:text="解绑"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="发送事件"
+        android:textSize="18sp" />
 
 </LinearLayout>
