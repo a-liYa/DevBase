@@ -1,7 +1,6 @@
 package com.aliya.base;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.os.Looper;
 
 /**
@@ -10,22 +9,19 @@ import android.os.Looper;
  * @author a_liYa
  * @date 2018/3/28 22:49.
  */
-public class LiveEvent {
+public class LiveEvent extends LiveData {
 
     private static volatile LiveEvent sInstance;
-    private MutableLiveData<Object> mLiveData = new MutableLiveData<>();
 
     private LiveEvent() {
     }
 
-    private static LiveEvent get() {
-        if (sInstance == null) {
+    public static LiveEvent get() {
+        if (sInstance == null)
             synchronized (LiveEvent.class) {
-                if (sInstance == null) {
+                if (sInstance == null)
                     sInstance = new LiveEvent();
-                }
             }
-        }
         return sInstance;
     }
 
@@ -36,13 +32,13 @@ public class LiveEvent {
      */
     public static void post(Object event) {
         if (isMainThread())
-            get().mLiveData.setValue(event);
+            get().setValue(event);
         else
-            get().mLiveData.postValue(event);
+            get().postValue(event);
     }
 
     public static LiveData liveData() {
-        return get().mLiveData;
+        return get();
     }
 
     private static boolean isMainThread() {
