@@ -5,6 +5,10 @@ import android.os.Looper;
 
 /**
  * 实现 EventBus的功能
+ * <p>
+ * 1 注册事件：LiveEvent.liveData().observe(owner, observer)
+ * 2 注销事件：LiveEvent.liveData().removeObserver(observer)
+ * 3 发送事件：LiveEvent.post(event)
  *
  * @author a_liYa
  * @date 2018/3/28 22:49.
