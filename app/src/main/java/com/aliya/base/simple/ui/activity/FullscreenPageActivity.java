@@ -1,4 +1,4 @@
-package com.aliya.base.simpe.ui.activity;
+package com.aliya.base.simple.ui.activity;
 
 import android.app.Activity;
 import android.os.Build;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.aliya.base.simpe.R;
+import com.aliya.base.simple.R;
 
 /**
  * 全屏页示例

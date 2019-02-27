@@ -1,6 +1,6 @@
-package com.aliya.base.simpe.constant;
+package com.aliya.base.simple.constant;
 
-import com.aliya.base.simpe.R;
+import com.aliya.base.simple.R;
 
 /**
  * 颜色值定义类

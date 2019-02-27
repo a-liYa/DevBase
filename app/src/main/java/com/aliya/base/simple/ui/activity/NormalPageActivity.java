@@ -1,13 +1,13 @@
-package com.aliya.base.simpe.ui.activity;
+package com.aliya.base.simple.ui.activity;
 
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 
-import com.aliya.base.simpe.R;
-import com.aliya.base.simpe.base.BaseActivity;
-import com.aliya.base.simpe.constant.Colors;
+import com.aliya.base.simple.R;
+import com.aliya.base.simple.base.BaseActivity;
+import com.aliya.base.simple.constant.Colors;
 
 /**
  * 普通页面示例

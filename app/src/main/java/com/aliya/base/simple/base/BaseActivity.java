@@ -1,11 +1,11 @@
-package com.aliya.base.simpe.base;
+package com.aliya.base.simple.base;
 
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.aliya.base.simpe.R;
+import com.aliya.base.simple.R;
 
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 

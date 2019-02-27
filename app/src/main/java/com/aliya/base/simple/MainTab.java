@@ -1,8 +1,8 @@
-package com.aliya.base.simpe;
+package com.aliya.base.simple;
 
-import com.aliya.base.simpe.ui.main.FindFragment;
-import com.aliya.base.simpe.ui.main.HomeFragment;
-import com.aliya.base.simpe.ui.main.VideoFragment;
+import com.aliya.base.simple.ui.main.FindFragment;
+import com.aliya.base.simple.ui.main.HomeFragment;
+import com.aliya.base.simple.ui.main.VideoFragment;
 
 /**
  * 主界面 tab 对应的 Fragment 枚举

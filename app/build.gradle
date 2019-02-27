@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.aliya.base.simpe"
+        applicationId "com.aliya.base.simple"
         minSdkVersion 14
         targetSdkVersion 27
         versionCode 1
@@ -26,11 +26,11 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation 'me.imid.swipebacklayout.lib:library:1.1.0'
-
+    implementation 'android.arch.lifecycle:extensions:1.1.0'
     implementation 'com.jakewharton:butterknife:8.8.1'
+
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-
     implementation 'com.aliya:fitwindow:2.0.0.dev'
-
     implementation project(':devbase')
+    implementation 'com.google.code.gson:gson:2.8.5'
 }

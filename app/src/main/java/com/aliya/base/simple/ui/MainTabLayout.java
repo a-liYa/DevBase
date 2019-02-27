@@ -1,4 +1,4 @@
-package com.aliya.base.simpe.ui;
+package com.aliya.base.simple.ui;
 
 import android.content.Context;
 import android.os.Bundle;

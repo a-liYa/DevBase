@@ -1,4 +1,4 @@
-package com.aliya.base.simpe;
+package com.aliya.base.simple;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.aliya.base.simpe.ui.MainTabLayout;
-import com.aliya.base.simpe.ui.activity.LiveEventActivity;
+import com.aliya.base.simple.ui.MainTabLayout;
+import com.aliya.base.simple.viewmodel.CitySelectActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         getDecorChildView(0).setFitsSystemWindows(false);
         mTabLayout.setupBind(this, getSupportFragmentManager(), R.id.frame_layout);
         mTabLayout.setAdapter(new MainTabAdapterImpl());
-        startActivity(new Intent(this, LiveEventActivity.class));
+        startActivity(new Intent(this, CitySelectActivity.class));
         finish();
     }
 

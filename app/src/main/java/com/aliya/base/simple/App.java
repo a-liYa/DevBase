@@ -1,4 +1,4 @@
-package com.aliya.base.simpe;
+package com.aliya.base.simple;
 
 import android.support.multidex.MultiDexApplication;
 

@@ -1,4 +1,4 @@
-package com.aliya.base.simpe.ui.activity;
+package com.aliya.base.simple.ui.activity;
 
 import android.arch.lifecycle.Observer;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.aliya.base.LiveEvent;
-import com.aliya.base.simpe.R;
-import com.aliya.base.simpe.base.BaseActivity;
+import com.aliya.base.simple.R;
+import com.aliya.base.simple.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

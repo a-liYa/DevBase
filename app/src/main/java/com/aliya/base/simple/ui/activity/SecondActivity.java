@@ -1,12 +1,12 @@
-package com.aliya.base.simpe.ui.activity;
+package com.aliya.base.simple.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.aliya.base.simpe.R;
-import com.aliya.base.simpe.base.BaseActivity;
-import com.aliya.base.simpe.utils.Utils;
+import com.aliya.base.simple.R;
+import com.aliya.base.simple.base.BaseActivity;
+import com.aliya.base.simple.utils.Utils;
 
 public class SecondActivity extends BaseActivity {
 

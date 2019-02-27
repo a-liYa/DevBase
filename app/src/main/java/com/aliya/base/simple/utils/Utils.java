@@ -1,4 +1,4 @@
-package com.aliya.base.simpe.utils;
+package com.aliya.base.simple.utils;
 
 import android.os.Build;
 import android.util.Log;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 
-import com.aliya.base.simpe.R;
+import com.aliya.base.simple.R;
 
 import java.util.Stack;
 
