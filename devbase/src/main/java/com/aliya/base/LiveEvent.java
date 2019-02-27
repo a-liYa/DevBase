@@ -13,7 +13,7 @@ import android.os.Looper;
  * @author a_liYa
  * @date 2018/3/28 22:49.
  */
-public class LiveEvent extends LiveData {
+public final class LiveEvent extends LiveData {
 
     private static volatile LiveEvent sInstance;
 
