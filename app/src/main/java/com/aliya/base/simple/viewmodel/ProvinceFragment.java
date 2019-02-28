@@ -39,7 +39,7 @@ public class ProvinceFragment extends BaseFragment implements OnItemClickListene
     RecyclerView mRecycler;
 
     private Adapter mAdapter;
-    private AreaLinkageViewModel mViewModel;
+    private AreaSelectViewModel mViewModel;
 
     public ProvinceFragment() {
     }
@@ -59,25 +59,25 @@ public class ProvinceFragment extends BaseFragment implements OnItemClickListene
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(getActivity()).get(AreaLinkageViewModel.class);
+        mViewModel = ViewModelProviders.of(getActivity()).get(AreaSelectViewModel.class);
 
         String json = IOs.getAssetsText(getContext(), "city_json.json");
         List<ProvinceEntity> list = JsonUtils.parseArray(json, ProvinceEntity.class);
         mRecycler.setAdapter(mAdapter = new Adapter(list, mViewModel));
         mAdapter.setOnItemClickListener(this);
-        mViewModel.select(mAdapter.getData(0));
+        mViewModel.selectProvince(mAdapter.getData(0));
     }
 
     @Override
     public void onItemClick(View itemView, int position) {
-        mViewModel.select(mAdapter.getData(position));
+        mViewModel.selectProvince(mAdapter.getData(position));
     }
 
     static class Adapter extends RecyclerAdapter<ProvinceEntity> {
 
-        private AreaLinkageViewModel mSelected;
+        private AreaSelectViewModel mSelected;
 
-        public Adapter(List<ProvinceEntity> data, AreaLinkageViewModel selected) {
+        public Adapter(List<ProvinceEntity> data, AreaSelectViewModel selected) {
             super(data);
             mSelected = selected;
         }
@@ -94,9 +94,9 @@ public class ProvinceFragment extends BaseFragment implements OnItemClickListene
         @BindView(R.id.tv_name)
         TextView mTvName;
 
-        private AreaLinkageViewModel mSelected;
+        private AreaSelectViewModel mSelected;
 
-        public ViewHolder(@NonNull ViewGroup parent, AreaLinkageViewModel selected) {
+        public ViewHolder(@NonNull ViewGroup parent, AreaSelectViewModel selected) {
             super(parent, R.layout.item_province);
             ButterKnife.bind(this, itemView);
             mSelected = selected;
@@ -106,7 +106,7 @@ public class ProvinceFragment extends BaseFragment implements OnItemClickListene
         public void bindData(ProvinceEntity data) {
             super.bindData(data);
             mTvName.setText(data.getName());
-            mTvName.setSelected(mSelected.getSelected().getValue() == data);
+            mTvName.setSelected(mSelected.getSelectedProvince().getValue() == data);
         }
 
         @Override

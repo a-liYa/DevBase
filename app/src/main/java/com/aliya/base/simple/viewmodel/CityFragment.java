@@ -43,7 +43,7 @@ public class CityFragment extends BaseFragment implements Observer<ProvinceEntit
 
     private Adapter mAdapter;
     private ProvinceEntity mProvince;
-    private AreaLinkageViewModel mViewModel;
+    private AreaSelectViewModel mViewModel;
     private CityEntity mCity;
 
     public CityFragment() {
@@ -64,8 +64,8 @@ public class CityFragment extends BaseFragment implements Observer<ProvinceEntit
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(getActivity()).get(AreaLinkageViewModel.class);
-        mViewModel.getSelected().observe(this, this);
+        mViewModel = ViewModelProviders.of(getActivity()).get(AreaSelectViewModel.class);
+        mViewModel.getSelectedProvince().observe(this, this);
     }
 
     @Override
@@ -86,6 +86,7 @@ public class CityFragment extends BaseFragment implements Observer<ProvinceEntit
     @Override
     public void onItemClick(View itemView, int position) {
         mCity = mAdapter.getData(position);
+        mViewModel.selectCity(mCity);
     }
 
     static class Adapter extends RecyclerAdapter<CityEntity> {
