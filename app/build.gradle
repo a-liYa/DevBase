@@ -24,13 +24,17 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    implementation 'me.imid.swipebacklayout.lib:library:1.1.0'
     implementation 'android.arch.lifecycle:extensions:1.1.0'
-    implementation 'com.jakewharton:butterknife:8.8.1'
-
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    implementation 'com.aliya:fitwindow:2.0.0.dev'
-    implementation project(':devbase')
     implementation 'com.google.code.gson:gson:2.8.5'
+
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    implementation 'me.imid.swipebacklayout.lib:library:1.1.0'
+    implementation 'com.aliya:fitwindow:2.0.0.dev'
+    implementation 'com.aliya:decoradapter:0.6.0'
+
+    implementation project(':devbase')
 }
