@@ -8,6 +8,7 @@
     tools:context=".SplashActivity">
 
     <ImageView
+        android:id="@+id/iv_logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -15,9 +16,29 @@
         android:src="@mipmap/splash_logo" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="66dp"
+        android:layout_marginTop="40dp"
+        android:includeFontPadding="false"
+        android:text="Developed by"
+        android:textSize="8sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="66dp"
+        android:layout_marginBottom="40dp"
+        android:includeFontPadding="false"
+        android:text="a_liYa"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:gravity="center"
-        android:text="Powered by Android" />
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:text="Powered by Android"
+        android:textSize="10sp" />
 
 </LinearLayout>
