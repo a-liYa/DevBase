@@ -1,9 +1,10 @@
 package com.aliya.base.simple;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+
+import com.aliya.base.simple.base.BaseActivity;
 
 /**
  * 启动页
@@ -11,7 +12,7 @@ import android.view.KeyEvent;
  * @author a_liYa
  * @date 2018/9/12 下午4:34.
  */
-public class SplashActivity extends AppCompatActivity implements Runnable {
+public class SplashActivity extends BaseActivity implements Runnable {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class SplashActivity extends AppCompatActivity implements Runnable {
         }
         setContentView(R.layout.activity_splash);
 
-        findViewById(android.R.id.content).postDelayed(this, 800);
+        findViewById(android.R.id.content).postDelayed(this, 2000);
     }
 
     @Override
