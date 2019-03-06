@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/holo_blue_light"
     android:fitsSystemWindows="true"
-    tools:context=".viewmodel.CitySelectActivity">
+    tools:context="com.aliya.base.sample.viewmodel.CitySelectActivity">
 
     <TextView
         android:id="@+id/tv_top_bar"
@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/fragment_province"
-        android:name="com.aliya.base.simple.viewmodel.ProvinceFragment"
+        android:name="com.aliya.base.sample.viewmodel.ProvinceFragment"
         android:layout_width="68dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,7 +32,7 @@
 
     <fragment
         android:id="@+id/fragment_city"
-        android:name="com.aliya.base.simple.viewmodel.CityFragment"
+        android:name="com.aliya.base.sample.viewmodel.CityFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

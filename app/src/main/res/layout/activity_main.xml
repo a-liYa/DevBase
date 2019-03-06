@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context="com.aliya.base.sample.MainActivity">
 
     <com.aliya.view.fitsys.FitWindowsFrameLayout
         android:id="@+id/frame_layout"
@@ -15,7 +15,7 @@
         android:layout_weight="1"
         android:background="@android:color/white" />
 
-    <com.aliya.base.simple.ui.MainTabLayout
+    <com.aliya.base.sample.ui.MainTabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="48dp"
