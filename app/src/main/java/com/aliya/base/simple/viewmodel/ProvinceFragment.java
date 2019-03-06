@@ -18,7 +18,7 @@ import com.aliya.adapter.click.ItemClickCallback;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.base.simple.R;
 import com.aliya.base.simple.base.BaseFragment;
-import com.aliya.base.simple.utils.JsonUtils;
+import com.aliya.base.simple.util.JsonUtils;
 import com.aliya.base.simple.viewmodel.bean.ProvinceEntity;
 import com.aliya.base.util.IOs;
 

@@ -1,4 +1,4 @@
-package com.aliya.base.simple.utils;
+package com.aliya.base.simple.util;
 
 import android.os.Build;
 import android.util.Log;

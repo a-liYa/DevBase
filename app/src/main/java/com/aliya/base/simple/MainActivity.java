@@ -1,8 +1,6 @@
 package com.aliya.base.simple;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,12 +11,14 @@ import android.widget.Toast;
 
 import com.aliya.base.click.ClickTracker;
 import com.aliya.base.manager.AppManager;
+import com.aliya.base.simple.base.BaseActivity;
+import com.aliya.base.simple.db.AppSetting;
 import com.aliya.base.simple.ui.MainTabLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.tab_layout)
     MainTabLayout mTabLayout;
@@ -28,24 +28,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        getDecorChildView(0).setFitsSystemWindows(false);
+        setSwipeBackEnable(false);
+
+        bindData();
+    }
+
+    private void bindData() {
         mTabLayout.setupBind(this, getSupportFragmentManager(), R.id.frame_layout);
         mTabLayout.setAdapter(new MainTabAdapterImpl());
-//        startActivity(new Intent(this, CitySelectActivity.class));
-//        finish();
     }
-
-    @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-    }
-
-    private boolean backToBackground;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            if (backToBackground) {
+            if (AppSetting.get().isBackToBackground()) {
                 moveTaskToBack(true); // 返回键切至后台不关闭页面
                 return true;
             } else {
@@ -63,17 +59,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "再按一次退出应用", Toast.LENGTH_SHORT).show();
             return true;
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-//        super.onBackPressed();
-
-    }
-
-    public View getDecorChildView(int index) {
-        View v = ((ViewGroup) getWindow().getDecorView()).getChildAt(index);
-        return v;
     }
 
     class MainTabAdapterImpl implements MainTabLayout.TabAdapter {

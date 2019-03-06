@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.aliya.base.simple.R;
 import com.aliya.base.simple.base.BaseActivity;
-import com.aliya.base.simple.utils.Utils;
+import com.aliya.base.simple.util.Utils;
 
 public class SecondActivity extends BaseActivity {
 
