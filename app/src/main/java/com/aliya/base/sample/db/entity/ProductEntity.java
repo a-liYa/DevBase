@@ -6,7 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "products")
 public class ProductEntity {
-    @PrimaryKey(autoGenerate = false) // 主键是否自动增长，默认为false
+    @PrimaryKey(autoGenerate = true) // 主键是否自动增长，默认为false
     private int id;
     private String name;
     private String description;

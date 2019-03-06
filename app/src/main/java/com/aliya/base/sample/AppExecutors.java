@@ -21,15 +21,23 @@ public class AppExecutors {
 
     private final Executor mMainThread;
 
-    private AppExecutors(Executor diskIO, Executor networkIO, Executor mainThread) {
-        this.mDiskIO = diskIO;
-        this.mNetworkIO = networkIO;
-        this.mMainThread = mainThread;
+    private AppExecutors() {
+        this.mDiskIO = Executors.newSingleThreadExecutor();
+        this.mNetworkIO = Executors.newFixedThreadPool(3);
+        this.mMainThread = new MainThreadExecutor();
     }
 
-    public AppExecutors() {
-        this(Executors.newSingleThreadExecutor(), Executors.newFixedThreadPool(3),
-                new MainThreadExecutor());
+    private static volatile AppExecutors sInstance;
+
+    public static AppExecutors get() {
+        if (sInstance == null) {
+            synchronized (AppExecutors.class) {
+                if (sInstance == null) {
+                    sInstance = new AppExecutors();
+                }
+            }
+        }
+        return sInstance;
     }
 
     public Executor diskIO() {

@@ -15,6 +15,9 @@ public interface ProductDao {
     @Query("SELECT * FROM products")
     LiveData<List<ProductEntity>> loadAllProducts();
 
+    @Insert()
+    void insert(ProductEntity product);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<ProductEntity> products);
 

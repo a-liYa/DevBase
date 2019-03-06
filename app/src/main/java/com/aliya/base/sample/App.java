@@ -3,7 +3,6 @@ package com.aliya.base.sample;
 import android.support.multidex.MultiDexApplication;
 
 import com.aliya.base.AppUtils;
-import com.aliya.base.sample.db.AppDatabase;
 
 /**
  * application
@@ -17,10 +16,7 @@ public class App extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         AppUtils.init(this);
-    }
 
-    public AppDatabase getDatabase() {
-        return AppDatabase.getInstance(this);
     }
 
 }

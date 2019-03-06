@@ -19,7 +19,7 @@ import com.aliya.base.sample.db.entity.ProductEntity;
  * @author a_liYa
  * @date 2019/3/6 16:49.
  */
-@Database(entities = {ProductEntity.class}, version = 1)
+@Database(entities = {ProductEntity.class}, version = 1, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -44,7 +44,6 @@ public abstract class AppDatabase extends RoomDatabase {
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         super.onCreate(db);
                         Log.e("TAG", "onCreate: database");
-
                     }
                 })
 //                .addMigrations() // 数据库升级专用

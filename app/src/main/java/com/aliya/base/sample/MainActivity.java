@@ -1,5 +1,6 @@
 package com.aliya.base.sample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.aliya.base.manager.AppManager;
 import com.aliya.base.sample.base.BaseActivity;
 import com.aliya.base.sample.db.AppSetting;
 import com.aliya.base.sample.ui.MainTabLayout;
+import com.aliya.base.sample.ui.activity.DatabaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +33,8 @@ public class MainActivity extends BaseActivity {
         setSwipeBackEnable(false);
 
         bindData();
+
+        startActivity(new Intent(this, DatabaseActivity.class));
     }
 
     private void bindData() {
