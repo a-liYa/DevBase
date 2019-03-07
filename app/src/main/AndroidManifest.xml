@@ -24,7 +24,10 @@
         <activity android:name=".ui.activity.FullscreenPageActivity" />
         <activity android:name=".ui.activity.LiveEventActivity" />
         <activity android:name=".viewmodel.CitySelectActivity" />
-        <activity android:name=".ui.activity.DatabaseActivity" android:process=":tools" />
+        <activity
+            android:name=".ui.activity.DatabaseActivity"
+            android:process=":tools" />
+        <activity android:name=".ui.activity.MineActivity"></activity>
     </application>
 
 </manifest>
