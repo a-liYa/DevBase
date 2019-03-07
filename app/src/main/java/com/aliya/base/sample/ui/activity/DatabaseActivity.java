@@ -30,24 +30,23 @@ public class DatabaseActivity extends BaseActivity {
         AppDatabase database = AppDatabase.getInstance(this);
         final ProductDao dao = database.productDao();
 
-        dao.loadAllProducts().observe(this,
+        dao.queryAll().observe(this,
                 new Observer<List<ProductEntity>>() {
                     @Override
                     public void onChanged(@Nullable List<ProductEntity> products) {
                         for (ProductEntity entity : products) {
-                            Log.e("TAG", "onChanged: " + entity.getId());
+                            Log.e("TAG", "onChanged: " + entity.getId() + " - " + entity.getName());
                         }
-                        if (products.size() > 2) return;
-                        AppExecutors.get().diskIO().execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                dao.insert(new ProductEntity(0, "s10", "samsung phone", 5999));
-                            }
-                        });
                     }
                 }
         );
 
+        AppExecutors.get().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+//                dao.insert(new ProductEntity(2, "s10plus", "samsung phone", 5999));
+            }
+        });
 
     }
 }

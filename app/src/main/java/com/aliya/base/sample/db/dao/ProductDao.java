@@ -2,8 +2,6 @@ package com.aliya.base.sample.db.dao;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import com.aliya.base.sample.db.entity.ProductEntity;
@@ -11,20 +9,15 @@ import com.aliya.base.sample.db.entity.ProductEntity;
 import java.util.List;
 
 @Dao
-public interface ProductDao {
+public interface ProductDao extends RoomDao<ProductEntity> {
+
     @Query("SELECT * FROM products")
-    LiveData<List<ProductEntity>> loadAllProducts();
-
-    @Insert()
-    void insert(ProductEntity product);
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<ProductEntity> products);
+    LiveData<List<ProductEntity>> queryAll();
 
     @Query("select * from products where id = :productId")
-    LiveData<ProductEntity> loadProduct(int productId);
+    LiveData<ProductEntity> query(int productId);
 
     @Query("select * from products where id = :productId")
-    ProductEntity loadProductSync(int productId);
+    ProductEntity querySync(int productId);
 
 }

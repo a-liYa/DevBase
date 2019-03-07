@@ -5,6 +5,7 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
+import android.arch.persistence.room.migration.Migration;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -19,7 +20,7 @@ import com.aliya.base.sample.db.entity.ProductEntity;
  * @author a_liYa
  * @date 2019/3/6 16:49.
  */
-@Database(entities = {ProductEntity.class}, version = 1, exportSchema = false)
+@Database(entities = {ProductEntity.class}, version = 3, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -40,16 +41,48 @@ public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase buildDatabase(final Context appContext) {
         return Room.databaseBuilder(appContext, AppDatabase.class, DATABASE_NAME)
                 .addCallback(new Callback() {
+                    // 第一次创建数据库时调用，但是在创建所有表之后调用的
                     @Override
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         super.onCreate(db);
                         Log.e("TAG", "onCreate: database");
                     }
+
+                    // 当数据库被打开时调用
+                    @Override
+                    public void onOpen(@NonNull SupportSQLiteDatabase db) {
+                        super.onOpen(db);
+                        Log.e("TAG", "onOpen: database");
+                    }
                 })
-//                .addMigrations() // 数据库升级专用
+                .addMigrations(MIGRATION_1_2, MIGRATION_1_3, MIGRATION_2_3) // 数据库升级
                 .build();
     }
 
+    // 每次调用返回的都是同一个实例
     public abstract ProductDao productDao();
+
+    private static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            Log.e("TAG", "migrate: version 1 -> 2");
+        }
+    };
+
+    private static final Migration MIGRATION_1_3 = new Migration(1, 3) {
+
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            Log.e("TAG", "migrate: version 1 -> 3");
+        }
+    };
+    private static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            Log.e("TAG", "migrate: version 2 -> 3");
+        }
+    };
 
 }
