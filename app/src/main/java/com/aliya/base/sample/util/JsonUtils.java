@@ -1,15 +1,14 @@
 package com.aliya.base.sample.util;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Json工具类封装
+ * <p>门面模式，随意切换fastJson</p>
  *
  * @author a_liYa
  * @date 16/6/27 下午3:12.
@@ -41,17 +40,6 @@ public class JsonUtils {
     }
 
     /**
-     * jsonElement解析成对象
-     *
-     * @param json jsonElement
-     * @param cls  目标对象class
-     * @return
-     */
-    public static <T> T parseObject(JsonElement json, Class<T> cls) {
-        return gson.fromJson(json, cls);
-    }
-
-    /**
      * 把json字符串解析成包含泛型对象
      *
      * @param jsonString json字符串
@@ -61,18 +49,6 @@ public class JsonUtils {
      */
     public static <T> T parseObject(String jsonString, Class<T> cls, Class<?>... generics) {
         return gson.fromJson(jsonString, type(cls, generics));
-    }
-
-    /**
-     * 把json字符串解析成包含泛型对象
-     *
-     * @param json     jsonElement
-     * @param cls      目标对象class
-     * @param generics 泛型类型class参数集合
-     * @return
-     */
-    public static <T> T parseObject(JsonElement json, Class<T> cls, Class<?>... generics) {
-        return gson.fromJson(json, type(cls, generics));
     }
 
     /**
@@ -86,23 +62,6 @@ public class JsonUtils {
         return gson.fromJson(jsonString, type(List.class, generic));
     }
 
-    /**
-     * jsonElement解析成List数据
-     *
-     * @param json    jsonElement
-     * @param generic List数据泛型的clazz
-     * @return
-     */
-    public static <T> List<T> parseArray(JsonElement json, Class<T> generic) {
-        return gson.fromJson(json, type(List.class, generic));
-    }
-
-    /**
-     * json字符串解析成Set数据
-     */
-    public static <T> Set<T> parseSet(String jsonString, Class<T> generic) {
-        return gson.fromJson(jsonString, type(Set.class, generic));
-    }
 
     /**
      * 把对象转换成json字符串

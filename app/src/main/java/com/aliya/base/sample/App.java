@@ -22,12 +22,14 @@ public class App extends MultiDexApplication {
 
         isMainProcess = TextUtils.equals(getPackageName(), AppUtils.getProcessName());
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // 此处 - 第三方初始化
-            }
-        }).start();
+        if (isMainProcess) { // 主进程需初始化
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    // 此处 - 第三方初始化
+                }
+            }).start();
+        }
 
     }
 
