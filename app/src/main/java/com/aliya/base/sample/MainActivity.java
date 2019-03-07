@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.aliya.base.click.ClickTracker;
 import com.aliya.base.manager.AppManager;
 import com.aliya.base.sample.base.BaseActivity;
-import com.aliya.base.sample.db.AppSetting;
+import com.aliya.base.sample.common.AppSetting;
 import com.aliya.base.sample.ui.MainTabLayout;
 import com.aliya.base.sample.ui.activity.DatabaseActivity;
 

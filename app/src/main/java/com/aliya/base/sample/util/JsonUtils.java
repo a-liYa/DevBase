@@ -1,6 +1,5 @@
 package com.aliya.base.sample.util;
 
-
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
@@ -34,7 +33,7 @@ public class JsonUtils {
      * 把json字符串解析成对象
      *
      * @param jsonString json字符串
-     * @param typeOfT        目标对象 type
+     * @param typeOfT    目标对象 type
      * @return
      */
     public static <T> T parseObject(String jsonString, Type typeOfT) {

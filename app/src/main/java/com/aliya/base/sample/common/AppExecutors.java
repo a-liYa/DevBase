@@ -1,4 +1,4 @@
-package com.aliya.base.sample;
+package com.aliya.base.sample.common;
 
 import android.os.Handler;
 import android.os.Looper;

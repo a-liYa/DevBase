@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.aliya.base.sample.AppExecutors;
+import com.aliya.base.sample.common.AppExecutors;
 import com.aliya.base.sample.R;
 import com.aliya.base.sample.base.BaseActivity;
 import com.aliya.base.sample.db.AppDatabase;

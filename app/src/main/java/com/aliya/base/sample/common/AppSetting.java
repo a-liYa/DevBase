@@ -1,7 +1,7 @@
-package com.aliya.base.sample.db;
+package com.aliya.base.sample.common;
 
 import com.aliya.base.SPHelper;
-import com.aliya.base.sample.constant.Key;
+import com.aliya.base.sample.common.constant.Key;
 
 /**
  * AppSetting

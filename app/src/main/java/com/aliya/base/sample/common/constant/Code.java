@@ -1,4 +1,4 @@
-package com.aliya.base.sample.constant;
+package com.aliya.base.sample.common.constant;
 
 /**
  * Code

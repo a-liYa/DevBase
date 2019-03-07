@@ -17,8 +17,6 @@ import java.util.List;
  */
 public interface RoomDao<T> {
 
-    String table_name = "";
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(T item);
 

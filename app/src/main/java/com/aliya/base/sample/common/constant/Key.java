@@ -1,4 +1,4 @@
-package com.aliya.base.sample.constant;
+package com.aliya.base.sample.common.constant;
 
 /**
  * App 相关 Key 常量声明
