@@ -20,7 +20,7 @@ import com.aliya.base.sample.db.entity.ProductEntity;
  * @author a_liYa
  * @date 2019/3/6 16:49.
  */
-@Database(entities = {ProductEntity.class}, version = 3, exportSchema = false)
+@Database(entities = {ProductEntity.class}, version = 3, exportSchema = true)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
 

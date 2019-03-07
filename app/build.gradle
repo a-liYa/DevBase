@@ -9,6 +9,13 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+
+        // 导出Room数据库的schema历史记录
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
     buildTypes {
         debug {
