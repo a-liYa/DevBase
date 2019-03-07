@@ -1,4 +1,4 @@
-package com.aliya.base.sample.constant;
+package com.aliya.base.sample.mock;
 
 import com.aliya.base.sample.R;
 

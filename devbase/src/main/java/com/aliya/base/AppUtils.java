@@ -196,11 +196,12 @@ public final class AppUtils {
      * @return process name
      */
     public static String getProcessName() {
+        // 1. 当前进程id
         final int pid = android.os.Process.myPid();
 
         ActivityManager manager = (ActivityManager)
                 sContext.getSystemService(Context.ACTIVITY_SERVICE);
-
+        // 2. 遍历运行进程，等于当前进程pid时返回进程名称
         if (manager != null) {
             List<ActivityManager.RunningAppProcessInfo>
                     processes = manager.getRunningAppProcesses();

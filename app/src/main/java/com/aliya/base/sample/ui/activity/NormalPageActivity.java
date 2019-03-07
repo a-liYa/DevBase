@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.aliya.base.sample.R;
 import com.aliya.base.sample.base.BaseActivity;
-import com.aliya.base.sample.constant.Colors;
+import com.aliya.base.sample.mock.Colors;
 
 /**
  * 普通页面示例
