@@ -39,15 +39,15 @@ public final class AppUtils {
     private static Context sContext;
 
     public static void init(Context context) {
-        if (context != null && sContext == null) {
-            sContext = context;
+        if (sContext == null) {
+            sContext = context.getApplicationContext();
             try {
                 debuggable =
                         (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
             } catch (Exception e) {
                 debuggable = false;
             }
-            AppManager.get();
+            AppManager.init(sContext);
         }
     }
 

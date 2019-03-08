@@ -6,7 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.aliya.base.AppUtils;
+import com.aliya.base.L;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,27 +18,32 @@ import java.util.Stack;
  * @author a_liYa
  * @date 2015/10/4 01:06.
  */
-public class AppManager {
+public final class AppManager {
 
     private volatile static AppManager sInstance;
 
     private Stack<Activity> mActivityStack;
     private Set<AppFrontBackCallback> mCallbacks = new HashSet<>();
 
-    private AppManager() {
-        Context app = AppUtils.getContext().getApplicationContext();
+    private AppManager(Context context) {
+        Context app = context.getApplicationContext();
         if (app instanceof Application) {
             ((Application) app).registerActivityLifecycleCallbacks(lifecycleCallbacks);
         }
     }
 
-    public static AppManager get() {
-        // 单例  懒汉式
+    public static void init(Context context) {
         if (sInstance == null) {
             synchronized (AppManager.class) {
                 if (sInstance == null)
-                    sInstance = new AppManager();
+                    sInstance = new AppManager(context);
             }
+        }
+    }
+
+    public static AppManager get() {
+        if (sInstance == null) {
+            L.e(AppManager.class.getSimpleName(), "AppManager 没有初始化");
         }
         return sInstance;
     }
