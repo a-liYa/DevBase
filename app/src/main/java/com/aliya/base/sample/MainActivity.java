@@ -20,6 +20,12 @@ import com.aliya.base.sample.ui.activity.MineActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * 主界面
+ *
+ * @author a_liYa
+ * @date 2019/3/11 下午4:28.
+ */
 public class MainActivity extends BaseActivity {
 
     @BindView(R.id.tab_layout)

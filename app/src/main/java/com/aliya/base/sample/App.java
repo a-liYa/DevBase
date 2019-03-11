@@ -38,8 +38,7 @@ public class App extends MultiDexApplication {
 
         Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
             @Override
-            public boolean queueIdle() {
-                Log.e("TAG", "queueIdle: ");
+            public boolean queueIdle() { // 应用场景待调研
                 return true;
             }
         });
@@ -49,7 +48,7 @@ public class App extends MultiDexApplication {
 
     private ActivityLifecycleCallbacks mLifecycleCallbacks = new ActivityLifecycleCallbacks() {
 
-        private boolean printLog = true;
+        private boolean printLog = false;
 
         private void e(Activity activity, String msg) {
             if (printLog)

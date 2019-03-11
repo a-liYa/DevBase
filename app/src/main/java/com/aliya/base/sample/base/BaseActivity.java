@@ -1,10 +1,12 @@
 package com.aliya.base.sample.base;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.aliya.base.compat.ActivityOrientationCompat;
 import com.aliya.base.sample.R;
 
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
@@ -16,6 +18,14 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
  * @date 2018/9/19 15:28.
  */
 public class BaseActivity extends SwipeBackActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        if (ActivityOrientationCompat.allowableRequestedOrientation(this)) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // 强制竖屏
+        }
+        super.onCreate(savedInstanceState);
+    }
 
     @CallSuper
     @Override

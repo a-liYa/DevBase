@@ -11,23 +11,40 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity">
+        <activity
+            android:name=".SplashActivity"
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ui.activity.SecondActivity" />
-        <activity android:name=".ui.activity.NormalPageActivity" />
-        <activity android:name=".ui.activity.FullscreenPageActivity" />
-        <activity android:name=".ui.activity.LiveEventActivity" />
-        <activity android:name=".viewmodel.CitySelectActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ui.activity.SecondActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ui.activity.NormalPageActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ui.activity.FullscreenPageActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".ui.activity.LiveEventActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".viewmodel.CitySelectActivity"
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".ui.activity.DatabaseActivity"
+            android:configChanges="orientation|screenSize"
             android:process=":tools" />
-        <activity android:name=".ui.activity.MineActivity"></activity>
+        <activity
+            android:name=".ui.activity.MineActivity"
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>
