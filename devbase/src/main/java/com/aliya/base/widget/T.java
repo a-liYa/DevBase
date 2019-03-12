@@ -1,4 +1,4 @@
-package com.aliya.base;
+package com.aliya.base.widget;
 
 import android.content.Context;
 import android.support.annotation.IntDef;

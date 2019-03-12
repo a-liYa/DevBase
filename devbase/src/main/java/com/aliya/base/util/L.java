@@ -1,6 +1,8 @@
-package com.aliya.base;
+package com.aliya.base.util;
 
 import android.util.Log;
+
+import com.aliya.base.AppUtils;
 
 /**
  * Log日志类
