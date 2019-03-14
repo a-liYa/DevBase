@@ -35,9 +35,10 @@
         <activity
             android:name=".ui.activity.LiveEventActivity"
             android:configChanges="orientation|screenSize" />
+        <!--适配横竖屏、分屏切换时Activity不重建-->
         <activity
             android:name=".viewmodel.CitySelectActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation" />
         <activity
             android:name=".ui.activity.DatabaseActivity"
             android:configChanges="orientation|screenSize"

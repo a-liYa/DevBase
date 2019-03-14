@@ -15,7 +15,7 @@ import com.aliya.base.manager.AppManager;
 import com.aliya.base.sample.base.BaseActivity;
 import com.aliya.base.sample.common.AppSetting;
 import com.aliya.base.sample.ui.MainTabLayout;
-import com.aliya.base.sample.ui.activity.MineActivity;
+import com.aliya.base.sample.viewmodel.CitySelectActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity {
 
         bindData();
 
-        startActivity(new Intent(this, MineActivity.class));
+        startActivity(new Intent(this, CitySelectActivity.class));
     }
 
     private void bindData() {

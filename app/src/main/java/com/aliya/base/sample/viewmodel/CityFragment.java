@@ -1,6 +1,5 @@
 package com.aliya.base.sample.viewmodel;
 
-
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -44,7 +43,6 @@ public class CityFragment extends BaseFragment implements Observer<ProvinceEntit
     private Adapter mAdapter;
     private ProvinceEntity mProvince;
     private AreaSelectViewModel mViewModel;
-    private CityEntity mCity;
 
     public CityFragment() {
     }
@@ -73,28 +71,28 @@ public class CityFragment extends BaseFragment implements Observer<ProvinceEntit
         if (mProvince != provinceEntity) {
             mProvince = provinceEntity;
             if (mAdapter == null) {
-                mAdapter = new Adapter(provinceEntity.getChild());
+                mAdapter = new Adapter(provinceEntity.getChild(),
+                        mViewModel.getSelectedCity().getValue());
                 mAdapter.setOnItemClickListener(this);
                 mRecycler.setAdapter(mAdapter);
             } else {
                 mAdapter.setData(mProvince.getChild(), true);
             }
-            mCity = mAdapter.getData(0);
         }
     }
 
     @Override
     public void onItemClick(View itemView, int position) {
-        mCity = mAdapter.getData(position);
-        mViewModel.selectCity(mCity);
+        mViewModel.selectCity(mAdapter.getData(position));
     }
 
     static class Adapter extends RecyclerAdapter<CityEntity> {
 
-        private DataStore<CityEntity> mSelected = new DataStore<>();
+        private DataStore<CityEntity> mSelected;
 
-        public Adapter(List<CityEntity> data) {
+        public Adapter(List<CityEntity> data, CityEntity city) {
             super(data);
+            mSelected = new DataStore<>(city);
         }
 
         @Override

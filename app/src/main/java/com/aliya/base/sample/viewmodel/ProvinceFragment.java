@@ -1,11 +1,13 @@
 package com.aliya.base.sample.viewmodel;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +20,7 @@ import com.aliya.adapter.click.ItemClickCallback;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.base.sample.R;
 import com.aliya.base.sample.base.BaseFragment;
-import com.aliya.base.sample.util.JsonUtils;
 import com.aliya.base.sample.viewmodel.bean.ProvinceEntity;
-import com.aliya.base.util.IOs;
 
 import java.util.List;
 
@@ -33,7 +33,8 @@ import butterknife.ButterKnife;
  * @author a_liYa
  * @date 2019/2/26 下午4:15.
  */
-public class ProvinceFragment extends BaseFragment implements OnItemClickListener {
+public class ProvinceFragment extends BaseFragment implements OnItemClickListener,
+        Observer<List<ProvinceEntity>> {
 
     @BindView(R.id.recycler)
     RecyclerView mRecycler;
@@ -60,17 +61,22 @@ public class ProvinceFragment extends BaseFragment implements OnItemClickListene
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(getActivity()).get(AreaSelectViewModel.class);
-
-        String json = IOs.getAssetsText(getContext(), "city_json.json");
-        List<ProvinceEntity> list = JsonUtils.parseArray(json, ProvinceEntity.class);
-        mRecycler.setAdapter(mAdapter = new Adapter(list, mViewModel));
-        mAdapter.setOnItemClickListener(this);
-        mViewModel.selectProvince(mAdapter.getData(0));
+        mViewModel.getProvinces().observe(this, this);
+        Log.e("TAG", "onActivityCreated: " + mViewModel.hashCode());
     }
 
     @Override
     public void onItemClick(View itemView, int position) {
         mViewModel.selectProvince(mAdapter.getData(position));
+    }
+
+    @Override
+    public void onChanged(@Nullable List<ProvinceEntity> provinces) {
+        mRecycler.setAdapter(mAdapter = new Adapter(provinces, mViewModel));
+        mAdapter.setOnItemClickListener(this);
+        if (mViewModel.getSelectedProvince().getValue() == null) {
+            mViewModel.selectProvince(mAdapter.getData(0));
+        }
     }
 
     static class Adapter extends RecyclerAdapter<ProvinceEntity> {
