@@ -2,18 +2,9 @@ package com.aliya.base;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
-import android.text.TextUtils;
-import android.util.Base64;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.Set;
-
 
 /**
  * 轻量级数据存储助手
@@ -85,24 +76,16 @@ public final class SPHelper {
         editor = getSharedPreferencesEditor();
         if (value instanceof Integer) {
             editor.putInt(key, (Integer) value);
-
         } else if (value instanceof Boolean) {
             editor.putBoolean(key, (Boolean) value);
-
         } else if (value instanceof Float) {
             editor.putFloat(key, (Float) value);
-
         } else if (value instanceof Long) {
             editor.putLong(key, (Long) value);
-
         } else if (value instanceof String) {
             editor.putString(key, (String) value);
-
         } else if (value instanceof Set) {
             editor.putStringSet(key, (Set<String>) value);
-
-        } else if (value instanceof Serializable) {
-            editor.putString(key, objectToBase64(value));
         }
         return this;
     }
@@ -160,29 +143,6 @@ public final class SPHelper {
     }
 
     /**
-     * 获取保存的bean对象
-     *
-     * @param key key
-     * @param <T> 获取对象的类型
-     * @return 返回对应的对象，不存在或出错时返回 null
-     */
-    public <T> T getObject(String key) {
-        try {
-            if (sharedPreferences.contains(key)) {
-                String string = sharedPreferences.getString(key, "");
-                if (!TextUtils.isEmpty(string)) {
-                    return (T) new ObjectInputStream(
-                            new ByteArrayInputStream(
-                                    Base64.decode(string, Base64.DEFAULT))).readObject();
-                }
-            }
-        } catch (Exception e) {
-            return null;
-        }
-        return null;
-    }
-
-    /**
      * 清空所有数据数据
      */
     public void clear() {
@@ -200,14 +160,4 @@ public final class SPHelper {
         editor.remove(key).commit();
     }
 
-    private String objectToBase64(Object obj) {
-        try {
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            new ObjectOutputStream(outputStream).writeObject(obj);
-            return Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
-        } catch (IOException e) {
-            return null;
-        }
-
-    }
 }
