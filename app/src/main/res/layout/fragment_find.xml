@@ -6,8 +6,10 @@
     tools:context="com.aliya.base.sample.ui.main.HomeFragment">
 
     <TextView
+        android:id="@+id/tv_name"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:text="发现" />
 
 </FrameLayout>

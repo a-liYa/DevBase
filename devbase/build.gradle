@@ -11,6 +11,8 @@ android {
         targetSdkVersion 27
         versionCode vCode
         versionName vName
+        // 配置混淆文件会对library生效
+        consumerProguardFiles 'proguard-rules.pro'
     }
 
     buildTypes {
