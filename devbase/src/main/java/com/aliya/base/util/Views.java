@@ -1,8 +1,11 @@
 package com.aliya.base.util;
 
+import android.support.annotation.IntDef;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -15,11 +18,7 @@ import java.util.Queue;
 public final class Views {
 
     /**
-     * 设置View以及子view的状态（可用/不可用）<br/>
-     * 广度优先遍历
-     *
-     * @param view    Assign view
-     * @param enabled {@link View#setEnabled(boolean)}
+     * (广度优先遍历) 设置 view 以及子view的状态 {@link View#setEnabled(boolean)}
      */
     public static void setViewEnabled(View view, boolean enabled) {
         if (view != null) {
@@ -38,6 +37,19 @@ public final class Views {
                 }
             }
         }
+    }
+
+    public static void setViewVisibility(@Visibility int visibility, View... views) {
+        if (views != null) {
+            for (View v : views) {
+                v.setVisibility(visibility);
+            }
+        }
+    }
+
+    @IntDef({View.VISIBLE, View.INVISIBLE, View.GONE})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Visibility {
     }
 
 }
