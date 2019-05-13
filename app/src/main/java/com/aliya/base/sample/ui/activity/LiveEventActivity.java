@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.aliya.base.LiveEvent;
+import com.aliya.base.event.LiveEvent;
 import com.aliya.base.sample.R;
 import com.aliya.base.sample.base.BaseActivity;
 
@@ -32,22 +32,26 @@ public class LiveEventActivity extends BaseActivity implements Observer {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_event);
         ButterKnife.bind(this);
-        LiveEvent.liveData();
     }
 
     @OnClick({R.id.tv_observe, R.id.tv_remove, R.id.tv_send})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_observe:
-                LiveEvent.liveData().observe(this, this);
+                LiveEvent.get().observe(this, this);
                 break;
             case R.id.tv_remove:
-                LiveEvent.liveData().removeObserver(this);
+//                LiveEvent.get().removeObserver(this);
                 break;
             case R.id.tv_send:
-                Long value = Long.valueOf(SystemClock.uptimeMillis());
-                LiveEvent.post(value);
-
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Long value = Long.valueOf(SystemClock.uptimeMillis());
+                        LiveEvent.get().post(value);
+                        LiveEvent.get().post(value + 1);
+                    }
+                }).start();
             break;
         }
     }
@@ -56,6 +60,5 @@ public class LiveEventActivity extends BaseActivity implements Observer {
     public void onChanged(@Nullable Object o) {
         Log.e("TAG", "onChanged: " + o);
     }
-
 
 }
