@@ -45,7 +45,7 @@
                     android:textSize="15sp" />
 
                 <com.aliya.base.widget.SwitchView
-                    android:id="@+id/switch_"
+                    android:id="@+id/switch_view"
                     android:layout_width="60dp"
                     android:layout_height="35dp"
                     android:layout_gravity="right|center_vertical"

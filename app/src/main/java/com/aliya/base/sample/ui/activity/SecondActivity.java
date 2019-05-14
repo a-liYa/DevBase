@@ -18,7 +18,7 @@ public class SecondActivity extends BaseActivity {
 
     public void onViewClick(View v) {
 
-//        Utils.printViews(getWindow());
+//        Utils.printViewTree(getWindow());
         startActivity(new Intent(this, FullscreenPageActivity.class));
 
     }
@@ -26,7 +26,7 @@ public class SecondActivity extends BaseActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        Utils.printViews(getWindow());
+        Utils.printViewTree(getWindow());
     }
 
 

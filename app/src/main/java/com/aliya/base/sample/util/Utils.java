@@ -18,7 +18,7 @@ import java.util.Stack;
  */
 public class Utils {
 
-    public static void printViews(Window window) {
+    public static void printViewTree(Window window) {
         Stack<View> stack = new Stack<>();
         View decorView = window.getDecorView();
         decorView.setTag(R.id.all, 0);
@@ -41,6 +41,16 @@ public class Utils {
                     child.setTag(R.id.all, depth + 1);
                     stack.add(child);
                 }
+            }
+        }
+    }
+
+    public static void printStackTrace() {
+        Log.e("StackTrace", "方法调用栈: ");
+        StackTraceElement[] trace = Thread.currentThread().getStackTrace();
+        if (trace != null) {
+            for (int i = 3; i < trace.length; i++) {
+                Log.e("StackTrace", "\n\tat " + trace[i]);
             }
         }
     }
