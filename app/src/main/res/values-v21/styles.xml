@@ -8,7 +8,7 @@
 
         <!-- windowTranslucentStatus = false 才生效，为 true 时系统默认为 #66000000 -->
         <item name="android:statusBarColor">#3f000000</item>
-        <!-- windowTranslucentNavigation = false 才生效，为 true 时默认为 #66000000 - nubia X 无效 -->
+        <!-- windowTranslucentNavigation = false 才生效，为 true 时默认为 #66000000 (nubia X 无效) -->
         <item name="android:navigationBarColor">#000000</item>
 
         <!--确保状态栏显示，可能继承多次会被设置为false-->
