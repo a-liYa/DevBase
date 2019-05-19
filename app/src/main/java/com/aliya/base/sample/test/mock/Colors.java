@@ -1,4 +1,4 @@
-package com.aliya.base.sample.mock;
+package com.aliya.base.sample.test.mock;
 
 import com.aliya.base.sample.R;
 
