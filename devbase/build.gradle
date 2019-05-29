@@ -1,7 +1,9 @@
 apply plugin: 'com.android.library'
 
-def vCode = 3
-def vName = '0.0.3'
+ext {
+    version_code = 3
+    version_name = '0.0.3'
+}
 
 android {
     compileSdkVersion 28
@@ -9,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode vCode
-        versionName vName
+        versionCode version_code
+        versionName version_name
         // 配置混淆文件会对library生效
         consumerProguardFiles 'proguard-rules.pro'
     }
@@ -28,13 +30,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     compileOnly 'com.android.support:appcompat-v7:28.0.0'
-}
-
-ext {
-    publishArtifact = 'dev-base'
-    publishVersion = vName
-    publishDesc = 'Android 开发基础库封装'
-    publishWebsite = 'https://github.com/a-liYa/DevBase'
 }
 
 apply from: "${rootDir}/publish.gradle"
