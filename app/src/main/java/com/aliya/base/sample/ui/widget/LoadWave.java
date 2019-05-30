@@ -11,7 +11,6 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.ViewTreeObserver;
 import android.view.animation.LinearInterpolator;
 
@@ -124,13 +123,10 @@ public class LoadWave extends android.support.v7.widget.AppCompatImageView {
             if (start) {
                 if (!mAnimator.isRunning()) {
                     mAnimator.start();
-                    Log.e("TAG", "setLoadState: start()");
                 }
             } else {
                 if (mAnimator.isStarted()) {
                     mAnimator.cancel();
-                    Log.e("TAG", "setLoadState: cancel()");
-
                 }
             }
         }

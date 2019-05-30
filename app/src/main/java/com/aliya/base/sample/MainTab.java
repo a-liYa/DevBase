@@ -3,7 +3,6 @@ package com.aliya.base.sample;
 import com.aliya.base.sample.ui.main.FindFragment;
 import com.aliya.base.sample.ui.main.HomeFragment;
 import com.aliya.base.sample.ui.main.VideoFragment;
-import com.aliya.base.sample.R;
 
 /**
  * 主界面 tab 对应的 Fragment 枚举
