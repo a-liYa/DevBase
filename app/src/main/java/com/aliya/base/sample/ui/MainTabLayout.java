@@ -30,6 +30,8 @@ public class MainTabLayout extends LinearLayout implements View.OnClickListener 
     private FragmentManager mFragmentManager;
     private int mContainerId = -1;
 
+    boolean modeDetach = false; // true：detach()
+
     /**
      * 子条目View集合
      */
@@ -106,7 +108,6 @@ public class MainTabLayout extends LinearLayout implements View.OnClickListener 
      * @param index
      */
     public void setSelected(int index) {
-
         if (mAdapter != null) {
             index %= mAdapter.getCount();
 
@@ -118,21 +119,24 @@ public class MainTabLayout extends LinearLayout implements View.OnClickListener 
                 if (tab.fragment == null) {
                     tab.fragment = Fragment.instantiate(mContext, tab.clss.getName(), tab.args);
                     ft.add(mContainerId, tab.fragment);
-
                 } else {
-                    ft.attach(tab.fragment);
+                    if (modeDetach)
+                        ft.attach(tab.fragment);
+                    else
+                        ft.show(tab.fragment);
                 }
 
                 if (selectedKey != -1) { // 隐藏上一个Fragment
                     TabInfo lastTab = mTabs.get(selectedKey);
                     if (lastTab.fragment != null) {
-                        ft.detach(lastTab.fragment);
+                        if (modeDetach)
+                            ft.detach(lastTab.fragment);
+                        else
+                            ft.hide(lastTab.fragment);
                     }
                 }
-//                ft.show(tab.fragment);
 
                 ft.commit();
-
             }
         }
 
@@ -152,8 +156,6 @@ public class MainTabLayout extends LinearLayout implements View.OnClickListener 
 
         if (mOnSelectedListener != null)
             mOnSelectedListener.onSelected(index);
-
-
     }
 
     /**
