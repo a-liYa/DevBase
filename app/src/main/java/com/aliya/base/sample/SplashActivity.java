@@ -49,28 +49,31 @@ public class SplashActivity extends BaseActivity {
                 overridePendingTransition(R.anim.splash_alpha_in, R.anim.splash_alpha_out);
                 finish();
             }
-        }, 1000);
-        fitAlienScreen();
+        }, 1500);
+        fitNotchScreen();
     }
 
-    private void fitAlienScreen() {
+    private void fitNotchScreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            // 全屏适配异面屏(刘海、水滴、挖孔)
+            // 全屏适配异面屏(刘海、水滴、黑瞳)
             WindowManager.LayoutParams lp = getWindow().getAttributes();
             lp.layoutInDisplayCutoutMode =
                     WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+        }
+        if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             getWindow().getDecorView().setOnApplyWindowInsetsListener(
                     new View.OnApplyWindowInsetsListener() {
                         @Override
                         public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {
-                            WindowInsets windowInsets = v.getRootWindowInsets();
-                            if (windowInsets != null) {
-                                DisplayCutout displayCutout = windowInsets.getDisplayCutout();
+                            if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                                DisplayCutout displayCutout = insets.getDisplayCutout();
                                 displayCutout.getBoundingRects(); // 获取非功能区域集合
                                 displayCutout.getSafeInsetTop(); // 获取安全区域距离屏幕顶部的距离
                                 displayCutout.getSafeInsetBottom(); // 获取安全区域距离屏幕底部的距离
-                                Log.e("TAG", "onApplyWindowInsets: " + displayCutout);
+                            } else {
+                                insets.getStableInsetTop(); // 获取距离屏幕顶部的稳定距离
                             }
+                            Log.e("TAG", "onApplyWindowInsets: " + insets);
                             return v.onApplyWindowInsets(insets);
                         }
                     });
