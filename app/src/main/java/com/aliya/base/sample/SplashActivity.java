@@ -67,9 +67,11 @@ public class SplashActivity extends BaseActivity {
                         public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {
                             if (Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
                                 DisplayCutout displayCutout = insets.getDisplayCutout();
-                                displayCutout.getBoundingRects(); // 获取非功能区域集合
-                                displayCutout.getSafeInsetTop(); // 获取安全区域距离屏幕顶部的距离
-                                displayCutout.getSafeInsetBottom(); // 获取安全区域距离屏幕底部的距离
+                                if (displayCutout != null) {
+                                    displayCutout.getBoundingRects(); // 获取非功能区域集合
+                                    displayCutout.getSafeInsetTop(); // 获取安全区域距离屏幕顶部的距离
+                                    displayCutout.getSafeInsetBottom(); // 获取安全区域距离屏幕底部的距离
+                                }
                             } else {
                                 insets.getStableInsetTop(); // 获取距离屏幕顶部的稳定距离
                             }
