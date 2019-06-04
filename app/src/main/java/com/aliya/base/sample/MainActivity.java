@@ -55,7 +55,7 @@ public class MainActivity extends BaseActivity {
                 moveTaskToBack(true); // 返回键切至后台不关闭页面
                 return true;
             } else {
-                if (quitApp()) return true;
+                if (!quitApp()) return true;
             }
         }
         return super.onKeyDown(keyCode, event);
@@ -64,10 +64,10 @@ public class MainActivity extends BaseActivity {
     private boolean quitApp() {
         if (ClickTracker.isDoubleClick(1000)) {
             AppManager.get().finishAllActivity();
-            return false;
+            return true;
         } else {
             Toast.makeText(this, "再按一次退出应用", Toast.LENGTH_SHORT).show();
-            return true;
+            return false;
         }
     }
 
