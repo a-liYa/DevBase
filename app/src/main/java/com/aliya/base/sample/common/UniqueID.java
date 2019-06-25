@@ -50,7 +50,7 @@ public class UniqueID {
         String shortID = prefix
                 + (Build.BOARD.length() % 10)
                 + (Build.BRAND.length() % 10)
-                + (Build.CPU_ABI.length() % 10)
+                + (Build.CPU_ABI.length() % 10) // 配置ndk {abiFilters } 不同导致结果不同
                 + (Build.DEVICE.length() % 10)
                 + (Build.MANUFACTURER.length() % 10)
                 + (Build.MODEL.length() % 10)

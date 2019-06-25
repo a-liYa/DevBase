@@ -10,6 +10,8 @@ import android.util.Log;
 
 import com.aliya.base.AppUtils;
 import com.aliya.base.compat.CrashCompat;
+import com.aliya.base.sample.common.Installation;
+import com.aliya.base.sample.common.UniqueID;
 
 /**
  * application
@@ -35,6 +37,12 @@ public class App extends MultiDexApplication {
                 @Override
                 public void run() {
                     // 此处 - 第三方初始化
+                    Log.e("TAG", "run: " + UniqueID.getPseudoID(getApplicationContext(), "24"));
+
+                    Log.e("TAG", "Installation ID: " + Installation.id(getApplicationContext()));
+                    Log.e("TAG", "PackageResource: " + getPackageResourcePath());
+                    Log.e("TAG", "PackageCode: " + getPackageCodePath());
+                    Log.e("TAG", "Database: " + getDatabasePath("temp"));
                 }
             }).start();
         }
