@@ -47,14 +47,25 @@ public class UniqueID {
     }
 
     private static String getMostSig(String prefix) {
-        String shortID = prefix
-                + (Build.BOARD.length() % 10)
-                + (Build.BRAND.length() % 10)
-                + (Build.CPU_ABI.length() % 10) // 配置ndk {abiFilters } 不同导致结果不同
-                + (Build.DEVICE.length() % 10)
-                + (Build.MANUFACTURER.length() % 10)
-                + (Build.MODEL.length() % 10)
-                + (Build.PRODUCT.length() % 10);
+        String shortID;
+        if (Build.VERSION.SDK_INT < 28 /* Android P */) {
+            shortID = prefix
+                    + (Build.BOARD.length() % 10)
+                    + (Build.BRAND.length() % 10)
+                    + (Build.CPU_ABI.length() % 10) // 配置ndk {abiFilters } 不同导致结果不同
+                    + (Build.DEVICE.length() % 10)
+                    + (Build.MANUFACTURER.length() % 10)
+                    + (Build.MODEL.length() % 10)
+                    + (Build.PRODUCT.length() % 10);
+        } else {
+            shortID = prefix
+                    + (Build.BOARD.length() % 10)
+                    + (Build.BRAND.length() % 10)
+                    + (Build.DEVICE.length() % 10)
+                    + (Build.MANUFACTURER.length() % 10)
+                    + (Build.MODEL.length() % 10)
+                    + (Build.PRODUCT.length() % 10);
+        }
         return shortID;
     }
 
@@ -71,8 +82,7 @@ public class UniqueID {
 
     private static String getAndroidID(Context context) {
         try {
-            return Settings.Secure.getString(context.getContentResolver(),
-                    Settings.Secure.ANDROID_ID);
+            return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
         } catch (Exception e) {
             // no-op
         }
