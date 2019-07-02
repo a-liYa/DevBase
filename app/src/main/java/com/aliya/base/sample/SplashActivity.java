@@ -3,7 +3,6 @@ package com.aliya.base.sample;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.DisplayCutout;
 import android.view.KeyEvent;
 import android.view.View;
@@ -75,7 +74,7 @@ public class SplashActivity extends BaseActivity {
                             } else {
                                 insets.getStableInsetTop(); // 获取距离屏幕顶部的稳定距离
                             }
-                            Log.e("TAG", "onApplyWindowInsets: " + insets);
+//                            Log.e("TAG", "onApplyWindowInsets: " + insets);
                             return v.onApplyWindowInsets(insets);
                         }
                     });

@@ -52,6 +52,10 @@
         <activity
             android:name=".ui.activity.MineActivity"
             android:configChanges="orientation|screenSize" />
+
+        <provider
+            android:authorities="com.aliya.app.provider"
+            android:name=".db.AppInitInstaller" />
     </application>
 
 </manifest>
