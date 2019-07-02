@@ -1,6 +1,5 @@
 package com.aliya.base.sample;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -15,7 +14,6 @@ import com.aliya.base.manager.AppManager;
 import com.aliya.base.sample.base.BaseActivity;
 import com.aliya.base.sample.common.AppSetting;
 import com.aliya.base.sample.ui.MainTabLayout;
-import com.aliya.base.sample.ui.activity.LiveEventActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,7 +38,7 @@ public class MainActivity extends BaseActivity {
 
         bindData();
 
-        startActivity(new Intent(this, LiveEventActivity.class));
+//        startActivity(new Intent(this, LiveEventActivity.class));
     }
 
     private void bindData() {

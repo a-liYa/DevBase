@@ -16,6 +16,10 @@ android {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
             }
         }
+
+        ndk {
+            abiFilters "armeabi"
+        }
     }
     buildTypes {
         debug {
