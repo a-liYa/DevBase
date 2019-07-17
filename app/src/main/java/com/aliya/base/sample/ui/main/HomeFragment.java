@@ -13,7 +13,7 @@ import com.aliya.base.sample.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public HomeFragment() {
     }
@@ -27,15 +27,20 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.tv_title).setOnClickListener(new View.OnClickListener() {
-            int count = 0;
+        view.findViewById(R.id.tv_title).setOnClickListener(this);
 
-            @Override
-            public void onClick(View v) {
-                v.getBackground().setLevel(++count % 2);
-            }
+        view.findViewById(R.id.tv_content).setOnClickListener(this);
 
-        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_title:
+                break;
+            case R.id.tv_content:
+                break;
+        }
     }
 
 }

@@ -31,12 +31,12 @@ import static android.content.pm.ActivityInfo.SCREEN_ORIENTATION_USER_PORTRAIT;
 import static android.os.Build.VERSION_CODES.O;
 
 /**
- * 兼容 targetSDK >= 8.1 Activity 横竖屏处理问题
+ * 兼容处理 targetSDK > 26(8.0) Activity 屏幕方向设置问题
  *
  * @author a_liYa
  * @date 2019/3/9 22:25.
  */
-public class ActivityOrientationCompat {
+public final class ActivityOrientationCompat {
 
     @IntDef({
             SCREEN_ORIENTATION_UNSPECIFIED,
@@ -60,19 +60,24 @@ public class ActivityOrientationCompat {
     public @interface ScreenOrientation {
     }
 
-    /**
-     * 是否允许设置屏幕固定方向.
-     *
-     * @param activity .
-     * @return 返回 true : 表示允许, false反之.
-     */
-    public static boolean allowableRequestedOrientation(Activity activity) {
-        // 方向固定, 来自 manifest android:screenOrientation 属性
-        boolean isFixedOrientation =
-                ActivityOrientationCompat.isFixedOrientation(activity.getRequestedOrientation());
+    public static void setRequestedOrientation(Activity activity,
+                                               @ScreenOrientation int orientation,
+                                               boolean force) {
+        if (!fixOrientationByOreo(activity)) {
+            final int _orientation = activity.getRequestedOrientation();
+            if (force || _orientation == ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED) {
+                if (orientation != _orientation) {
+                    activity.setRequestedOrientation(orientation);
+                }
+            }
+        }
+    }
+
+    public static boolean fixOrientationByOreo(Activity activity) {
         if (activity.getApplicationInfo().targetSdkVersion > O
                 && Build.VERSION.SDK_INT == O
-                && ActivityOrientationCompat.isTranslucentOrFloating(activity)) {
+                && isTranslucentOrFloating(activity)) {
+            boolean isFixedOrientation = isFixedOrientation(activity.getRequestedOrientation());
             if (isFixedOrientation) {
                 activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                 try {
@@ -86,13 +91,16 @@ public class ActivityOrientationCompat {
                     // no-op
                 }
             }
-            return false;
+            return true; // true表示：设置固定方向，会崩溃
         }
-        return !isFixedOrientation;
+        return false;
     }
 
     static int[] window_attrs;
 
+    /**
+     * {@see ActivityInfo#isTranslucentOrFloating(TypedArray)}
+     */
     static boolean isTranslucentOrFloating(Context context) {
         if (window_attrs == null) {
             window_attrs = new int[]{
@@ -109,11 +117,17 @@ public class ActivityOrientationCompat {
         return isFloating || isTranslucent || isSwipeToDismiss;
     }
 
+    /**
+     * {@see ActivityInfo#isFixedOrientation(int)}
+     */
     static boolean isFixedOrientation(@ScreenOrientation int orientation) {
         return isFixedOrientationLandscape(orientation) || isFixedOrientationPortrait(orientation)
                 || orientation == SCREEN_ORIENTATION_LOCKED;
     }
 
+    /**
+     * {@see ActivityInfo#isFixedOrientationLandscape(int)}
+     */
     static boolean isFixedOrientationLandscape(@ScreenOrientation int orientation) {
         return orientation == SCREEN_ORIENTATION_LANDSCAPE
                 || orientation == SCREEN_ORIENTATION_SENSOR_LANDSCAPE
@@ -121,11 +135,13 @@ public class ActivityOrientationCompat {
                 || orientation == SCREEN_ORIENTATION_USER_LANDSCAPE;
     }
 
+    /**
+     * {@see ActivityInfo#isFixedOrientationPortrait(int)}
+     */
     static boolean isFixedOrientationPortrait(@ScreenOrientation int orientation) {
         return orientation == SCREEN_ORIENTATION_PORTRAIT
                 || orientation == SCREEN_ORIENTATION_SENSOR_PORTRAIT
                 || orientation == SCREEN_ORIENTATION_REVERSE_PORTRAIT
                 || orientation == SCREEN_ORIENTATION_USER_PORTRAIT;
     }
-
 }

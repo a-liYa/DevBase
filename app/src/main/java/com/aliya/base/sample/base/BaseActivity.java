@@ -25,9 +25,8 @@ public class BaseActivity extends SwipeBackActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (ActivityOrientationCompat.allowableRequestedOrientation(this)) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); // 强制竖屏
-        }
+        ActivityOrientationCompat.setRequestedOrientation(this,
+                ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, false); // 设置竖屏
         super.onCreate(savedInstanceState);
     }
 
