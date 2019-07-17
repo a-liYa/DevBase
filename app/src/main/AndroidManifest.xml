@@ -17,9 +17,11 @@
         <meta-data
             android:name="android.notch_support"
             android:value="true" />
+
         <activity
             android:name=".SplashActivity"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,34 +30,42 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.SecondActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.NormalPageActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.FullscreenPageActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.LiveEventActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
         <!--适配横竖屏、分屏切换时Activity不重建-->
         <activity
             android:name=".viewmodel.CitySelectActivity"
-            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation" />
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.DatabaseActivity"
             android:configChanges="orientation|screenSize"
-            android:process=":tools" />
+            android:process=":tools"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.MineActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait" />
 
         <provider
-            android:authorities="com.aliya.app.provider"
-            android:name=".db.AppInitInstaller" />
+            android:name=".db.AppInitInstaller"
+            android:authorities="com.aliya.app.provider" />
     </application>
 
 </manifest>
