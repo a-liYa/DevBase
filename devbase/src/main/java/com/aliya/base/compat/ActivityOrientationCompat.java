@@ -33,8 +33,8 @@ import static android.os.Build.VERSION_CODES.O;
 /**
  * 兼容处理 targetSDK > 26(8.0) Activity 屏幕方向设置问题
  * <p/>
- * Android 24(7.0)及以后版本屏幕方向设置建议在Manifest, 否则导致启动Activity短暂显示重力感应方向
- * 
+ * Android Api >= 25(7.1.1) 时屏幕方向设置建议在Manifest, 否则启动Activity短暂先显示重力感应方向
+ *
  * @author a_liYa
  * @date 2019/3/9 22:25.
  */
