@@ -1,5 +1,6 @@
 package com.aliya.base.compat;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -113,8 +114,8 @@ public final class ActivityOrientationCompat {
         }
         final TypedArray ta = context.obtainStyledAttributes(window_attrs);
         boolean isTranslucent = ta.getBoolean(0, false);
-        boolean isSwipeToDismiss = !ta.hasValue(0) && ta.getBoolean(1, false);
-        boolean isFloating = ta.getBoolean(2, false);
+        @SuppressLint("ResourceType") boolean isSwipeToDismiss = !ta.hasValue(0) && ta.getBoolean(1, false);
+        @SuppressLint("ResourceType") boolean isFloating = ta.getBoolean(2, false);
         ta.recycle();
         return isFloating || isTranslucent || isSwipeToDismiss;
     }

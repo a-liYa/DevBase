@@ -1,27 +1,20 @@
 apply plugin: 'com.android.library'
 
 ext {
-    version_code = 3
-    version_name = '0.0.3'
+    version_code = 4
+    version_name = '0.0.4'
 }
 
 android {
     compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 17
         targetSdkVersion 28
         versionCode version_code
         versionName version_name
         // 配置混淆文件会对library生效
         consumerProguardFiles 'proguard-rules.pro'
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
     }
 
 }
