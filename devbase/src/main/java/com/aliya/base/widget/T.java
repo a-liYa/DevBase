@@ -5,6 +5,8 @@ import android.support.annotation.IntDef;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.aliya.compat.ToastContext;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -16,7 +18,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 public final class T {
 
-    public static boolean isShow = true;
+    public static boolean showEnable = true;
 
     private T() {
     }
@@ -26,7 +28,7 @@ public final class T {
      *
      * @param context context
      * @param message 显示内容, 为空不显示
-     * @return toast, {@link #isShow} = false 或 message == null 时返回 null.
+     * @return toast, {@link #showEnable} = false 或 message == null 时返回 null.
      */
     public static Toast showShort(Context context, CharSequence message) {
         return show(context, message, Toast.LENGTH_SHORT);
@@ -37,7 +39,7 @@ public final class T {
      *
      * @param context context
      * @param resId   Resource id for the string.
-     * @return toast, {@link #isShow} = false 时返回 null.
+     * @return toast, {@link #showEnable} = false 时返回 null.
      */
     public static Toast showShort(Context context, int resId) {
         return show(context, resId, Toast.LENGTH_SHORT);
@@ -48,7 +50,7 @@ public final class T {
      *
      * @param context context
      * @param message 显示内容, 为空不显示
-     * @return toast, {@link #isShow} = false 或 message == null 时返回 null.
+     * @return toast, {@link #showEnable} = false 或 message == null 时返回 null.
      */
     public static Toast showLong(Context context, CharSequence message) {
         return show(context, message, Toast.LENGTH_LONG);
@@ -59,7 +61,7 @@ public final class T {
      *
      * @param context context
      * @param resId   Resource id for the string.
-     * @return toast, {@link #isShow} = false 时返回 null.
+     * @return toast, {@link #showEnable} = false 时返回 null.
      */
     public static Toast showLong(Context context, int resId) {
         return show(context, resId, Toast.LENGTH_LONG);
@@ -71,12 +73,12 @@ public final class T {
      * @param context  context
      * @param message  显示内容, 为空不显示
      * @param duration 时长类型
-     * @return toast, {@link #isShow} = false 或 message == null 时返回 null.
+     * @return toast, {@link #showEnable} = false 或 message == null 时返回 null.
      */
     public static Toast show(Context context, CharSequence message, int duration) {
         Toast toast = null;
-        if (isShow && !TextUtils.isEmpty(message)) {
-            toast = Toast.makeText(context, message, duration);
+        if (showEnable && !TextUtils.isEmpty(message)) {
+            toast = Toast.makeText(ToastContext.compatContext(context), message, duration);
             toast.show();
         }
         return toast;
@@ -89,12 +91,12 @@ public final class T {
      * @param context  context
      * @param resId    Resource id for the string.
      * @param duration 时长类型
-     * @return toast, {@link #isShow} = false 时返回 null.
+     * @return toast, {@link #showEnable} = false 时返回 null.
      */
     public static Toast show(Context context, int resId, int duration) {
         Toast toast = null;
-        if (isShow) {
-            toast = Toast.makeText(context, resId, duration);
+        if (showEnable) {
+            toast = Toast.makeText(ToastContext.compatContext(context), resId, duration);
             toast.show();
         }
         return toast;

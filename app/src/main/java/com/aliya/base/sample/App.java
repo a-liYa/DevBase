@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.aliya.base.AppUtils;
-import com.aliya.base.compat.CrashCompat;
 
 /**
  * application
@@ -25,7 +24,6 @@ public class App extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
 
-        CrashCompat.init();
 
         isMainProcess = TextUtils.equals(getPackageName(), AppUtils.getProcessName());
 

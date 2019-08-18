@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.aliya.base.manager.AppManager;
+import com.aliya.compat.CrashCompat;
 
 import java.util.List;
 
@@ -47,6 +48,7 @@ public final class AppUtils {
             } catch (Exception e) {
                 debuggable = false;
             }
+            CrashCompat.fixBug();
             AppManager.init(sContext);
         }
     }
