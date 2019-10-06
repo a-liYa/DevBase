@@ -12,9 +12,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
-import java.util.Queue;
 
 /**
  * 自定义MainTabLayout
@@ -143,14 +141,14 @@ public class MainTabLayout extends LinearLayout implements View.OnClickListener 
         // 设置当前item为选中状态
         View selectedView = mTabs.get(index).view;
         if (selectedView != null) {
-            setViewSelected(selectedView, true);
+            selectedView.setSelected(true);
         }
 
         // 取消上个item的选中状态
         View lastView = mTabs.get(selectedKey) == null ? null : mTabs.get
                 (selectedKey).view;
         if (lastView != null) {
-            setViewSelected(lastView, false);
+            lastView.setSelected(false);
         }
         selectedKey = index;
 
@@ -196,39 +194,6 @@ public class MainTabLayout extends LinearLayout implements View.OnClickListener 
 
                     addView(tab.view, i, lp);
                 }
-            }
-        }
-    }
-
-
-    /**
-     * 设置View以及子view的状态（选中/未选中）<br/>
-     * 广度遍历
-     *
-     * @param view
-     * @param selected
-     */
-    private void setViewSelected(View view, boolean selected) {
-        if (view == null) {
-            return;
-        }
-        Queue<View> queue = new LinkedList<View>();
-        queue.add(view);
-        while (true) {
-            if (!queue.isEmpty()) {
-                View poll = queue.poll();
-                if (poll != null) {
-                    poll.setSelected(selected);
-                    if (poll instanceof ViewGroup) {
-                        ViewGroup vg = (ViewGroup) poll;
-                        for (int i = 0; i < vg.getChildCount(); i++) {
-                            View child = vg.getChildAt(i);
-                            queue.add(child);
-                        }
-                    }
-                }
-            } else {
-                return;
             }
         }
     }

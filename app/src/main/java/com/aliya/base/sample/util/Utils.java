@@ -23,7 +23,7 @@ public class Utils {
         View decorView = window.getDecorView();
         decorView.setTag(R.id.all, 0);
         stack.add(decorView);
-        while (!stack.isEmpty()) {
+        while (!stack.isEmpty()) { // 深度优先遍历
             View pop = stack.pop();
             Integer depth = (Integer) pop.getTag(R.id.all);
             String msg = String.format("%" + (depth * 4 + 1) + "s", "") + pop;
