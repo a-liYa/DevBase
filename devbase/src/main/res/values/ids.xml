@@ -3,4 +3,7 @@
 
     <item name="tag_view_holder" type="id" />
 
+    <!-- 预防 compileOnly v7包 ID找不到-->
+    <item name="action_mode_bar_stub" type="id" />
+
 </resources>

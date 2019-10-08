@@ -61,6 +61,7 @@
         <activity
             android:name=".ui.activity.MineActivity"
             android:configChanges="orientation|screenSize"
+            android:label="我的"
             android:screenOrientation="portrait" />
 
         <provider
