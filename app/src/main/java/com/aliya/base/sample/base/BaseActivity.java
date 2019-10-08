@@ -11,8 +11,6 @@ import com.aliya.base.compat.ActivityOrientationCompat;
 import com.aliya.base.compat.DensityCompat;
 import com.aliya.base.sample.R;
 
-import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
-
 /**
  * Base activity
  *
