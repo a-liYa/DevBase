@@ -17,7 +17,6 @@ public class MineActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        findViewById(R.id.action_mode_bar_stub);
         setContentView(R.layout.activity_mine);
     }
 

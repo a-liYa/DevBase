@@ -21,6 +21,7 @@ import com.aliya.base.R;
  */
 public abstract class RebornActionBar {
 
+    protected View mView;
     protected Activity mActivity;
 
     public RebornActionBar(Activity activity) {
@@ -30,19 +31,31 @@ public abstract class RebornActionBar {
             ViewParent viewParent = viewStub.getParent();
             if (viewParent != null && viewParent instanceof ViewGroup) {
                 ViewGroup parent = (ViewGroup) viewParent;
-                View view = onCreateView(LayoutInflater.from(viewStub.getContext()), parent);
-                onViewCreated(view);
-                int indexOfViewStub = parent.indexOfChild(viewStub);
-                parent.removeViewInLayout(viewStub);
-                parent.addView(view, indexOfViewStub);
+                mView = onCreateView(LayoutInflater.from(viewStub.getContext()), parent);
+                onViewCreated(mView);
             }
         }
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent) {
+    public void inflateActionBar() {
+        if (mView != null && mView.getParent() == null) {
+            View viewStub = mActivity.findViewById(R.id.action_mode_bar_stub);
+            if (viewStub != null) {
+                ViewParent viewParent = viewStub.getParent();
+                if (viewParent != null && viewParent instanceof ViewGroup) {
+                    ViewGroup parent = (ViewGroup) viewParent;
+                    int indexOfViewStub = parent.indexOfChild(viewStub);
+                    parent.removeViewInLayout(viewStub);
+                    parent.addView(mView, indexOfViewStub);
+                }
+            }
+        }
+    }
+
+    protected View onCreateView(LayoutInflater inflater, ViewGroup parent) {
         return null;
     }
 
-    public void onViewCreated(View view) {
+    protected void onViewCreated(View view) {
     }
 }

@@ -1,6 +1,7 @@
 package com.aliya.base.sample.base;
 
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 
 /**
  * ActionBarActivity
@@ -10,13 +11,30 @@ import android.os.Bundle;
  */
 public class ActionBarActivity extends BaseActivity {
 
+    protected AppActionBar mActionBar;
+
+    @CallSuper
     @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        onCreateActionBar();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mActionBar = onCreateActionBar();
+        if (mActionBar != null) {
+            mActionBar.inflateActionBar();
+        }
     }
 
-    protected void onCreateActionBar() {
-        new AppActionBar(this);
+    protected AppActionBar onCreateActionBar() {
+        return new AppActionBar(this);
+    }
+
+    /**
+     * 借助系统方法同步修改我们的 title
+     */
+    @Override
+    public void setTitle(CharSequence title) {
+        super.setTitle(title);
+        if (mActionBar != null) {
+            mActionBar.setTitle(title);
+        }
     }
 }
