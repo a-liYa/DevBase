@@ -10,6 +10,11 @@ import com.aliya.base.R;
 
 /**
  * 伪复兴的ActionBar
+ * <p>
+ * 若实现悬浮功能，在 Activity#onCreate() 内部使用如下代码
+ * <code>
+ * AppCompatActivity#getDelegate().requestWindowFeature(Window.FEATURE_ACTION_MODE_OVERLAY);
+ * </code>
  *
  * @author a_liYa
  * @date 2019-10-08 18:49.

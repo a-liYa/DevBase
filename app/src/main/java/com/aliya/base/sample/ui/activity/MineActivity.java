@@ -3,8 +3,7 @@ package com.aliya.base.sample.ui.activity;
 import android.os.Bundle;
 
 import com.aliya.base.sample.R;
-import com.aliya.base.sample.base.AppActionBar;
-import com.aliya.base.sample.base.BaseActivity;
+import com.aliya.base.sample.base.ActionBarActivity;
 import com.aliya.base.sample.util.Utils;
 
 /**
@@ -13,15 +12,18 @@ import com.aliya.base.sample.util.Utils;
  * @author a_liYa
  * @date 2019/3/7 下午7:41.
  */
-public class MineActivity extends BaseActivity {
+public class MineActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        findViewById(R.id.action_mode_bar_stub);
         setContentView(R.layout.activity_mine);
-        new AppActionBar(this);
-
-        Utils.printViewTree(getWindow());
     }
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        Utils.printViewTree(getWindow());
+    }
 }
