@@ -31,16 +31,24 @@ public class App extends MultiDexApplication {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    // Application#onCreate() 执行耗时操作时，子线程提前加载Class，加快启动页开启速度3ms
+                    Class clazz = SplashActivity.class;
+
                     // 此处 - 第三方初始化
-//                    Log.e("TAG", "run: " + UniqueID.getPseudoID(getApplicationContext(), "24"));
                 }
             }).start();
+        }
+
+        try { // 模拟初始化耗时操作
+            Thread.sleep(50);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
         Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
             @Override
             public boolean queueIdle() { // 应用场景待调研
-                return true;
+                return false;
             }
         });
 
