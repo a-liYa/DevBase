@@ -3,6 +3,8 @@ package com.aliya.base.sample;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.DisplayCutout;
 import android.view.KeyEvent;
 import android.view.View;
@@ -29,6 +31,7 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getTheme().applyStyle(R.style.FontFamilySystem, true);
         super.onCreate(savedInstanceState);
         if (!isTaskRoot()) { // 防止App重复启动
             finish();
@@ -47,6 +50,8 @@ public class SplashActivity extends BaseActivity {
             }
         }, 1500);
         fitNotchScreen();
+
+        Log.e("TAG", "启动页开启耗时: " + (SystemClock.uptimeMillis() - App.sMillis));
     }
 
     private void fitNotchScreen() {

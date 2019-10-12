@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.MessageQueue;
+import android.os.SystemClock;
 import android.support.multidex.MultiDexApplication;
+import android.support.v4.content.res.ResourcesCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -20,10 +22,12 @@ public class App extends MultiDexApplication {
 
     private boolean isMainProcess; // 是否为主进程
 
+    public static long sMillis;
+
     @Override
     public void onCreate() {
         super.onCreate();
-
+        sMillis = SystemClock.uptimeMillis();
 
         isMainProcess = TextUtils.equals(getPackageName(), AppUtils.getProcessName());
 
@@ -35,14 +39,10 @@ public class App extends MultiDexApplication {
                     Class clazz = SplashActivity.class;
 
                     // 此处 - 第三方初始化
+                    App.this.getTheme().applyStyle(R.style.FontFamilyCustom, false);
+                    ResourcesCompat.getFont(App.this, R.font.fzbiaoysk_zbjt);
                 }
             }).start();
-        }
-
-        try { // 模拟初始化耗时操作
-            Thread.sleep(50);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
 
         Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
@@ -60,13 +60,14 @@ public class App extends MultiDexApplication {
         private boolean printLog = false;
 
         private void e(Activity activity, String msg) {
-            if (printLog)
-                Log.e("TAG", msg + activity.getClass().getSimpleName());
+            if (printLog) Log.e("TAG", msg + activity.getClass().getSimpleName());
         }
 
         @Override
         public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
             e(activity, "onActivityCreated: ");
+            // 全局修改TextView字体，参数:false 表示不强制覆盖原本设置过的字体
+            activity.getTheme().applyStyle(R.style.FontFamilyFangZheng, false);
         }
 
         @Override
