@@ -34,6 +34,37 @@ import static android.os.Build.VERSION_CODES.O;
 /**
  * 兼容处理 targetSDK > 26(8.0) Activity 屏幕方向设置问题
  * <p/>
+ * 参考
+ *
+ * Android-26/frameworks_base/services/core/java/com/android/server/am/ActivityManagerService.java
+ *
+ *     ActivityManagerService#setRequestedOrientation(IBinder token, int requestedOrientation) {
+ *         synchronized (this) {
+ *             ActivityRecord r = ActivityRecord.isInStackLocked(token);
+ *             if (r == null) {
+ *                 return;
+ *             }
+ *             final long origId = Binder.clearCallingIdentity();
+ *             try {
+ *                 r.setRequestedOrientation(requestedOrientation);
+ *             } finally {
+ *                 Binder.restoreCallingIdentity(origId);
+ *             }
+ *         }
+ *     }
+ *
+ * Android-26/frameworks_base/services/core/java/com/android/server/am/ActivityRecord.java
+ *
+ *     ActivityRecord#setRequestedOrientation(int requestedOrientation) {
+ *         if (ActivityInfo.isFixedOrientation(requestedOrientation) && !fullscreen
+ *                 && appInfo.targetSdkVersion > O) {
+ *             throw new IllegalStateException("Only fullscreen activities can request
+ *             orientation");
+ *         }
+ *         ...
+ *     }
+ *
+ * <p/>
  * Android Api >= 25(7.1.1) 时屏幕方向设置建议在Manifest, 否则启动Activity短暂先显示重力感应方向
  *
  * @author a_liYa
