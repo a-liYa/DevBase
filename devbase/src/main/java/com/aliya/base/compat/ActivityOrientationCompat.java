@@ -115,7 +115,21 @@ public final class ActivityOrientationCompat {
             if (isFixedOrientation) {
                 activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                 try {
-                    // 防止异常 "Only fullscreen opaque activities can request orientation"
+                    /**
+                     * 防止异常 "Only fullscreen opaque activities can request orientation"
+                     *
+                     * Android-26/
+                     *     Activity#protected void onCreate(Bundle savedInstanceState) {
+                     *         if (getApplicationInfo().targetSdkVersion > O && mActivityInfo.isFixedOrientation()) {
+                     *             final TypedArray ta = obtainStyledAttributes(com.android.internal.R.styleable.Window);
+                     *             final boolean isTranslucentOrFloating = ActivityInfo.isTranslucentOrFloating(ta);
+                     *             ta.recycle();
+                     *             if (isTranslucentOrFloating) {
+                     *                 throw new IllegalStateException("Only fullscreen opaque activities can request orientation");
+                     *             }
+                     *         }
+                     *     }
+                     */
                     Field field = Activity.class.getDeclaredField("mActivityInfo");
                     field.setAccessible(true);
                     ActivityInfo o = (ActivityInfo) field.get(activity);
