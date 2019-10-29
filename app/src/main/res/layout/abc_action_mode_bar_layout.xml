@@ -21,6 +21,5 @@
         android:layout_marginRight="?attr/actionBarSize"
         android:gravity="center"
         android:text="标题"
-        android:textColor="#3b424c"
         android:textSize="18sp" />
 </FrameLayout>

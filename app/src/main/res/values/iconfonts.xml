@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    /*
+     * 字体图标 - 关键配置
+     * 1. res/font/xxx.ttf;
+     * 2. 资源 values 声明 string code;
+     * 3. TextView 两个属性 android:fontFamily  android:text
+     */
+
+    <string name="icon_font_view">&#xe633;</string>
+    <string name="icon_font_view_off">&#xe634;</string>
+    <string name="icon_font_check">&#xe651;</string>
+    <string name="icon_font_close">&#xe652;</string>
+    <string name="icon_font_arrow_up">&#xe658;</string>
+    <string name="icon_font_arrow_left">&#xe659;</string>
+    <string name="icon_font_arrow_down">&#xe65a;</string>
+    <string name="icon_font_arrow_right">&#xe65b;</string>
+</resources>

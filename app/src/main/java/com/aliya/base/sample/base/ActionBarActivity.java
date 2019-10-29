@@ -28,7 +28,7 @@ public class ActionBarActivity extends BaseActivity {
     }
 
     /**
-     * 借助系统方法同步修改我们的 title
+     * 借助 Android Api 同步修改我们的 title
      */
     @Override
     public void setTitle(CharSequence title) {
