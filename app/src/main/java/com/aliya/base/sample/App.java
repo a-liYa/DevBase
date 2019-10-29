@@ -39,7 +39,9 @@ public class App extends MultiDexApplication {
                     Class clazz = SplashActivity.class;
 
                     // 此处 - 第三方初始化
-                    App.this.getTheme().applyStyle(R.style.FontFamilyCustom, false);
+
+                    getTheme().applyStyle(R.style.FontFamilyCustom, false);
+                    // 加载字体耗时 150ms
                     ResourcesCompat.getFont(App.this, R.font.fzbiaoysk_zbjt);
                 }
             }).start();
