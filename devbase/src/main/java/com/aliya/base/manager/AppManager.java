@@ -9,6 +9,8 @@ import android.support.annotation.Nullable;
 import com.aliya.base.util.L;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
@@ -22,7 +24,10 @@ public final class AppManager {
 
     private volatile static AppManager sInstance;
 
-    private Stack<Activity> mActivityStack;
+    private Stack<Activity> mCreatedStack = new Stack<>();
+    private Stack<Activity> mStartedStack = new Stack<>();
+    private Queue<Activity> mResumedQueue = new LinkedList<>();
+
     private Set<AppFrontBackCallback> mCallbacks = new HashSet<>();
 
     private AppManager(Context context) {
@@ -31,6 +36,55 @@ public final class AppManager {
             ((Application) app).registerActivityLifecycleCallbacks(lifecycleCallbacks);
         }
     }
+
+    static final Application.ActivityLifecycleCallbacks lifecycleCallbacks =
+            new Application.ActivityLifecycleCallbacks() {
+
+                // 打开的Activity数量统计
+                private int activityStartCount = 0;
+
+                @Override
+                public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+                    get().mCreatedStack.push(activity);
+                }
+
+                @Override
+                public void onActivityStarted(Activity activity) {
+                    get().mStartedStack.push(activity);
+                    // 数值从 0 -> 1 说明是从后台切到前台
+                    if (++activityStartCount == 1) {
+                        get().dispatchOnFront();
+                    }
+                }
+
+                @Override
+                public void onActivityResumed(Activity activity) {
+                    get().mResumedQueue.offer(activity);
+                }
+
+                @Override
+                public void onActivityPaused(Activity activity) {
+                    get().mResumedQueue.remove(activity);
+                }
+
+                @Override
+                public void onActivityStopped(Activity activity) {
+                    get().mStartedStack.remove(activity);
+                    // 数值从 1 -> 0 说明是从前台切到后台
+                    if (--activityStartCount == 0) {
+                        get().dispatchOnBack();
+                    }
+                }
+
+                @Override
+                public void onActivityDestroyed(Activity activity) {
+                    get().mCreatedStack.remove(activity);
+                }
+
+                @Override
+                public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+                }
+            };
 
     public static void init(Context context) {
         if (sInstance == null) {
@@ -47,51 +101,6 @@ public final class AppManager {
         }
         return sInstance;
     }
-
-    private static final Application.ActivityLifecycleCallbacks lifecycleCallbacks =
-            new Application.ActivityLifecycleCallbacks() {
-
-                // 打开的Activity数量统计
-                private int activityStartCount = 0;
-
-                @Override
-                public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-                    get().addActivity(activity);
-                }
-
-                @Override
-                public void onActivityStarted(Activity activity) {
-                    // 数值从 0 -> 1 说明是从后台切到前台
-                    if (++activityStartCount == 1) {
-                        get().dispatchOnFront();
-                    }
-                }
-
-                @Override
-                public void onActivityResumed(Activity activity) {
-                }
-
-                @Override
-                public void onActivityPaused(Activity activity) {
-                }
-
-                @Override
-                public void onActivityStopped(Activity activity) {
-                    // 数值从 1 -> 0 说明是从前台切到后台
-                    if (--activityStartCount == 0) {
-                        get().dispatchOnBack();
-                    }
-                }
-
-                @Override
-                public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
-                }
-
-                @Override
-                public void onActivityDestroyed(Activity activity) {
-                    get().removeActivity(activity);
-                }
-            };
 
     private void dispatchOnFront() {
         for (AppFrontBackCallback callback : mCallbacks) {
@@ -114,39 +123,13 @@ public final class AppManager {
     }
 
     /**
-     * 添加Activity到堆栈.
-     *
-     * @param activity activity.
-     */
-    public void addActivity(Activity activity) {
-        if (mActivityStack == null)
-            mActivityStack = new Stack<>();
-
-        if (activity != null)
-            mActivityStack.push(activity);
-    }
-
-    /**
-     * 删除Activity从堆栈.
-     *
-     * @param activity activity.
-     * @return false : 删除失败（当不存在时）.
-     */
-    public boolean removeActivity(Activity activity) {
-        if (mActivityStack != null && activity != null) {
-            return mActivityStack.remove(activity);
-        }
-        return false;
-    }
-
-    /**
      * 获取栈中所有Activity.
      *
      * @return 返回 stack.
      */
-    public @Nullable
-    Stack<Activity> getAllActivity() {
-        return mActivityStack;
+    @Nullable
+    public Stack<Activity> getAllActivity() {
+        return mCreatedStack;
     }
 
     /**
@@ -156,11 +139,23 @@ public final class AppManager {
      * @return true : 包含
      */
     public boolean contains(Class<? extends Activity> clazz) {
-        if (mActivityStack != null)
-            for (Activity activity : mActivityStack) {
+        if (mCreatedStack != null)
+            for (Activity activity : mCreatedStack) {
                 if (activity.getClass().equals(clazz)) return true;
             }
         return false;
+    }
+
+    @Nullable
+    public Activity getTopActivity() {
+        Activity peek = mResumedQueue.peek();
+        if (peek == null) {
+            peek = mStartedStack.peek();
+            if (peek == null) {
+                peek = mCreatedStack.peek();
+            }
+        }
+        return peek;
     }
 
     /**
@@ -169,10 +164,10 @@ public final class AppManager {
      * @param clazz activity class.
      * @return activity instance.
      */
-    public @Nullable
-    Activity getActivity(Class<? extends Activity> clazz) {
-        if (mActivityStack != null)
-            for (Activity activity : mActivityStack) {
+    @Nullable
+    public Activity getActivity(Class<? extends Activity> clazz) {
+        if (mCreatedStack != null)
+            for (Activity activity : mCreatedStack) {
                 if (activity.getClass().equals(clazz)) return activity;
             }
         return null;
@@ -184,8 +179,8 @@ public final class AppManager {
      * @param clazz activity.
      */
     public void finishActivity(Class<?> clazz) {
-        if (mActivityStack != null) {
-            for (Activity activity : mActivityStack) {
+        if (mCreatedStack != null) {
+            for (Activity activity : mCreatedStack) {
                 if (activity.getClass().equals(clazz)) activity.finish();
             }
         }
@@ -197,18 +192,18 @@ public final class AppManager {
      * @return activity count.
      */
     public int getCount() {
-        return mActivityStack != null ? mActivityStack.size() : 0;
+        return mCreatedStack != null ? mCreatedStack.size() : 0;
     }
 
     /**
      * 结束所有Activity
      */
     public void finishAllActivity() {
-        if (mActivityStack != null) {
-            for (Activity activity : mActivityStack) {
+        if (mCreatedStack != null) {
+            for (Activity activity : mCreatedStack) {
                 if (activity != null) activity.finish();
             }
-            mActivityStack.clear();
+            mCreatedStack.clear();
         }
     }
 
