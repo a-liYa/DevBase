@@ -107,13 +107,16 @@ public final class ActivityOrientationCompat {
         }
     }
 
+    /**
+     * 修复 Android 8.0 Manifest 配置方向固定引起的崩溃
+     * * @return true表示：设置固定方向，会崩溃
+     */
     public static boolean fixOrientationByOreo(Activity activity) {
         if (activity.getApplicationInfo().targetSdkVersion > O
                 && Build.VERSION.SDK_INT == O
                 && isTranslucentOrFloating(activity)) {
             boolean isFixedOrientation = isFixedOrientation(activity.getRequestedOrientation());
             if (isFixedOrientation) {
-                activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                 try {
                     /**
                      * 防止异常 "Only fullscreen opaque activities can request orientation"
@@ -136,7 +139,7 @@ public final class ActivityOrientationCompat {
                     o.screenOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED;
                     field.setAccessible(false);
                 } catch (Exception e) {
-                    // no-op
+                    // ignore it.
                 }
             }
             return true; // true表示：设置固定方向，会崩溃
