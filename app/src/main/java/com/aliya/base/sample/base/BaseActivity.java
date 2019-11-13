@@ -1,5 +1,6 @@
 package com.aliya.base.sample.base;
 
+import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -45,5 +46,9 @@ public class BaseActivity extends SwipeBackActivity {
             return DensityCompat.forceDensityDpiByResources(super.getResources());
         }
         return super.getResources();
+    }
+
+    protected Activity getActivity() {
+        return this;
     }
 }
