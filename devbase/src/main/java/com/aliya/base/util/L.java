@@ -58,6 +58,11 @@ public final class L {
             Log.v(tag == null ? TAG : tag, msg);
     }
 
+    public static void e(String tag, String msg, Throwable tr) {
+        if (AppUtils.isDebuggable())
+            Log.e(tag == null ? TAG : tag, msg, tr);
+    }
+
     public static void markStart() {
         startMillis = System.currentTimeMillis();
     }
