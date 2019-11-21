@@ -23,4 +23,11 @@ public final class Docs {
      * A(T:activityOpenExitAnimation) -> T(T:activityOpenEnterAnimation)
      * T(T:activityCloseEnterAnimation) <- B(T:activityCloseExitAnimation)
      */
+
+    /**
+     * 设置字体注意事项：
+     *
+     * TextView 在 Android 25(7.1) 及以下版本配置（android:fontFamily）属性无效，代码 setTypeface 有效。
+     * AppCompatTextView 则不存在这个问题，
+     */
 }
