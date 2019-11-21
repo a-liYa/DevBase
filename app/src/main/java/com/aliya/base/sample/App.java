@@ -9,6 +9,7 @@ import android.support.multidex.MultiDexApplication;
 import android.support.v4.content.res.ResourcesCompat;
 import android.text.TextUtils;
 import android.util.Log;
+import android.webkit.WebView;
 
 import com.aliya.base.AppUtils;
 
@@ -48,9 +49,18 @@ public class App extends MultiDexApplication {
         }
 
         Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
+
+            boolean isInitWeb;
+
             @Override
             public boolean queueIdle() { // 应用场景待调研
-                return false;
+                if (!isInitWeb) {
+                    isInitWeb = true;
+                    long ms = SystemClock.uptimeMillis();
+                    new WebView(getApplicationContext());
+                    Log.e("TAG", "首次初始化WebView耗时: " + (SystemClock.uptimeMillis() - ms));
+                }
+                return true; // false 不会有下次回调
             }
         });
 
