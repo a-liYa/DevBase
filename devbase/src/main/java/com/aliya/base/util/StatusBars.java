@@ -23,7 +23,7 @@ public final class StatusBars {
      * @return boolean 成功执行返回true
      */
     public static boolean setDarkMode(final Window window, final boolean dark) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { // Android 6.0及以上使用
             int visibility = window.getDecorView().getSystemUiVisibility();
             if (dark) {
                 visibility |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
@@ -42,7 +42,6 @@ public final class StatusBars {
 
     /**
      * 设置状态栏图标为深色和魅族特定的文字风格，Flyme4.0以上可以用来判断是否为Flyme用户
-     * Flyme Android 7.0版本以上需要使用原生适配方法
      */
     static boolean fitDarkModeFlyme(Window window, boolean dark) {
         boolean result = false;
