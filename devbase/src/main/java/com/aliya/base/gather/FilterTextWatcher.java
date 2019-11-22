@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 对{@link android.widget.EditText} 进行指定字符过滤
+ * 对{@link android.widget.EditText} 进行正则表达式配字符过滤
  *
  * @author a_liYa
  * @date 2019-09-18 10:34.
