@@ -23,7 +23,7 @@ public final class WebPools {
         mWebQueue = new LinkedBlockingQueue<>();
     }
 
-    public static WebPools getInstance() {
+    public static WebPools get() {
         if (sInstance == null) {
             synchronized (WebPools.class) {
                 if (sInstance == null) {

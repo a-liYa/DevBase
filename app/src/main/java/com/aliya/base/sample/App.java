@@ -9,9 +9,9 @@ import android.support.multidex.MultiDexApplication;
 import android.support.v4.content.res.ResourcesCompat;
 import android.text.TextUtils;
 import android.util.Log;
-import android.webkit.WebView;
 
 import com.aliya.base.AppUtils;
+import com.aliya.base.gather.WebPools;
 
 /**
  * application
@@ -36,11 +36,12 @@ public class App extends MultiDexApplication {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    // Application#onCreate() 执行耗时操作时，子线程提前加载Class，加快启动页开启速度3ms
+                    // Application#onCreate() 执行了耗时操作时，子线程提前加载Class，加快启动页开启速度3ms
                     Class clazz = SplashActivity.class;
 
                     // 此处 - 第三方初始化
 
+                    // Application应用字体Style
                     getTheme().applyStyle(R.style.FontFamilyCustom, false);
                     // 加载字体耗时 150ms
                     ResourcesCompat.getFont(App.this, R.font.fzbiaoysk_zbjt);
@@ -57,7 +58,7 @@ public class App extends MultiDexApplication {
                 if (!isInitWeb) {
                     isInitWeb = true;
                     long ms = SystemClock.uptimeMillis();
-                    new WebView(getApplicationContext());
+                    WebPools.get().recycle(WebPools.get().acquireWebView(getApplicationContext()));
                     Log.e("TAG", "首次初始化WebView耗时: " + (SystemClock.uptimeMillis() - ms));
                 }
                 return true; // false 不会有下次回调
