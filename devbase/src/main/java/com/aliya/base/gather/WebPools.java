@@ -2,6 +2,8 @@ package com.aliya.base.gather;
 
 import android.content.Context;
 import android.content.MutableContextWrapper;
+import android.view.View;
+import android.view.ViewGroup;
 import android.webkit.WebView;
 
 import java.util.Queue;
@@ -55,6 +57,22 @@ public final class WebPools {
                     (MutableContextWrapper) webView.getContext();
             mMutableContextWrapper.setBaseContext(context);
             return webView;
+        }
+    }
+
+    /**
+     * 提供WebView替换占位View功能
+     */
+    public static void replaceWithWebView(WebView webView, View view) {
+        final ViewGroup parent = (ViewGroup) view.getParent();
+        if (parent != null && webView != null) {
+            final int index = parent.indexOfChild(view);
+            parent.removeViewInLayout(view);
+            final int viewId = view.getId();
+            if (viewId != View.NO_ID) {
+                webView.setId(viewId);
+            }
+            parent.addView(webView, index, view.getLayoutParams());
         }
     }
 }

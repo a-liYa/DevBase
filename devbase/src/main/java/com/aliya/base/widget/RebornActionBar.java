@@ -30,8 +30,7 @@ public abstract class RebornActionBar {
         if (viewStub != null) {
             ViewParent viewParent = viewStub.getParent();
             if (viewParent != null && viewParent instanceof ViewGroup) {
-                ViewGroup parent = (ViewGroup) viewParent;
-                mView = onCreateView(LayoutInflater.from(viewStub.getContext()), parent);
+                mView = onCreateView(LayoutInflater.from(activity), (ViewGroup) viewParent);
                 onViewCreated(mView);
             }
         }
@@ -52,9 +51,7 @@ public abstract class RebornActionBar {
         }
     }
 
-    protected View onCreateView(LayoutInflater inflater, ViewGroup parent) {
-        return null;
-    }
+    protected abstract View onCreateView(LayoutInflater inflater, ViewGroup parent);
 
     protected void onViewCreated(View view) {
     }
