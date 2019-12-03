@@ -1,8 +1,8 @@
 package com.aliya.base.sample.base;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.view.View;
@@ -20,7 +20,15 @@ import com.aliya.base.sample.R;
  */
 public class BaseActivity extends SwipeBackActivity {
 
-    boolean fitDensity = false;
+    boolean forceDensity = false;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        if (forceDensity) {
+            newBase = DensityCompat.forceDensityDpiByResources(newBase);
+        }
+        super.attachBaseContext(newBase);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +46,6 @@ public class BaseActivity extends SwipeBackActivity {
             view.setFitsSystemWindows(false);
         }
         super.onPostCreate(savedInstanceState);
-    }
-
-    @Override
-    public Resources getResources() {
-        if (fitDensity) {
-            return DensityCompat.forceDensityDpiByResources(super.getResources());
-        }
-        return super.getResources();
     }
 
     protected Activity getActivity() {

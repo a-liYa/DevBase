@@ -1,7 +1,9 @@
 package com.aliya.base.compat;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.util.DisplayMetrics;
 
 /**
@@ -12,8 +14,10 @@ import android.util.DisplayMetrics;
  */
 public class DensityCompat {
 
-    public static Resources forceDensityDpiByResources(Resources resources) {
+    public static Context forceDensityDpiByResources(Context context) {
+        Resources resources = context.getResources();
         Configuration config = resources.getConfiguration();
+
         /**
          *  0.8   0.9  1.0  1.1  1.2  1.35  1.5
          *   |    |     |    |    |    ｜　　｜
@@ -24,10 +28,14 @@ public class DensityCompat {
         final int dpi = matchFitDensityDpi();
         if (config.densityDpi != dpi) {
             config.densityDpi = dpi;
-            // updateConfiguration方法已过时，暂时未找到替代方案
-            resources.updateConfiguration(config, resources.getDisplayMetrics());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                context = context.createConfigurationContext(config);
+            } else {
+                // Build.VERSION.N_MR1(Api 25) 被标记 @Deprecated
+                resources.updateConfiguration(config, resources.getDisplayMetrics());
+            }
         }
-        return resources;
+        return context;
     }
 
     public static int sFitDensityDpi;
