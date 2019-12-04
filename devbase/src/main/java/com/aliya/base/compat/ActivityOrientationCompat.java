@@ -94,6 +94,10 @@ public final class ActivityOrientationCompat {
     public @interface ScreenOrientation {
     }
 
+    /**
+     * 设置 Activity orientation
+     * @param force false：表示如果 Manifest 配置了方向，不去覆盖
+     */
     public static void setRequestedOrientation(Activity activity,
                                                @ScreenOrientation int orientation,
                                                boolean force) {
