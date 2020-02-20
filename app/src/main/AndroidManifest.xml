@@ -49,7 +49,9 @@
         <activity
             android:name=".ui.activity.LiveEventActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait" /> <!-- 适配横竖屏、分屏切换时Activity不重建 -->
+            android:screenOrientation="portrait" />
+
+        <!-- 适配横竖屏、分屏切换时Activity不重建 -->
         <activity
             android:name=".viewmodel.CitySelectActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
@@ -63,6 +65,11 @@
             android:name=".ui.activity.MineActivity"
             android:configChanges="orientation|screenSize"
             android:label="我的"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.WebActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Web"
             android:screenOrientation="portrait" />
 
         <activity
@@ -83,6 +90,7 @@
             android:label="SingleTop"
             android:launchMode="singleTop"/>
 
+        <!--协助初始化Context-->
         <provider
             android:name=".db.AppInitInstaller"
             android:authorities="com.aliya.app.provider" />

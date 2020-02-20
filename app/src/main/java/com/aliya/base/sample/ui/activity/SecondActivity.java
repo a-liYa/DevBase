@@ -1,43 +1,37 @@
 package com.aliya.base.sample.ui.activity;
 
-import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.View;
-import android.webkit.WebView;
 
-import com.aliya.base.compat.WindowCompat;
-import com.aliya.base.gather.WebPools;
-import com.aliya.base.sample.MainActivity;
 import com.aliya.base.sample.R;
 import com.aliya.base.sample.base.BaseActivity;
 
 public class SecondActivity extends BaseActivity {
 
-    WebView mWebView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Class<Typeface> typefaceClass = Typeface.class;
+//        try {
+//            Field typefaceField = typefaceClass.getDeclaredField("sSystemFontMap");
+//            typefaceField.setAccessible(true);
+//            Map<String, Typeface> o = (Map<String, Typeface>) typefaceField.get(null);
+//            Map<String, Typeface> newMap = new HashMap<>();
+//            Set<Map.Entry<String, Typeface>> entries = o.entrySet();
+//            for (Map.Entry<String, Typeface> entry : entries) {
+//                if (entry.getKey().equals("sans-serif")) {
+//                    newMap.put(entry.getKey(), ResourcesCompat.getFont(this, R.font.fzbiaoysk_zbjt));
+//                } else {
+//                    newMap.put(entry.getKey(), entry.getValue());
+//                }
+//                Log.e("TAG", "onCreate: " + entry.getKey() + " - " + newMap.get(entry.getKey()));
+//            }
+//            typefaceField.set(null, newMap);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Log.e("TAG", "Exception: sSystemFontMap" + e.toString());
+//        }
+
         setContentView(R.layout.activity_second);
-
-        mWebView = WebPools.get().acquireWebView(this);
-        WebPools.replaceWithWebView(mWebView, findViewById(R.id.view_stub));
-
-        mWebView.loadUrl("https://mp.weixin.qq.com/s?__biz=MzIyMjQ0MTU0NA==&mid=2247494299&idx=3&sn=0dd4932da201cdc88e2c387081bf7db2&chksm=e82fd3bcdf585aaad566bcc4b6283f785ee862ab7e536a1f45f15304a9780de1c1f57c83b56a&mpshare=1&scene=23&srcid=&sharer_sharetime=1573733607034&sharer_shareid=1760a1eeb048331105b4abc5053e15d5#rd");
-
-        View decorView = getWindow().getDecorView();
-        decorView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
-            @Override
-            public void onViewAttachedToWindow(View v) {
-                WindowCompat.openDrawDuringWindowsAnimating(getActivity());
-            }
-
-            @Override
-            public void onViewDetachedFromWindow(View v) {
-
-            }
-        });
-
-        startActivity(new Intent(this, MainActivity.class));
     }
 }
