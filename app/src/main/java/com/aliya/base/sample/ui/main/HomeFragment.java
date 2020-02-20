@@ -45,9 +45,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(), SingleInstanceActivity.class));
                 break;
             case R.id.tv_thread_pool:
-                startActivity(new Intent(getContext(), ThreadPoolActivity.class));
+                getActivity().startActivity(new Intent(getContext(), ThreadPoolActivity.class));
                 break;
         }
     }
-
 }

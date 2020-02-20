@@ -1,6 +1,9 @@
 package com.aliya.base.sample;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.MessageQueue;
@@ -24,6 +27,24 @@ public class App extends MultiDexApplication {
     private boolean isMainProcess; // 是否为主进程
 
     public static long sMillis;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(new ContextWrapper(base) {
+            @Override
+            public void startActivity(Intent intent) {
+                if (intent != null) intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                super.startActivity(intent);
+            }
+
+            @Override
+            public void startActivity(Intent intent, Bundle options) {
+                if (intent != null) intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                super.startActivity(intent, options);
+            }
+        });
+
+    }
 
     @Override
     public void onCreate() {
@@ -66,6 +87,21 @@ public class App extends MultiDexApplication {
         });
 
         registerActivityLifecycleCallbacks(mLifecycleCallbacks);
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        super.startActivity(intent);
+    }
+
+    @Override
+    public void startActivity(Intent intent, Bundle options) {
+        super.startActivity(intent, options);
+    }
+
+    @Override
+    public void startActivities(Intent[] intents) {
+        super.startActivities(intents);
     }
 
     private ActivityLifecycleCallbacks mLifecycleCallbacks = new ActivityLifecycleCallbacks() {
