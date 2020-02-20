@@ -48,14 +48,14 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            if (AppSetting.get().isBackToBackground()) {
-                moveTaskToBack(true); // 返回键切至后台不关闭页面
-                return true;
-            } else {
-                if (!quitApp()) return true;
-            }
-        }
+//        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+//            if (AppSetting.get().isBackToBackground()) {
+//                moveTaskToBack(true); // 返回键切至后台不关闭页面
+//                return true;
+//            } else {
+//                if (!quitApp()) return true;
+//            }
+//        }
         return super.onKeyDown(keyCode, event);
     }
 

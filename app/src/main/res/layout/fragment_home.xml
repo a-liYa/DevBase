@@ -26,6 +26,14 @@
         android:padding="16dp"
         android:text="获取" />
 
+    <TextView
+        android:id="@+id/tv_launch_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="16dp"
+        android:text="启动模式" />
+
     <com.aliya.base.sample.ui.widget.LoadWave
         android:id="@+id/load_wave"
         android:layout_width="93dp"

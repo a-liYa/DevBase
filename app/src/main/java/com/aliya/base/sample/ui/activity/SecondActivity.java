@@ -1,11 +1,13 @@
 package com.aliya.base.sample.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 
 import com.aliya.base.compat.WindowCompat;
 import com.aliya.base.gather.WebPools;
+import com.aliya.base.sample.MainActivity;
 import com.aliya.base.sample.R;
 import com.aliya.base.sample.base.BaseActivity;
 
@@ -35,5 +37,7 @@ public class SecondActivity extends BaseActivity {
 
             }
         });
+
+        startActivity(new Intent(this, MainActivity.class));
     }
 }
