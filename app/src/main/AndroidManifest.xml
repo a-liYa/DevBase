@@ -49,9 +49,7 @@
         <activity
             android:name=".ui.activity.LiveEventActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait" />
-
-        <!-- 适配横竖屏、分屏切换时Activity不重建 -->
+            android:screenOrientation="portrait" /> <!-- 适配横竖屏、分屏切换时Activity不重建 -->
         <activity
             android:name=".viewmodel.CitySelectActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
@@ -71,13 +69,12 @@
             android:configChanges="orientation|screenSize"
             android:label="Web"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.activity.launch.SingleInstanceActivity"
-            android:label="SingleInstance"
             android:icon="@mipmap/ic_loading_logo"
-            android:taskAffinity="com.aliya.single_instance"
-            android:launchMode="singleInstance" />
+            android:label="SingleInstance"
+            android:launchMode="singleInstance"
+            android:taskAffinity="com.aliya.single_instance" />
         <activity
             android:name=".ui.activity.launch.StandardActivity"
             android:label="Standard"
@@ -86,11 +83,15 @@
             android:name=".ui.activity.launch.SingleTaskActivity"
             android:label="SingleTask"
             android:launchMode="singleTask" />
-        <activity android:name=".ui.activity.launch.SingleTopActivity"
+        <activity
+            android:name=".ui.activity.launch.SingleTopActivity"
             android:label="SingleTop"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop" />
 
-        <!--协助初始化Context-->
+        <activity android:name=".ui.activity.thread.ThreadPoolActivity"
+            android:label="线程池"/>
+
+        <!-- 协助初始化Context -->
         <provider
             android:name=".db.AppInitInstaller"
             android:authorities="com.aliya.app.provider" />

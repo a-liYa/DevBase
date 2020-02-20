@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.aliya.base.sample.R;
 import com.aliya.base.sample.ui.activity.launch.SingleInstanceActivity;
+import com.aliya.base.sample.ui.activity.thread.ThreadPoolActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +33,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.tv_title).setOnClickListener(this);
         view.findViewById(R.id.tv_content).setOnClickListener(this);
         view.findViewById(R.id.tv_launch_mode).setOnClickListener(this);
-
+        view.findViewById(R.id.tv_thread_pool).setOnClickListener(this);
     }
 
     @Override
@@ -42,6 +43,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tv_launch_mode:
                 startActivity(new Intent(getContext(), SingleInstanceActivity.class));
+                break;
+            case R.id.tv_thread_pool:
+                startActivity(new Intent(getContext(), ThreadPoolActivity.class));
                 break;
         }
     }
