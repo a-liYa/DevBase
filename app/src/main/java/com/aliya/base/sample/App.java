@@ -33,6 +33,12 @@ public class App extends MultiDexApplication {
         super.attachBaseContext(new ContextWrapper(base) {
             @Override
             public void startActivity(Intent intent) {
+                /**
+                 * @see android.app.ContextImpl#startActivity(Intent, Bundle)
+                 * throw new AndroidRuntimeException("Calling startActivity() from outside of an
+                 * Activity context requires the FLAG_ACTIVITY_NEW_TASK flag. Is this really what
+                 * you want?").
+                 */
                 if (intent != null) intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 super.startActivity(intent);
             }
