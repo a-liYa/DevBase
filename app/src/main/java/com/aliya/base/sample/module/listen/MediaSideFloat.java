@@ -1,4 +1,4 @@
-package com.aliya.base.sample.ui.widget;
+package com.aliya.base.sample.module.listen;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;

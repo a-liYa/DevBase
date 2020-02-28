@@ -14,7 +14,7 @@ import com.aliya.base.manager.AppManager;
 import com.aliya.base.sample.base.BaseActivity;
 import com.aliya.base.sample.common.AppSetting;
 import com.aliya.base.sample.ui.MainTabLayout;
-import com.aliya.base.sample.ui.SideFloatHelper;
+import com.aliya.base.sample.module.listen.SideFloatHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

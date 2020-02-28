@@ -5,7 +5,6 @@ import android.view.View;
 
 import com.aliya.base.sample.R;
 import com.aliya.base.sample.base.ActionBarActivity;
-import com.aliya.base.sample.ui.SideFloatHelper;
 
 /**
  * 听新闻 - 示例页

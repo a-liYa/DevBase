@@ -1,4 +1,4 @@
-package com.aliya.base.sample.ui;
+package com.aliya.base.sample.module.listen;
 
 import android.app.Activity;
 import android.app.Application;
@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.aliya.base.AppUtils;
-import com.aliya.base.sample.ui.widget.MediaSideFloat;
 
 /**
  * SideFloatHelper
