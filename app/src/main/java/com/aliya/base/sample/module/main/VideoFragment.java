@@ -1,4 +1,4 @@
-package com.aliya.base.sample.ui.main;
+package com.aliya.base.sample.module.main;
 
 
 import android.os.Bundle;

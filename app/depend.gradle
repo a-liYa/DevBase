@@ -7,7 +7,7 @@ configurations.all {
 
         force 'android.arch.lifecycle:extensions:1.1.1'
         force 'android.arch.persistence.room:runtime:1.1.1'
-
+        force 'android.arch.persistence.room:compiler:1.1.1'
     }
 }
 

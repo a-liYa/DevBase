@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context="com.aliya.base.sample.ui.main.HomeFragment">
+    tools:context=".module.main.HomeFragment">
 
     <TextView
         android:id="@+id/tv_title"

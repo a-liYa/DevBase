@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aliya.base.sample.ui.main.HomeFragment">
+    tools:context=".module.main.HomeFragment">
 
     <TextView
         android:layout_width="match_parent"

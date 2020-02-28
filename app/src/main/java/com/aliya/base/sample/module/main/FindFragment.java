@@ -1,4 +1,4 @@
-package com.aliya.base.sample.ui.main;
+package com.aliya.base.sample.module.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,12 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.aliya.base.sample.R;
-import com.aliya.base.sample.ui.activity.SecondActivity;
+import com.aliya.base.sample.ui.activity.MineActivity;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 发现页
+ *
+ * @author a_liYa
+ * @date 2020-02-28 15:58.
  */
-public class FindFragment extends Fragment {
+public class FindFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,12 +28,15 @@ public class FindFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        view.findViewById(R.id.tv_mine).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                startActivity(new Intent(getContext(), MineActivity.class));
-                startActivity(new Intent(getContext(), SecondActivity.class));
-            }
-        });
+        view.findViewById(R.id.tv_mine).setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_mine:
+                startActivity(new Intent(getContext(), MineActivity.class));
+                break;
+        }
     }
 }

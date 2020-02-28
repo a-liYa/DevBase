@@ -3,21 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.aliya.base.sample.ui.main.HomeFragment">
-
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:gravity="center"
-        android:text="发现" />
+    tools:context=".module.main.HomeFragment">
 
     <TextView
         android:id="@+id/tv_mine"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="45dp"
         android:gravity="center"
         android:text="我的" />
+
+    <TextView
+        android:id="@+id/tv_listen"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="听新闻" />
 
 </LinearLayout>
