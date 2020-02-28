@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.aliya.base.sample.R;
+import com.aliya.base.sample.module.listen.ListenNewsActivity;
 import com.aliya.base.sample.ui.activity.MineActivity;
 
 /**
@@ -29,6 +30,7 @@ public class FindFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         view.findViewById(R.id.tv_mine).setOnClickListener(this);
+        view.findViewById(R.id.tv_listen).setOnClickListener(this);
     }
 
     @Override
@@ -36,6 +38,9 @@ public class FindFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.tv_mine:
                 startActivity(new Intent(getContext(), MineActivity.class));
+                break;
+            case R.id.tv_listen:
+                startActivity(new Intent(getContext(), ListenNewsActivity.class));
                 break;
         }
     }

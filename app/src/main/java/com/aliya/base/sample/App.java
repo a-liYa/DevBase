@@ -15,6 +15,7 @@ import android.util.Log;
 
 import com.aliya.base.AppUtils;
 import com.aliya.base.gather.WebPools;
+import com.aliya.base.sample.ui.SideFloatHelper;
 
 /**
  * application
@@ -68,6 +69,7 @@ public class App extends MultiDexApplication {
                     ResourcesCompat.getFont(App.this, R.font.fzbiaoysk_zbjt);
                 }
             }).start();
+            SideFloatHelper.init(this);
         }
 
         Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
