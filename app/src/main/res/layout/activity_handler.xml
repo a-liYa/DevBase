@@ -8,24 +8,12 @@
     android:orientation="vertical"
     tools:context="com.aliya.base.sample.ui.activity.SecondActivity">
 
-    <com.aliya.base.sample.ui.widget.FontTextView
+    <TextView
+        android:id="@+id/send_message_delay"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="45dp"
         android:gravity="center"
-        android:text="我是 a_liYa，91年4月出生"
-        android:textSize="18sp" />
-
-    <com.aliya.base.sample.ui.widget.FontTextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:fontFamily="@font/letter_numerals"
-        android:gravity="center"
-        android:text="我是 a_liYa，91年4月出生"
-        android:textSize="18sp" />
-
-    <com.aliya.base.sample.ui.widget.FontView
-        android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:text="发送延迟Message" />
 
     <TextView
         android:id="@+id/send_message"

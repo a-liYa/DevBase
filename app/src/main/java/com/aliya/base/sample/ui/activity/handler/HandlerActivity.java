@@ -1,4 +1,4 @@
-package com.aliya.base.sample.ui.activity;
+package com.aliya.base.sample.ui.activity.handler;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,23 +9,25 @@ import android.util.Log;
 import android.view.View;
 
 import com.aliya.base.sample.R;
-import com.aliya.base.sample.base.BaseActivity;
+import com.aliya.base.sample.base.ActionBarActivity;
 
-public class SecondActivity extends BaseActivity {
+/**
+ * Handler 测试
+ *
+ * @author a_liYa
+ * @date 2020/3/1 21:00.
+ */
+public class HandlerActivity extends ActionBarActivity implements View.OnClickListener {
 
     private Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
+        setContentView(R.layout.activity_handler);
 
-        findViewById(R.id.send_message).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mHandler.sendEmptyMessage(100);
-            }
-        });
+        findViewById(R.id.send_message_delay).setOnClickListener(this);
+        findViewById(R.id.send_message).setOnClickListener(this);
         new Thread(new Runnable() {
 
             @Override
@@ -48,5 +50,17 @@ public class SecondActivity extends BaseActivity {
                 Looper.loop();
             }
         }).start();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.send_message_delay:
+                mHandler.sendEmptyMessageDelayed(101, 5 * 60 * 1000);
+                break;
+                case R.id.send_message:
+                mHandler.sendEmptyMessage(100);
+                break;
+        }
     }
 }
