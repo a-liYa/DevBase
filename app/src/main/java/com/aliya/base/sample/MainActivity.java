@@ -14,6 +14,7 @@ import com.aliya.base.manager.AppManager;
 import com.aliya.base.sample.base.BaseActivity;
 import com.aliya.base.sample.common.AppSetting;
 import com.aliya.base.sample.ui.MainTabLayout;
+import com.aliya.base.sample.ui.SideFloatHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,7 +25,7 @@ import butterknife.ButterKnife;
  * @author a_liYa
  * @date 2019/3/11 下午4:28.
  */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements SideFloatHelper.FloatMark {
 
     @BindView(R.id.tab_layout)
     MainTabLayout mTabLayout;
@@ -48,14 +49,14 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-//            if (AppSetting.get().isBackToBackground()) {
-//                moveTaskToBack(true); // 返回键切至后台不关闭页面
-//                return true;
-//            } else {
-//                if (!quitApp()) return true;
-//            }
-//        }
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            if (AppSetting.get().isBackToBackground()) {
+                moveTaskToBack(true); // 返回键切至后台不关闭页面
+                return true;
+            } else {
+                if (!quitApp()) return true;
+            }
+        }
         return super.onKeyDown(keyCode, event);
     }
 
@@ -67,6 +68,11 @@ public class MainActivity extends BaseActivity {
             Toast.makeText(this, "再按一次退出应用", Toast.LENGTH_SHORT).show();
             return false;
         }
+    }
+
+    @Override
+    public boolean isDisable() {
+        return false;
     }
 
     class MainTabAdapterImpl implements MainTabLayout.TabAdapter {

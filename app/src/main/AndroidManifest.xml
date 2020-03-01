@@ -94,6 +94,11 @@
         <activity
             android:name=".ui.activity.thread.ThreadPoolActivity"
             android:label="线程池" />
+        <activity
+            android:name=".ui.activity.thread.ThreadPoolActivity"
+            android:label="线程池" />
+        <activity android:name=".module.listen.ListenNewsActivity"
+            android:label="新闻早班车" />
 
         <activity
             android:name=".ui.activity.handler.HandlerActivity"

@@ -3,22 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:fitsSystemWindows="true"
+    android:gravity="center"
     android:orientation="vertical"
-    tools:context=".module.main.HomeFragment">
+    tools:context=".module.listen.ListenNewsActivity">
 
     <TextView
-        android:id="@+id/tv_mine"
+        android:id="@+id/tv_open"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:gravity="center"
-        android:text="我的" />
+        android:text="开启悬浮窗" />
 
     <TextView
-        android:id="@+id/tv_listen"
+        android:id="@+id/tv_open_enable"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:gravity="center"
-        android:text="听新闻" />
+        android:text="设置悬浮窗允许开启" />
 
+    <TextView
+        android:id="@+id/tv_close"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="关闭悬浮窗" />
 </LinearLayout>
