@@ -19,14 +19,6 @@
         android:text="主页" />
 
     <TextView
-        android:id="@+id/tv_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="16dp"
-        android:text="获取" />
-
-    <TextView
         android:id="@+id/tv_launch_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,6 +33,14 @@
         android:layout_gravity="center"
         android:padding="16dp"
         android:text="线程池" />
+
+    <TextView
+        android:id="@+id/tv_handler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="16dp"
+        android:text="Handler" />
 
     <com.aliya.base.sample.ui.widget.LoadWave
         android:id="@+id/load_wave"

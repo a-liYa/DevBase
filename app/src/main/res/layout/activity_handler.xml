@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
+    android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".ui.activity.thread.ThreadPoolActivity">
+    tools:context="com.aliya.base.sample.ui.activity.SecondActivity">
 
     <TextView
-        android:id="@+id/open_thread"
+        android:id="@+id/send_message_delay"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:gravity="center"
-        android:text="开启一个线程" />
+        android:text="发送延迟Message" />
 
     <TextView
-        android:id="@+id/open_thread_1"
+        android:id="@+id/send_message"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:gravity="center"
-        android:text="开启一个线程" />
+        android:text="发送Message" />
 
 </LinearLayout>

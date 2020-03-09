@@ -8,9 +8,9 @@ import android.support.annotation.CallSuper;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.aliya.base.compat.ActivityOrientationCompat;
 import com.aliya.base.compat.DensityCompat;
 import com.aliya.base.sample.R;
+import com.aliya.compat.ActivityOrientationCompat;
 
 /**
  * Base activity
