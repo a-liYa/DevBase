@@ -16,7 +16,6 @@ import android.util.Log;
 import com.aliya.base.AppUtils;
 import com.aliya.base.gather.WebPools;
 import com.aliya.base.sample.module.listen.SideFloatHelper;
-import com.aliya.base.sample.ui.SideFloatHelper;
 import com.aliya.compat.CrashCompat;
 
 /**
@@ -98,6 +97,21 @@ public class App extends MultiDexApplication {
 
         CrashCompat.fixBug(); // 在Bug统计库之后调用
         registerActivityLifecycleCallbacks(mLifecycleCallbacks);
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        super.startActivity(intent);
+    }
+
+    @Override
+    public void startActivity(Intent intent, Bundle options) {
+        super.startActivity(intent, options);
+    }
+
+    @Override
+    public void startActivities(Intent[] intents) {
+        super.startActivities(intents);
     }
 
     private ActivityLifecycleCallbacks mLifecycleCallbacks = new ActivityLifecycleCallbacks() {
