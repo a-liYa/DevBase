@@ -90,10 +90,6 @@
             android:name=".ui.activity.launch.SingleTopActivity"
             android:label="SingleTop"
             android:launchMode="singleTop" />
-
-        <activity
-            android:name=".ui.activity.thread.ThreadPoolActivity"
-            android:label="线程池" />
         <activity
             android:name=".ui.activity.thread.ThreadPoolActivity"
             android:label="线程池" />
