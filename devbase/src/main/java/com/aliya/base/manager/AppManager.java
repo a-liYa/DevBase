@@ -149,11 +149,11 @@ public final class AppManager {
     @Nullable
     public Activity getTopActivity() {
         Activity peek = mResumedQueue.peek();
-        if (peek == null) {
+        if (peek == null && !mStartedStack.empty()) {
             peek = mStartedStack.peek();
-            if (peek == null) {
-                peek = mCreatedStack.peek();
-            }
+        }
+        if (peek == null && !mCreatedStack.isEmpty()) {
+            peek = mCreatedStack.peek();
         }
         return peek;
     }
