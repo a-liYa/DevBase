@@ -50,4 +50,11 @@
         android:src="@mipmap/ic_loading_logo"
         app:overColor="#e9e9e9" />
 
+
+    <ImageView
+        android:layout_width="93dp"
+        android:layout_height="93dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:src="@mipmap/ic_loading_logo"/>
+
 </LinearLayout>
