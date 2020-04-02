@@ -1,5 +1,6 @@
 package com.aliya.base.sample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -14,8 +15,9 @@ import com.aliya.base.manager.AppManager;
 import com.aliya.base.sample.base.BaseActivity;
 import com.aliya.base.sample.common.AppSetting;
 import com.aliya.base.sample.databinding.ActivityMainBinding;
-import com.aliya.base.sample.ui.MainTabLayout;
 import com.aliya.base.sample.module.listen.SideFloatHelper;
+import com.aliya.base.sample.ui.MainTabLayout;
+import com.aliya.base.sample.ui.activity.WebActivity;
 
 /**
  * 主界面
@@ -36,7 +38,7 @@ public class MainActivity extends BaseActivity implements SideFloatHelper.FloatM
 
         bindData();
 
-//        startActivity(new Intent(this, LiveEventActivity.class));
+        startActivity(new Intent(this, WebActivity.class));
     }
 
     private void bindData() {

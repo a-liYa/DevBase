@@ -15,6 +15,7 @@ import android.util.Log;
 
 import com.aliya.base.AppUtils;
 import com.aliya.base.gather.WebPools;
+import com.aliya.base.sample.base.ColorSaturation;
 import com.aliya.base.sample.module.listen.SideFloatHelper;
 import com.aliya.compat.CrashCompat;
 
@@ -96,6 +97,7 @@ public class App extends MultiDexApplication {
         });
 
         CrashCompat.fixBug(); // 在Bug统计库之后调用
+        ColorSaturation.init(this);
         registerActivityLifecycleCallbacks(mLifecycleCallbacks);
     }
 

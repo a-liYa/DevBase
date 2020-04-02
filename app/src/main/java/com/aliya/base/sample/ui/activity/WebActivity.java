@@ -28,6 +28,6 @@ public class WebActivity extends ActionBarActivity {
 
         WindowCompat.openDrawDuringWindowsAnimating(getActivity());
 
-        mWebView.loadUrl("https://github.com/");
+        mWebView.loadUrl("https://www.jianshu.com/p/7a832e074b69");
     }
 }
