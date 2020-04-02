@@ -30,7 +30,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|center_vertical"
-                    android:text="返回至后台"
+                    android:text="首页返回可后台运行"
                     android:textSize="15sp" />
 
                 <com.aliya.base.widget.SwitchView

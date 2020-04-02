@@ -13,11 +13,9 @@ import com.aliya.base.click.ClickTracker;
 import com.aliya.base.manager.AppManager;
 import com.aliya.base.sample.base.BaseActivity;
 import com.aliya.base.sample.common.AppSetting;
+import com.aliya.base.sample.databinding.ActivityMainBinding;
 import com.aliya.base.sample.ui.MainTabLayout;
 import com.aliya.base.sample.module.listen.SideFloatHelper;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 主界面
@@ -27,14 +25,13 @@ import butterknife.ButterKnife;
  */
 public class MainActivity extends BaseActivity implements SideFloatHelper.FloatMark {
 
-    @BindView(R.id.tab_layout)
-    MainTabLayout mTabLayout;
+    private ActivityMainBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        mBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(mBinding.getRoot());
         setSwipeBackEnable(false);
 
         bindData();
@@ -43,8 +40,8 @@ public class MainActivity extends BaseActivity implements SideFloatHelper.FloatM
     }
 
     private void bindData() {
-        mTabLayout.setupBind(this, getSupportFragmentManager(), R.id.frame_layout);
-        mTabLayout.setAdapter(new MainTabAdapterImpl());
+        mBinding.tabLayout.setupBind(this, getSupportFragmentManager(), R.id.frame_layout);
+        mBinding.tabLayout.setAdapter(new MainTabAdapterImpl());
     }
 
     @Override

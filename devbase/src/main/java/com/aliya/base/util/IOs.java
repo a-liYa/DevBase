@@ -40,12 +40,19 @@ public final class IOs {
 
             return buffer.toString();
         } catch (IOException e) {
-            // no-op
+            // Ignore it.
         }
 
         return null;
     }
 
+    /**
+     * 批量关闭数据源
+     * <p>
+     * JDK 1.7 (Android 5.0) 引入 AutoCloseable
+     *
+     * @param closeables Closeable JDK 1.5 引入
+     */
     public static void close(Closeable... closeables) {
         if (closeables == null) return;
 
@@ -54,7 +61,7 @@ public final class IOs {
                 try {
                     closeable.close();
                 } catch (IOException e) {
-                    // no-op
+                    // Ignore it.
                 }
         }
     }
