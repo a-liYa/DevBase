@@ -28,6 +28,9 @@ public class ColorSaturation {
         return Singleton.sInstance;
     }
 
+    // =====================================================================
+    // 利用内部类持有静态对象的方式实现单例，理论依据：对象初始化过程中隐含初始化锁
+    // =====================================================================
     private static class Singleton {
         private static final ColorSaturation sInstance = new ColorSaturation();
     }
