@@ -8,6 +8,8 @@ import android.view.Window;
 
 import com.aliya.base.sample.R;
 
+import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 
 /**
@@ -52,6 +54,15 @@ public class Utils {
             for (int i = 3; i < trace.length; i++) {
                 Log.e("StackTrace", "\n\tat " + trace[i]);
             }
+        }
+    }
+
+    public static void printAllThreadName() {
+        Map<Thread, StackTraceElement[]> allStackTraces = Thread.getAllStackTraces();
+        Set<Thread> threadSet = allStackTraces.keySet();
+        int index = 0;
+        for (Thread thread : threadSet) {
+            Log.e("TAG", index + " thread name : " + thread.getName());
         }
     }
 
