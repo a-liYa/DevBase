@@ -14,6 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <activity
+            android:name=".ui.activity.NotificationActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="通知演示"
+            android:screenOrientation="portrait" />
+
         <!-- 华为全屏适配使用刘海区显示，也可对Activity配置 -->
         <meta-data
             android:name="android.notch_support"
@@ -50,7 +56,6 @@
             android:name=".ui.activity.LiveEventActivity"
             android:configChanges="orientation|screenSize"
             android:screenOrientation="portrait" />
-
         <!-- 适配横竖屏、分屏切换时Activity不重建 -->
         <activity
             android:name=".viewmodel.CitySelectActivity"
@@ -71,7 +76,6 @@
             android:configChanges="orientation|screenSize"
             android:label="Web"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.activity.launch.SingleInstanceActivity"
             android:icon="@mipmap/ic_loading_logo"
@@ -93,12 +97,16 @@
         <activity
             android:name=".ui.activity.thread.ThreadPoolActivity"
             android:label="线程池" />
-        <activity android:name=".module.listen.ListenNewsActivity"
+        <activity
+            android:name=".module.listen.ListenNewsActivity"
             android:label="新闻早班车" />
-
         <activity
             android:name=".ui.activity.handler.HandlerActivity"
             android:label="Handler" />
+
+        <receiver
+            android:name=".ui.receiver.NotificationClickReceiver"
+            android:exported="false" />
 
         <!-- 协助初始化Context -->
         <provider
