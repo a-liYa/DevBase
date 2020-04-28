@@ -1,6 +1,8 @@
 package com.aliya.base.sample.util;
 
 import android.os.Build;
+import android.os.Environment;
+import android.os.StatFs;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import com.aliya.base.sample.R;
 
 import java.util.Map;
 import java.util.Set;
+import java.io.File;
 import java.util.Stack;
 
 /**
@@ -57,6 +60,33 @@ public class Utils {
         }
     }
 
+    public static void printSDCardInfo() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            File sdcardDir = Environment.getExternalStorageDirectory();
+            StatFs statFs = new StatFs(sdcardDir.getPath());
+
+            long totalBytes;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                totalBytes = statFs.getTotalBytes();
+            } else {
+                // 区块数量 * 区块大小
+                totalBytes = statFs.getBlockSize() * statFs.getBlockCount();
+            }
+
+            long availableBytes;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                availableBytes = statFs.getAvailableBytes();
+            } else {
+                // 剩余区块数量 * 区块大小
+                availableBytes = statFs.getBlockSize() * statFs.getAvailableBlocks();
+            }
+
+            Log.e("TAG", "SD卡总空间:" + totalBytes + "Byte");
+            Log.e("TAG", "剩余空间:" + availableBytes + "Byte");
+            // statFs.getTotalBytes() >= statFs.getFreeBytes() >= statFs.getAvailableBytes()
+        }
+    }
     public static void printAllThreadName() {
         Map<Thread, StackTraceElement[]> allStackTraces = Thread.getAllStackTraces();
         Set<Thread> threadSet = allStackTraces.keySet();
