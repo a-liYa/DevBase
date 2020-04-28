@@ -15,7 +15,7 @@
 ## Activity Intent 的 Flags  
 
 ### 1. Intent.FLAG_ACTIVITY_NEW_TASK  
-    Context#startActivity(Intent),在 API 28 及以上必须添加该标志，否则崩溃。
+    Context#startActivity(Intent),在 API 28（Android 9.0）及以上必须添加该标志，否则崩溃。
     
 ### 2. Intent.FLAG_ACTIVITY_SINGLE_TOP  
     作用等同于 Manifest 指定 SingleTop 启动模式。
