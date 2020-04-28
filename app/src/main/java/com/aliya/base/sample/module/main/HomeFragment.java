@@ -1,20 +1,25 @@
 package com.aliya.base.sample.module.main;
 
-import android.content.Context;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.aliya.base.sample.R;
 import com.aliya.base.sample.ui.activity.SecondActivity;
-import com.aliya.base.sample.ui.activity.handler.HandlerActivity;
 import com.aliya.base.sample.ui.activity.launch.SingleInstanceActivity;
 import com.aliya.base.sample.ui.activity.thread.ThreadPoolActivity;
+import com.aliya.base.sample.util.Utils;
+
+import java.util.Map;
+import java.util.Set;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,9 +56,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.tv_thread_pool:
                 getActivity().startActivity(new Intent(getContext(), ThreadPoolActivity.class));
                 break;
-                case R.id.tv_handler:
-                getActivity().startActivity(new Intent(getContext(), HandlerActivity.class));
+            case R.id.tv_handler:
+//                getActivity().startActivity(new Intent(getContext(), HandlerActivity.class));
+                showDialog();
                 break;
         }
+    }
+
+    private void showDialog() {
+        Dialog dialog = new Dialog(getActivity());
+        TextView textView = new TextView(getActivity());
+        textView.setText("我是Dialog");
+        dialog.setContentView(textView);
+        Utils.printViewTree(dialog.getWindow());
+        dialog.show();
+        Map<Thread, StackTraceElement[]> allStackTraces = Thread.getAllStackTraces();
+        Log.e("TAG", "showDialog: " + allStackTraces.size());
+        Set<Thread> threadSet = allStackTraces.keySet();
+        for (Thread thread : threadSet) {
+            Log.e("TAG", "thread name : " + thread.getName());
+        }
+
     }
 }
