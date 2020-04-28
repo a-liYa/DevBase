@@ -30,9 +30,10 @@
      如果当前任务栈已有该Activity实例，重用该实例，但不会清空其上面Activity。eg: A,B,C,D D#startActivity(B) -> A,C,D,B
 
 
-不同任务栈(TaskStack)开启Activity时，若被开启任务栈已包含该Activity，此时只切换当前任务栈至最前端。    
+不同 Task id 开启Activity时，若被开启 Task id 已包含该Activity，此时只切换对应的 Task id 至前台。
 
-属性 - android:taskAffinity 默认为包名，配置不同该属性值，会开启不同的任务栈。
+属性 - android:taskAffinity 默认为包名，配置不同的属性值，会开启对应不同的 Task id。
+Android 9.0 及以后 Stack id 一一对应 Task id；Android 9.0以前
     
 应用Activity栈查看命令：adb shell dumpsys activity activities
 
