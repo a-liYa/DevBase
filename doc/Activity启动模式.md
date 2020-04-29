@@ -42,3 +42,5 @@
  TaskRecord{b854c0b #85 A=com.aliya.base.sample U=0 StackId=78 sz=2}
         Run #1: ActivityRecord{1c66cc u0 com.aliya.base.sample/.MainActivity t85}
         Run #0: ActivityRecord{dd3d2a4 u0 com.aliya.base.sample/.SplashActivity t85 f}
+
+不同任务栈(TaskStack)开启Activity时，若被开启Activity的launchMode="singleTask"时，逻辑与同一 TaskID 相似
