@@ -61,6 +61,7 @@ public final class LiveEvent {
         if (isMainThread())
             get().mLiveData.setValue(new DataWrapper(event));
         else
+            // 如果使用 postValue() 系统慢时会导致Event丢失
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
