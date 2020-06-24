@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.tv_thread_pool).setOnClickListener(this);
         view.findViewById(R.id.tv_handler).setOnClickListener(this);
         view.findViewById(R.id.tv_icon).setOnClickListener(this);
+        view.findViewById(R.id.tv_text).setOnClickListener(this);
 
         mTvIcon = view.findViewById(R.id.tv_icon);
         LinearDrawable linearDrawable = new LinearDrawable();
@@ -81,6 +82,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             linearDrawable.getMinimumHeight());
                     mTvIcon.setCompoundDrawables(null, null, linearDrawable, null);
                 }
+                break;
+            case R.id.tv_text:
+                TextView textView = (TextView)v;
+                textView.setText(textView.getText() + " - ");
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                    v.setForeground(
+//                            new TextGradientDrawable(textView.getText().toString(), textView));
+//                }
                 break;
         }
     }
