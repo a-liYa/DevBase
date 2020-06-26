@@ -19,9 +19,9 @@ public final class Generics {
     /**
      * 获取类声明的泛型
      *
-     * @param realize 目标类
+     * @param realize 参数化的类型 class
      * @param define  定义泛型的 class
-     * @return 返回泛型对应type {@link Type}, 获取失败返回null.
+     * @return 实际类型参数（泛型）type {@link Type}, 获取失败返回null.
      */
     @Nullable
     public static Type getGenericType(final Class realize, final Class define) {
@@ -56,9 +56,9 @@ public final class Generics {
     /**
      * 获取类当前泛型
      *
-     * @param realize 参数化类型的类 class
+     * @param realize 参数化的类型 class
      * @param define  定义泛型的 class
-     * @return 实际类型参数（泛型）
+     * @return 实际类型参数（泛型）type {@link Type}, 获取失败返回null.
      */
     @Nullable
     public static Type getCurrentGenericType(final Class realize, final Class define) {

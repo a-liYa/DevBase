@@ -29,30 +29,6 @@ public class App extends MultiDexApplication {
 
     public static long sMillis;
 
-    // 发送广播崩溃
-//    @Override
-//    protected void attachBaseContext(Context base) {
-//        super.attachBaseContext(new ContextWrapper(base) {
-//            @Override
-//            public void startActivity(Intent intent) {
-//                /**
-//                 * @see android.app.ContextImpl#startActivity(Intent, Bundle)
-//                 * throw new AndroidRuntimeException("Calling startActivity() from outside of an
-//                 * Activity context requires the FLAG_ACTIVITY_NEW_TASK flag. Is this really what
-//                 * you want?").
-//                 */
-//                if (intent != null) intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                super.startActivity(intent);
-//            }
-//
-//            @Override
-//            public void startActivity(Intent intent, Bundle options) {
-//                if (intent != null) intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                super.startActivity(intent, options);
-//            }
-//        });
-//    }
-
     @Override
     public void onCreate() {
         super.onCreate();
