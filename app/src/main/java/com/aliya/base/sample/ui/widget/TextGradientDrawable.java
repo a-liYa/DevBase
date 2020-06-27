@@ -1,15 +1,16 @@
 package com.aliya.base.sample.ui.widget;
 
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import android.support.annotation.ColorInt;
+import android.text.BoringLayout;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextDirectionHeuristics;
 import android.text.TextPaint;
-import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.TextView;
 
 import com.aliya.base.AppUtils;
@@ -26,21 +27,79 @@ public class TextGradientDrawable extends GradientDrawable {
     private TextPaint mPaint;
     private Layout mLayout;
 
+    private int mWidth, mHeight;
+
     public TextGradientDrawable(String text, TextView referTo) {
         this.mText = text;
         this.mPaint = new TextPaint(referTo.getPaint());
-        mPaint.setColor(Color.parseColor("#4f000000"));
-        int width = referTo.getWidth() - referTo.getCompoundPaddingLeft() - referTo.getCompoundPaddingRight();
+
+        onMeasure(referTo);
+    }
+
+    public void setTextColor(@ColorInt int color) {
+        mPaint.setColor(color);
+    }
+
+    /**
+     * 代码参考自 TextView#onMeasure(widthMeasureSpec, heightMeasureSpec)
+     */
+    private void onMeasure(TextView referTo) {
+        BoringLayout.Metrics boring = BoringLayout.isBoring(referTo.getText(), mPaint);
+        if (boring != null) {
+            mWidth = boring.width;
+        }
+        mWidth += referTo.getCompoundPaddingLeft() + referTo.getCompoundPaddingRight();
+        mWidth = Math.min(mWidth, 1080);
+
+        int wantWidth =
+                mWidth - referTo.getCompoundPaddingLeft() - referTo.getCompoundPaddingRight();
+        makeNewLayout(referTo, wantWidth);
+
+        mHeight = mLayout.getHeight();
+        mHeight += referTo.getCompoundPaddingTop() + referTo.getCompoundPaddingBottom();
+    }
+
+    private void makeNewLayout(TextView referTo, int wantWidth) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mLayout = buildStaticLayout23(referTo, width);
+            StaticLayout.Builder builder = StaticLayout.Builder.obtain(mText,
+                    0, mText.length(), mPaint, wantWidth)
+                    .setAlignment(getLayoutAlignment(referTo))
+                    .setTextDirection(TextDirectionHeuristics.FIRSTSTRONG_LTR)
+                    .setLineSpacing(referTo.getLineSpacingExtra(),
+                            referTo.getLineSpacingMultiplier())
+                    .setIncludePad(referTo.getIncludeFontPadding())
+                    .setBreakStrategy(referTo.getBreakStrategy())
+                    .setHyphenationFrequency(referTo.getHyphenationFrequency())
+                    .setMaxLines(referTo.getMaxLines() == -1 ? Integer.MAX_VALUE :
+                            referTo.getMaxLines());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                builder.setJustificationMode(referTo.getJustificationMode());
+            }
+            if (referTo.getEllipsize() != null && referTo.getKeyListener() == null) {
+                builder.setEllipsize(referTo.getEllipsize())
+                        .setEllipsizedWidth(wantWidth);
+            }
+            mLayout = builder.build();
         } else {
-            mLayout = buildStaticLayout(referTo, width);
+            mLayout = new StaticLayout(mText,
+                    0, mText.length(),
+                    mPaint, wantWidth, getLayoutAlignment(referTo),
+                    referTo.getLineSpacingMultiplier(),
+                    referTo.getLineSpacingExtra(), referTo.getIncludeFontPadding(),
+                    referTo.getEllipsize(),
+                    wantWidth);
         }
     }
 
+
     @Override
-    public void setSize(int width, int height) {
-        super.setSize(width, height);
+    public int getIntrinsicWidth() {
+        return mWidth;
+    }
+
+    @Override
+    public int getIntrinsicHeight() {
+        return mHeight;
     }
 
     @Override
@@ -50,33 +109,64 @@ public class TextGradientDrawable extends GradientDrawable {
         mLayout.draw(canvas);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private StaticLayout buildStaticLayout23(TextView textView, int width) {
-        StaticLayout.Builder builder = StaticLayout.Builder.obtain(textView.getText(),
-                0, textView.getText().length(), mPaint, width)
-                .setAlignment(Layout.Alignment.ALIGN_CENTER)
-                .setTextDirection(TextDirectionHeuristics.FIRSTSTRONG_LTR)
-                .setLineSpacing(textView.getLineSpacingExtra(), textView.getLineSpacingMultiplier())
-                .setIncludePad(textView.getIncludeFontPadding())
-                .setBreakStrategy(textView.getBreakStrategy())
-                .setHyphenationFrequency(textView.getHyphenationFrequency())
-                .setMaxLines(textView.getMaxLines() == -1 ? Integer.MAX_VALUE : textView.getMaxLines());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            builder.setJustificationMode(textView.getJustificationMode());
-        }
-        if (textView.getEllipsize() != null && textView.getKeyListener() == null) {
-            builder.setEllipsize(textView.getEllipsize())
-                    .setEllipsizedWidth(width);
-        }
-        return builder.build();
-    }
 
-    private StaticLayout buildStaticLayout(TextView textView, int width) {
-        return new StaticLayout(textView.getText(),
-                0, textView.getText().length(),
-                mPaint, width, Layout.Alignment.ALIGN_NORMAL,
-                textView.getLineSpacingMultiplier(),
-                textView.getLineSpacingExtra(), textView.getIncludeFontPadding(), textView.getEllipsize(),
-                width);
+    private Layout.Alignment getLayoutAlignment(TextView referTo) {
+        Layout.Alignment alignment = null;
+        switch (referTo.getTextAlignment()) {
+            case View.TEXT_ALIGNMENT_GRAVITY:
+                switch (referTo.getGravity() & Gravity.RELATIVE_HORIZONTAL_GRAVITY_MASK) {
+                    case Gravity.START:
+                        alignment = Layout.Alignment.ALIGN_NORMAL;
+                        break;
+                    case Gravity.END:
+                        alignment = Layout.Alignment.ALIGN_OPPOSITE;
+                        break;
+                    case Gravity.LEFT:
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                            alignment = Layout.Alignment.ALIGN_LEFT;
+                        }
+                        break;
+                    case Gravity.RIGHT:
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                            alignment = Layout.Alignment.ALIGN_RIGHT;
+                        }
+                        break;
+                    case Gravity.CENTER_HORIZONTAL:
+                        alignment = Layout.Alignment.ALIGN_CENTER;
+                        break;
+                    default:
+                        alignment = Layout.Alignment.ALIGN_NORMAL;
+                        break;
+                }
+                break;
+            case View.TEXT_ALIGNMENT_TEXT_START:
+                alignment = Layout.Alignment.ALIGN_NORMAL;
+                break;
+            case View.TEXT_ALIGNMENT_TEXT_END:
+                alignment = Layout.Alignment.ALIGN_OPPOSITE;
+                break;
+            case View.TEXT_ALIGNMENT_CENTER:
+                alignment = Layout.Alignment.ALIGN_CENTER;
+                break;
+            case View.TEXT_ALIGNMENT_VIEW_START:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    alignment = (referTo.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL)
+                            ? Layout.Alignment.ALIGN_RIGHT : Layout.Alignment.ALIGN_LEFT;
+                }
+                break;
+            case View.TEXT_ALIGNMENT_VIEW_END:
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    alignment = (referTo.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL)
+                            ? Layout.Alignment.ALIGN_LEFT : Layout.Alignment.ALIGN_RIGHT;
+                }
+                break;
+            case View.TEXT_ALIGNMENT_INHERIT:
+                // This should never happen as we have already resolved the text alignment
+                // but better safe than sorry so we just fall through
+            default:
+                alignment = Layout.Alignment.ALIGN_NORMAL;
+                break;
+        }
+        return alignment;
     }
 }

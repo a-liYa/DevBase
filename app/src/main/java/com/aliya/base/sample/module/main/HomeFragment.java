@@ -1,6 +1,7 @@
 package com.aliya.base.sample.module.main;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,20 +13,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.aliya.base.AppUtils;
 import com.aliya.base.sample.R;
+import com.aliya.base.sample.databinding.FragmentHomeBinding;
 import com.aliya.base.sample.ui.activity.SecondActivity;
 import com.aliya.base.sample.ui.activity.handler.HandlerActivity;
 import com.aliya.base.sample.ui.activity.launch.SingleInstanceActivity;
 import com.aliya.base.sample.ui.activity.thread.ThreadPoolActivity;
 import com.aliya.base.sample.ui.widget.LinearDrawable;
 import com.aliya.base.sample.ui.widget.ScaleDrawable;
+import com.aliya.base.sample.ui.widget.TextGradientDrawable;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
-    private TextView mTvIcon;
+    private FragmentHomeBinding mBinding;
 
     public HomeFragment() {
     }
@@ -33,27 +37,27 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        mBinding = FragmentHomeBinding.inflate(inflater, container, false);
+        return mBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.tv_title).setOnClickListener(this);
-        view.findViewById(R.id.tv_launch_mode).setOnClickListener(this);
-        view.findViewById(R.id.tv_thread_pool).setOnClickListener(this);
-        view.findViewById(R.id.tv_handler).setOnClickListener(this);
-        view.findViewById(R.id.tv_icon).setOnClickListener(this);
-        view.findViewById(R.id.tv_text).setOnClickListener(this);
+        mBinding.tvTitle.setOnClickListener(this);
+        mBinding.tvLaunchMode.setOnClickListener(this);
+        mBinding.tvThreadPool.setOnClickListener(this);
+        mBinding.tvHandler.setOnClickListener(this);
+        mBinding.tvIcon.setOnClickListener(this);
+        mBinding.tvText.setOnClickListener(this);
 
-        mTvIcon = view.findViewById(R.id.tv_icon);
         LinearDrawable linearDrawable = new LinearDrawable();
         linearDrawable.addDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.ic_icon_01));
         linearDrawable.addDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.ic_icon_02));
         linearDrawable.addDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.ic_icon_03));
         linearDrawable.setBounds(0, 0, linearDrawable.getMinimumWidth(),
                 linearDrawable.getMinimumHeight());
-        mTvIcon.setCompoundDrawables(null, null, linearDrawable, null);
+        mBinding.tvIcon.setCompoundDrawables(null, null, linearDrawable, null);
     }
 
     @Override
@@ -72,7 +76,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 getActivity().startActivity(new Intent(getContext(), HandlerActivity.class));
                 break;
             case R.id.tv_icon:
-                Drawable[] drawables = mTvIcon.getCompoundDrawables();
+                Drawable[] drawables = mBinding.tvIcon.getCompoundDrawables();
                 if (drawables[2] instanceof LinearDrawable) {
                     LinearDrawable linearDrawable = (LinearDrawable) drawables[2];
                     ScaleDrawable scaleDrawable = new ScaleDrawable(
@@ -80,16 +84,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     linearDrawable.addDrawable(scaleDrawable);
                     linearDrawable.setBounds(0, 0, linearDrawable.getMinimumWidth(),
                             linearDrawable.getMinimumHeight());
-                    mTvIcon.setCompoundDrawables(null, null, linearDrawable, null);
+                    mBinding.tvIcon.setCompoundDrawables(null, null, linearDrawable, null);
                 }
                 break;
             case R.id.tv_text:
                 TextView textView = (TextView)v;
-                textView.setText(textView.getText() + " - ");
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//                    v.setForeground(
-//                            new TextGradientDrawable(textView.getText().toString(), textView));
-//                }
+                textView.setText(textView.getText() + "我");
+
+                TextGradientDrawable drawable =
+                        new TextGradientDrawable(textView.getText().toString(), textView);
+                drawable.setColor(getResources().getColor(android.R.color.holo_purple));
+                drawable.setCornerRadius(AppUtils.dp2px(4));
+                drawable.setTextColor(Color.BLUE);
+                mBinding.ivText.setImageDrawable(drawable);
                 break;
         }
     }
