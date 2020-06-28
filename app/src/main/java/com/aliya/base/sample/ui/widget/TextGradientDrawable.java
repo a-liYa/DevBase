@@ -1,6 +1,10 @@
 package com.aliya.base.sample.ui.widget;
 
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.RectF;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
@@ -9,6 +13,7 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextDirectionHeuristics;
 import android.text.TextPaint;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
@@ -23,16 +28,19 @@ import com.aliya.base.AppUtils;
  */
 public class TextGradientDrawable extends GradientDrawable {
 
-    private String mText;
+    private CharSequence mText;
     private TextPaint mPaint;
     private Layout mLayout;
+    private DisplayMetrics mDisplayMetrics;
 
     private int mWidth, mHeight;
+    private int mMaxWidth;
 
-    public TextGradientDrawable(String text, TextView referTo) {
+    public TextGradientDrawable(CharSequence text, TextView referTo, int maxWidth) {
         this.mText = text;
+        this.mMaxWidth = maxWidth;
         this.mPaint = new TextPaint(referTo.getPaint());
-
+        this.mDisplayMetrics = referTo.getResources().getDisplayMetrics();
         onMeasure(referTo);
     }
 
@@ -49,7 +57,7 @@ public class TextGradientDrawable extends GradientDrawable {
             mWidth = boring.width;
         }
         mWidth += referTo.getCompoundPaddingLeft() + referTo.getCompoundPaddingRight();
-        mWidth = Math.min(mWidth, 1080);
+        mWidth = Math.min(mWidth, mMaxWidth);
 
         int wantWidth =
                 mWidth - referTo.getCompoundPaddingLeft() - referTo.getCompoundPaddingRight();
@@ -57,6 +65,7 @@ public class TextGradientDrawable extends GradientDrawable {
 
         mHeight = mLayout.getHeight();
         mHeight += referTo.getCompoundPaddingTop() + referTo.getCompoundPaddingBottom();
+        setBounds(0, 0, mWidth, mHeight);
     }
 
     private void makeNewLayout(TextView referTo, int wantWidth) {
@@ -91,7 +100,6 @@ public class TextGradientDrawable extends GradientDrawable {
         }
     }
 
-
     @Override
     public int getIntrinsicWidth() {
         return mWidth;
@@ -109,6 +117,43 @@ public class TextGradientDrawable extends GradientDrawable {
         mLayout.draw(canvas);
     }
 
+    /**
+     * 代码参考自 {@link Bitmap#createBitmap(Bitmap, int, int, int, int, Matrix, boolean) }
+     */
+    public Bitmap getDrawingBitmap(Matrix matrix) {
+        int newWidth = mWidth;
+        int newHeight = mHeight;
+        Bitmap bitmap;
+
+        RectF dstR = new RectF(0, 0, mWidth, mHeight);
+        RectF deviceR = new RectF();
+
+        if (matrix == null || matrix.isIdentity()) {
+            bitmap = Bitmap.createBitmap(mDisplayMetrics, newWidth, newHeight, Config.ARGB_8888);
+        } else {
+            matrix.mapRect(deviceR, dstR);
+
+            newWidth = Math.round(deviceR.width());
+            newHeight = Math.round(deviceR.height());
+
+            bitmap = Bitmap.createBitmap(mDisplayMetrics, newWidth, newHeight, Config.ARGB_8888);
+        }
+
+        Canvas canvas = null;
+        if (canvas == null) {
+            canvas = new Canvas(bitmap);
+        } else {
+            canvas.setBitmap(bitmap);
+        }
+        canvas.translate(-deviceR.left, -deviceR.top);
+        canvas.concat(matrix);
+
+        final int restoreCount = canvas.save();
+        this.draw(canvas);
+        canvas.restoreToCount(restoreCount);
+        canvas.setBitmap(null);
+        return bitmap;
+    }
 
     private Layout.Alignment getLayoutAlignment(TextView referTo) {
         Layout.Alignment alignment = null;

@@ -1,7 +1,9 @@
 package com.aliya.base.sample.module.main;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -88,15 +90,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.tv_text:
-                TextView textView = (TextView)v;
-                textView.setText(textView.getText() + "我");
+                TextView textView = (TextView) v;
+                textView.setText(textView.getText() + "+");
 
                 TextGradientDrawable drawable =
-                        new TextGradientDrawable(textView.getText().toString(), textView);
+                        new TextGradientDrawable(textView.getText(), textView,
+                                ((View) v.getParent()).getWidth());
                 drawable.setColor(getResources().getColor(android.R.color.holo_purple));
                 drawable.setCornerRadius(AppUtils.dp2px(4));
-                drawable.setTextColor(Color.BLUE);
-                mBinding.ivText.setImageDrawable(drawable);
+                drawable.setTextColor(Color.WHITE);
+
+                Matrix matrix = new Matrix();
+                matrix.setScale(1.5f, 1.5f,
+                        drawable.getIntrinsicWidth() / 2f, drawable.getIntrinsicHeight() / 2f);
+                matrix.postRotate(0 % 360,
+                        drawable.getIntrinsicWidth() / 2f, drawable.getIntrinsicHeight() / 2f);
+
+                Bitmap rawBitmap = drawable.getDrawingBitmap(matrix);
+
+                mBinding.ivText.setImageBitmap(rawBitmap);
+
                 break;
         }
     }
