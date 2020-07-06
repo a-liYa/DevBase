@@ -1,4 +1,4 @@
-package com.aliya.base.sample.ui.widget;
+package com.aliya.base.sample.ui.widget.drawable;
 
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;

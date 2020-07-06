@@ -22,9 +22,9 @@ import com.aliya.base.sample.ui.activity.SecondActivity;
 import com.aliya.base.sample.ui.activity.handler.HandlerActivity;
 import com.aliya.base.sample.ui.activity.launch.SingleInstanceActivity;
 import com.aliya.base.sample.ui.activity.thread.ThreadPoolActivity;
-import com.aliya.base.sample.ui.widget.LinearDrawable;
-import com.aliya.base.sample.ui.widget.ScaleDrawable;
-import com.aliya.base.sample.ui.widget.TextGradientDrawable;
+import com.aliya.base.sample.ui.widget.drawable.LinearDrawable;
+import com.aliya.base.sample.ui.widget.drawable.ScaleDrawable;
+import com.aliya.base.sample.ui.widget.drawable.TextGradientDrawable;
 
 /**
  * A simple {@link Fragment} subclass.

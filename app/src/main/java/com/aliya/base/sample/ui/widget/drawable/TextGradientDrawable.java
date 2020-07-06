@@ -1,4 +1,4 @@
-package com.aliya.base.sample.ui.widget;
+package com.aliya.base.sample.ui.widget.drawable;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
