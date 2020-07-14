@@ -53,10 +53,10 @@ public class TextGradientDrawable extends GradientDrawable {
      */
     private void onMeasure(TextView referTo) {
         int width, height;
-        if (referTo.getLayout() != null) {
-            width = desiredWidth(referTo.getLayout());
+        if (mLayout != null) {
+            width = desiredWidth(mLayout);
         } else {
-            BoringLayout.Metrics boring = BoringLayout.isBoring(referTo.getText(), mPaint);
+            BoringLayout.Metrics boring = BoringLayout.isBoring(mText, mPaint);
             if (boring != null) {
                 width = boring.width;
             } else {
@@ -68,7 +68,10 @@ public class TextGradientDrawable extends GradientDrawable {
 
         int wantWidth =
                 width - referTo.getCompoundPaddingLeft() - referTo.getCompoundPaddingRight();
-        makeNewLayout(referTo, wantWidth);
+
+        if (mLayout == null) {
+            makeNewLayout(referTo, wantWidth);
+        }
 
         height = mLayout.getHeight();
         height += referTo.getCompoundPaddingTop() + referTo.getCompoundPaddingBottom();
