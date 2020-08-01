@@ -6,7 +6,7 @@ package com.aliya.base.util;
  *
  * Use examples are as follows:
  *
- * class SingletonClass {
+ * public class SingletonClass {
  *
  *     static final Singleton<SingletonClass> sSingleton = new Singleton<SingletonClass>() {
  *         @Override
@@ -17,6 +17,21 @@ package com.aliya.base.util;
  *
  *     public static SingletonClass getInstance(){
  *         return sSingleton.get();
+ *     }
+ * }
+ *
+ * =================================================================================================
+ *
+ * // 静态内部类实现单例模式:
+ * public class SingletonClass {
+ *     private static class Singleton {
+ *         private static Singleton sSingleton = new Singleton();
+ *     }
+ *
+ *     private SingletonClass(){}
+ *
+ *     public static Singleton getSingleton(){
+ *         return Singleton.sSingleton;
  *     }
  * }
  *
