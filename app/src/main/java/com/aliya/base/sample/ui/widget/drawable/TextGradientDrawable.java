@@ -52,20 +52,54 @@ public class TextGradientDrawable extends GradientDrawable {
      * 代码参考自 TextView#onMeasure(widthMeasureSpec, heightMeasureSpec)
      */
     private void onMeasure(TextView referTo) {
-        BoringLayout.Metrics boring = BoringLayout.isBoring(referTo.getText(), mPaint);
-        if (boring != null) {
-            mWidth = boring.width;
+        int width, height;
+        if (mLayout != null) {
+            width = desiredWidth(mLayout);
+        } else {
+            BoringLayout.Metrics boring = BoringLayout.isBoring(mText, mPaint);
+            if (boring != null) {
+                width = boring.width;
+            } else {
+                width = (int) Math.ceil(Layout.getDesiredWidth(mText, mPaint));
+            }
         }
-        mWidth += referTo.getCompoundPaddingLeft() + referTo.getCompoundPaddingRight();
-        mWidth = Math.min(mWidth, mMaxWidth);
+        width += referTo.getCompoundPaddingLeft() + referTo.getCompoundPaddingRight();
+        width = Math.min(width, mMaxWidth);
 
         int wantWidth =
-                mWidth - referTo.getCompoundPaddingLeft() - referTo.getCompoundPaddingRight();
-        makeNewLayout(referTo, wantWidth);
+                width - referTo.getCompoundPaddingLeft() - referTo.getCompoundPaddingRight();
 
-        mHeight = mLayout.getHeight();
-        mHeight += referTo.getCompoundPaddingTop() + referTo.getCompoundPaddingBottom();
-        setBounds(0, 0, mWidth, mHeight);
+        if (mLayout == null) {
+            makeNewLayout(referTo, wantWidth);
+        }
+
+        height = mLayout.getHeight();
+        height += referTo.getCompoundPaddingTop() + referTo.getCompoundPaddingBottom();
+
+        setBounds(0, 0, mWidth = width, mHeight = height);
+    }
+
+    /**
+     * 代码参考自 TextView#desired(layout)
+     */
+    private static int desiredWidth(Layout layout) {
+        int n = layout.getLineCount();
+        CharSequence text = layout.getText();
+        float max = 0;
+
+        // if any line was wrapped, we can't use it.
+        // but it's ok for the last line not to have a newline
+
+        for (int i = 0; i < n - 1; i++) {
+            if (text.charAt(layout.getLineEnd(i) - 1) != '\n')
+                return -1;
+        }
+
+        for (int i = 0; i < n; i++) {
+            max = Math.max(max, layout.getLineWidth(i));
+        }
+
+        return (int) Math.ceil(max);
     }
 
     private void makeNewLayout(TextView referTo, int wantWidth) {
