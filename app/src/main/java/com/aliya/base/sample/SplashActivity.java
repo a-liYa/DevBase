@@ -22,7 +22,7 @@ import com.aliya.base.sample.databinding.ActivitySplashBinding;
  */
 public class SplashActivity extends BaseActivity implements View.OnClickListener {
 
-    private ActivitySplashBinding mViewBinding;
+    ActivitySplashBinding mViewBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

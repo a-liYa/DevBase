@@ -22,9 +22,6 @@ dependencies {
 
     implementation deps.gson
 
-//    implementation 'com.jakewharton:butterknife:10.2.3'
-//    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
-
     implementation deps.swipebacklayout
     implementation deps.aliya.fitwindow
     implementation deps.aliya.decoradapter
