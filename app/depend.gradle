@@ -1,10 +1,6 @@
 configurations.all {
     resolutionStrategy {
-        force deps.androidx.appcompat
-        force deps.androidx.room_runtime
-        force deps.androidx.room_compiler
-
-        force deps.arch.lifecycle_extensions
+        force deps.androidx.annotation
     }
 }
 
@@ -16,7 +12,7 @@ dependencies {
     implementation deps.androidx.constraintlayout
 
     // Architecture components
-    implementation deps.arch.lifecycle_extensions
+    implementation deps.androidx.lifecycle_extensions
     implementation deps.androidx.room_runtime
     annotationProcessor deps.androidx.room_compiler
 
