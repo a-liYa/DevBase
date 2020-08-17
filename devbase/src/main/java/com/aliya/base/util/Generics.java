@@ -1,9 +1,9 @@
 package com.aliya.base.util;
 
-import android.support.annotation.Nullable;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+
+import androidx.annotation.Nullable;
 
 /**
  * 泛型 - 工具类

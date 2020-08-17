@@ -1,10 +1,10 @@
 package com.aliya.base.sample.base.network;
 
-import android.arch.lifecycle.LiveData;
-import android.support.annotation.MainThread;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
+import androidx.lifecycle.LiveData;
+import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
 
 /**
  * NetworkBoundResource

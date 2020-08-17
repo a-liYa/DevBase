@@ -1,29 +1,29 @@
 configurations.all {
     resolutionStrategy {
-        force deps.support.appcompat
+        force deps.androidx.appcompat
+        force deps.androidx.room_runtime
+        force deps.androidx.room_compiler
 
-        force deps.arch.extensions
-        force deps.arch.room
-        force deps.arch.room_compiler
+        force deps.arch.lifecycle_extensions
     }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     // 　Support libraries
-    implementation deps.support.appcompat
-    implementation deps.support.recyclerview
-    implementation deps.constraint_layout
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.recyclerview
+    implementation deps.androidx.constraintlayout
 
     // Architecture components
-    implementation deps.arch.extensions
-    implementation deps.arch.room
-    annotationProcessor deps.arch.room_compiler
+    implementation deps.arch.lifecycle_extensions
+    implementation deps.androidx.room_runtime
+    annotationProcessor deps.androidx.room_compiler
 
     implementation deps.gson
 
-    implementation 'com.jakewharton:butterknife:9.0.0-rc1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc1'
+//    implementation 'com.jakewharton:butterknife:10.2.3'
+//    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 
     implementation deps.swipebacklayout
     implementation deps.aliya.fitwindow

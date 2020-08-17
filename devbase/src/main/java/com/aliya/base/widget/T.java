@@ -1,7 +1,7 @@
 package com.aliya.base.widget;
 
 import android.content.Context;
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 import android.text.TextUtils;
 import android.widget.Toast;
 

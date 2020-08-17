@@ -1,7 +1,7 @@
 package com.aliya.base.sample.base.network;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Resource 网络数据和状态的封装

@@ -7,7 +7,7 @@ import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 import android.text.BoringLayout;
 import android.text.Layout;
 import android.text.StaticLayout;

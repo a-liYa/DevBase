@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.os.MessageQueue;
 import android.os.SystemClock;
-import android.support.multidex.MultiDexApplication;
-import android.support.v4.content.res.ResourcesCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -16,6 +14,9 @@ import com.aliya.base.gather.WebPools;
 import com.aliya.base.sample.base.ColorSaturation;
 import com.aliya.base.sample.module.listen.SideFloatHelper;
 import com.aliya.compat.CrashCompat;
+
+import androidx.core.content.res.ResourcesCompat;
+import androidx.multidex.MultiDexApplication;
 
 /**
  * application

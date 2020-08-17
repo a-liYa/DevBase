@@ -38,6 +38,4 @@ android {
 }
 
 dependencies {
-    implementation deps.constraint_layout
-    implementation deps.support.appcompat
 }

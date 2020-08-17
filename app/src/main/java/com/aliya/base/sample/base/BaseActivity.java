@@ -4,13 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.aliya.base.compat.DensityCompat;
 import com.aliya.base.sample.R;
 import com.aliya.compat.ActivityOrientationCompat;
+
+import androidx.annotation.CallSuper;
 
 /**
  * Base activity

@@ -1,8 +1,8 @@
 package com.aliya.base.sample.ui.activity;
 
-import android.arch.lifecycle.Observer;
+import androidx.lifecycle.Observer;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 
 import com.aliya.base.sample.common.AppExecutors;

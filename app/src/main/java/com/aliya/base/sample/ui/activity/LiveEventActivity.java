@@ -1,20 +1,17 @@
 package com.aliya.base.sample.ui.activity;
 
-import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.aliya.base.event.LiveEvent;
 import com.aliya.base.sample.R;
 import com.aliya.base.sample.base.BaseActivity;
+import com.aliya.base.sample.databinding.ActivityLiveEventBinding;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
 
 /**
  * LiveEvent 使用示例
@@ -22,21 +19,24 @@ import butterknife.OnClick;
  * @author a_liYa
  * @date 2019/2/26 上午9:51.
  */
-public class LiveEventActivity extends BaseActivity implements Observer {
+public class LiveEventActivity extends BaseActivity implements Observer, View.OnClickListener {
 
-    @BindView(R.id.tv_bind_size)
-    TextView mTvBindSize;
+    ActivityLiveEventBinding mViewBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_live_event);
-        ButterKnife.bind(this);
+        mViewBinding = ActivityLiveEventBinding.inflate(getLayoutInflater());
+        setContentView(mViewBinding.getRoot());
+
+        mViewBinding.tvObserve.setOnClickListener(this);
+        mViewBinding.tvRemove.setOnClickListener(this);
+        mViewBinding.tvSend.setOnClickListener(this);
     }
 
-    @OnClick({R.id.tv_observe, R.id.tv_remove, R.id.tv_send})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.tv_observe:
                 LiveEvent.get().observe(this, this);
                 break;

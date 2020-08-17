@@ -1,6 +1,6 @@
 package com.aliya.base.event;
 
-import android.arch.lifecycle.Observer;
+import androidx.lifecycle.Observer;
 
 /**
  * StickyObserver 粘性
