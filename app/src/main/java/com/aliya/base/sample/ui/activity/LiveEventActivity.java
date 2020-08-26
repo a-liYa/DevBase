@@ -10,16 +10,13 @@ import com.aliya.base.sample.R;
 import com.aliya.base.sample.base.BaseActivity;
 import com.aliya.base.sample.databinding.ActivityLiveEventBinding;
 
-import androidx.annotation.Nullable;
-import androidx.lifecycle.Observer;
-
 /**
  * LiveEvent 使用示例
  *
  * @author a_liYa
  * @date 2019/2/26 上午9:51.
  */
-public class LiveEventActivity extends BaseActivity implements Observer, View.OnClickListener {
+public class LiveEventActivity extends BaseActivity implements View.OnClickListener {
 
     ActivityLiveEventBinding mViewBinding;
 
@@ -34,31 +31,43 @@ public class LiveEventActivity extends BaseActivity implements Observer, View.On
         mViewBinding.tvSend.setOnClickListener(this);
     }
 
+    private LiveEvent.Observer<Long> mLongObserver = new LiveEvent.Observer<Long>() {
+
+        @Override
+        public void onEvent(Long o) {
+            Log.e("TAG", "onEvent: Long " + o);
+        }
+    };
+
+    private LiveEvent.Observer<String> mStringObserver = new LiveEvent.Observer<String>() {
+        @Override
+        public void onEvent(String event) {
+            Log.e("TAG", "onEvent: String " + event);
+        }
+    };
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_observe:
-                LiveEvent.get().observe(this, this);
+                // 注册且自动反注销
+                LiveEvent.get().observe(this, mLongObserver);
+                LiveEvent.get().observe(mStringObserver);
                 break;
             case R.id.tv_remove:
-//                LiveEvent.get().removeObserver(this);
+                LiveEvent.get().removeObserver(mStringObserver);
                 break;
             case R.id.tv_send:
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         Long value = Long.valueOf(SystemClock.uptimeMillis());
-                        LiveEvent.get().post(value);
-                        LiveEvent.get().post(value + 1);
+                        LiveEvent.get().post(new Long(value));
+                        LiveEvent.get().post("This is string type event");
                     }
                 }).start();
             break;
         }
-    }
-
-    @Override
-    public void onChanged(@Nullable Object o) {
-        Log.e("TAG", "onChanged: " + o);
     }
 
 }
