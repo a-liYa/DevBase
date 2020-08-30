@@ -1,7 +1,7 @@
 package com.aliya.base.sample.base;
 
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
+import androidx.annotation.CallSuper;
 
 /**
  * ActionBarActivity

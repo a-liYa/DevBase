@@ -1,20 +1,14 @@
 package com.aliya.base.sample.ui.activity;
 
-import android.arch.lifecycle.Observer;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.aliya.base.event.LiveEvent;
 import com.aliya.base.sample.R;
 import com.aliya.base.sample.base.BaseActivity;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import com.aliya.base.sample.databinding.ActivityLiveEventBinding;
 
 /**
  * LiveEvent 使用示例
@@ -22,43 +16,58 @@ import butterknife.OnClick;
  * @author a_liYa
  * @date 2019/2/26 上午9:51.
  */
-public class LiveEventActivity extends BaseActivity implements Observer {
+public class LiveEventActivity extends BaseActivity implements View.OnClickListener {
 
-    @BindView(R.id.tv_bind_size)
-    TextView mTvBindSize;
+    ActivityLiveEventBinding mViewBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_live_event);
-        ButterKnife.bind(this);
+        mViewBinding = ActivityLiveEventBinding.inflate(getLayoutInflater());
+        setContentView(mViewBinding.getRoot());
+
+        mViewBinding.tvObserve.setOnClickListener(this);
+        mViewBinding.tvRemove.setOnClickListener(this);
+        mViewBinding.tvSend.setOnClickListener(this);
     }
 
-    @OnClick({R.id.tv_observe, R.id.tv_remove, R.id.tv_send})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
+    private LiveEvent.Observer<Long> mLongObserver = new LiveEvent.Observer<Long>() {
+
+        @Override
+        public void onEvent(Long o) {
+            Log.e("TAG", "onEvent: Long " + o);
+        }
+    };
+
+    private LiveEvent.Observer<String> mStringObserver = new LiveEvent.Observer<String>() {
+        @Override
+        public void onEvent(String event) {
+            Log.e("TAG", "onEvent: String " + event);
+        }
+    };
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.tv_observe:
-                LiveEvent.get().observe(this, this);
+                // 注册且自动反注销
+                LiveEvent.get().observe(this, mLongObserver);
+                LiveEvent.get().observe(mStringObserver);
                 break;
             case R.id.tv_remove:
-//                LiveEvent.get().removeObserver(this);
+                LiveEvent.get().removeObserver(mStringObserver);
                 break;
             case R.id.tv_send:
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         Long value = Long.valueOf(SystemClock.uptimeMillis());
-                        LiveEvent.get().post(value);
-                        LiveEvent.get().post(value + 1);
+                        LiveEvent.get().post(new Long(value));
+                        LiveEvent.get().post("This is string type event");
                     }
                 }).start();
             break;
         }
-    }
-
-    @Override
-    public void onChanged(@Nullable Object o) {
-        Log.e("TAG", "onChanged: " + o);
     }
 
 }

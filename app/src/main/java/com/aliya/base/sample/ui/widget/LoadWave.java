@@ -22,7 +22,7 @@ import com.aliya.base.sample.R;
  * @author a_liYa
  * @date 2016/12/13 00:25.
  */
-public class LoadWave extends android.support.v7.widget.AppCompatImageView {
+public class LoadWave extends androidx.appcompat.widget.AppCompatImageView {
 
     private PorterDuffXfermode mMode = new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP); // 目标覆盖
 

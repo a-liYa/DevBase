@@ -1,6 +1,5 @@
 package com.aliya.base.util;
 
-import android.support.annotation.IntDef;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -8,6 +7,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.LinkedList;
 import java.util.Queue;
+
+import androidx.annotation.IntDef;
 
 /**
  * view 相关处理工具类

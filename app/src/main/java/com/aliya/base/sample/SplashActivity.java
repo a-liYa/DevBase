@@ -10,13 +10,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowInsets;
 import android.view.WindowManager;
-import android.widget.ImageView;
 
 import com.aliya.base.sample.base.BaseActivity;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import com.aliya.base.sample.databinding.ActivitySplashBinding;
 
 /**
  * 启动页
@@ -24,10 +20,9 @@ import butterknife.OnClick;
  * @author a_liYa
  * @date 2018/9/12 下午4:34.
  */
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends BaseActivity implements View.OnClickListener {
 
-    @BindView(R.id.iv_logo)
-    ImageView mIvLogo;
+    ActivitySplashBinding mViewBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +33,10 @@ public class SplashActivity extends BaseActivity {
             return;
         }
         setSwipeBackEnable(false);
-        setContentView(R.layout.activity_splash);
-        ButterKnife.bind(this);
-
-        mIvLogo.postDelayed(new Runnable() {
+        mViewBinding = ActivitySplashBinding.inflate(getLayoutInflater());
+        setContentView(mViewBinding.getRoot());
+        mViewBinding.ivLogo.setOnClickListener(this);
+        mViewBinding.ivLogo.postDelayed(new Runnable() {
             @Override
             public void run() {
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
@@ -91,11 +86,10 @@ public class SplashActivity extends BaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    @OnClick({R.id.iv_logo})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_logo:
-                mIvLogo.setImageResource(R.mipmap.splash_slogan);
+                mViewBinding.ivLogo.setImageResource(R.mipmap.splash_slogan);
                 break;
         }
     }

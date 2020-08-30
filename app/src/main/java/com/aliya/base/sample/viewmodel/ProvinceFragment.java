@@ -1,17 +1,10 @@
 package com.aliya.base.sample.viewmodel;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.widget.TextView;
 
 import com.aliya.adapter.RecyclerAdapter;
 import com.aliya.adapter.RecyclerViewHolder;
@@ -19,12 +12,18 @@ import com.aliya.adapter.click.ItemClickCallback;
 import com.aliya.adapter.click.OnItemClickListener;
 import com.aliya.base.sample.R;
 import com.aliya.base.sample.base.BaseFragment;
+import com.aliya.base.sample.databinding.ItemProvinceBinding;
+import com.aliya.base.sample.databinding.ProvinceFragmentBinding;
 import com.aliya.base.sample.viewmodel.bean.ProvinceEntity;
 
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 
 /**
  * 省份数据展示 Fragment
@@ -35,25 +34,24 @@ import butterknife.ButterKnife;
 public class ProvinceFragment extends BaseFragment implements OnItemClickListener,
         Observer<List<ProvinceEntity>> {
 
-    @BindView(R.id.recycler)
-    RecyclerView mRecycler;
-
     private Adapter mAdapter;
     private AreaSelectViewModel mViewModel;
+    private ProvinceFragmentBinding mViewBinding;
 
     public ProvinceFragment() {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.province_fragment, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        mViewBinding = ProvinceFragmentBinding.inflate(inflater, container, false);
+        return mViewBinding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        mViewBinding.recycler.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @Override
@@ -70,7 +68,7 @@ public class ProvinceFragment extends BaseFragment implements OnItemClickListene
 
     @Override
     public void onChanged(@Nullable List<ProvinceEntity> provinces) {
-        mRecycler.setAdapter(mAdapter = new Adapter(provinces, mViewModel));
+        mViewBinding.recycler.setAdapter(mAdapter = new Adapter(provinces, mViewModel));
         mAdapter.setOnItemClickListener(this);
         if (mViewModel.getSelectedProvince().getValue() == null) {
             mViewModel.selectProvince(mAdapter.getData(0));
@@ -95,22 +93,20 @@ public class ProvinceFragment extends BaseFragment implements OnItemClickListene
     static class ViewHolder extends RecyclerViewHolder<ProvinceEntity> implements
             ItemClickCallback {
 
-        @BindView(R.id.tv_name)
-        TextView mTvName;
-
+        final ItemProvinceBinding mViewBinding;
         private AreaSelectViewModel mSelected;
 
         public ViewHolder(@NonNull ViewGroup parent, AreaSelectViewModel selected) {
             super(parent, R.layout.item_province);
-            ButterKnife.bind(this, itemView);
+            mViewBinding = ItemProvinceBinding.bind(itemView);
             mSelected = selected;
         }
 
         @Override
         public void bindData(ProvinceEntity data) {
             super.bindData(data);
-            mTvName.setText(data.getName());
-            mTvName.setSelected(mSelected.getSelectedProvince().getValue() == data);
+            mViewBinding.tvName.setText(data.getName());
+            mViewBinding.tvName.setSelected(mSelected.getSelectedProvince().getValue() == data);
         }
 
         @Override
