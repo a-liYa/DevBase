@@ -1,6 +1,7 @@
 configurations.all {
     resolutionStrategy {
         force deps.androidx.annotation
+        force deps.androidx.core
     }
 }
 

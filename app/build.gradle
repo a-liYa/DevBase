@@ -36,6 +36,3 @@ android {
         enabled = true
     }
 }
-
-dependencies {
-}

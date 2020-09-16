@@ -2,9 +2,6 @@ package com.aliya.base.sample.ui;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -13,6 +10,10 @@ import android.widget.LinearLayout;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * 自定义MainTabLayout
@@ -145,8 +146,7 @@ public class MainTabLayout extends LinearLayout implements View.OnClickListener 
         }
 
         // 取消上个item的选中状态
-        View lastView = mTabs.get(selectedKey) == null ? null : mTabs.get
-                (selectedKey).view;
+        View lastView = mTabs.get(selectedKey) == null ? null : mTabs.get(selectedKey).view;
         if (lastView != null) {
             lastView.setSelected(false);
         }
@@ -161,7 +161,7 @@ public class MainTabLayout extends LinearLayout implements View.OnClickListener 
      *
      * @param context
      * @param manager
-     * @param containerId FramLayout的资源id
+     * @param containerId FrameLayout的资源id
      */
     public void setupBind(Context context, FragmentManager manager, int containerId) {
         mContext = context;
