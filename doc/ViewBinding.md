@@ -30,7 +30,7 @@ ViewHolder 使用示例.
 ActivityMainBinding mViewBinding;
 public ViewHolder(@NonNull ViewGroup parent, AreaSelectViewModel selected) {
 	super(parent, R.layout.activity_main);
-	mViewBinding = ActivityMainBinding,bind(itemView);
+	mViewBinding = ActivityMainBinding.bind(itemView);
 }
 ```
 
