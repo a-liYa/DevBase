@@ -1,8 +1,10 @@
 package com.aliya.base.sample.module.actionbar;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
+import com.aliya.base.AppUtils;
 import com.aliya.base.sample.R;
 import com.aliya.base.sample.base.ActionBarActivity;
 import com.aliya.base.sample.databinding.ActivitySampleActionBarBinding;
@@ -46,14 +48,16 @@ public class SampleActionBarActivity extends ActionBarActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_add_share:
-                mActionBar.addRightAction(mShareAction);
-                mShareAction.getView();
+                mActionBar.addRightAction(mShareAction,0);
+                mShareAction.getView().setBackgroundColor(Color.parseColor("#f5f5f5"));
                 break;
             case R.id.tv_remove_share:
                 mActionBar.removeRightAction(mShareAction);
                 break;
             case R.id.tv_add_help:
-                mActionBar.addRightAction(mHelpAction);
+                mActionBar.addRightAction(mHelpAction, -1);
+                mHelpAction.getView().getLayoutParams().width = AppUtils.dp2px(35);
+                mHelpAction.getView().setBackgroundColor(Color.parseColor("#e5e5e5"));
                 break;
             case R.id.tv_remove_help:
                 mActionBar.removeRightAction(mHelpAction);

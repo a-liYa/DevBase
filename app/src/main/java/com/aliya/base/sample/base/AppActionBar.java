@@ -56,22 +56,30 @@ public class AppActionBar extends RebornActionBar {
             mBinding.abcTvTitle.setText(title);
     }
 
-    public AppActionBar addRightAction(Action action) {
+    /**
+     * @param index 0,表示最左边，-1 表示最右边
+     * @return this
+     */
+    public AppActionBar addRightAction(Action action, int index) {
         if (mRightParent == null) {
             mRightParent = (ViewGroup) mBinding.abcRightFrameStub.inflate();
         }
         if (action.view == null)
             action.view = action.onCreateView(mActivity.getLayoutInflater(), mRightParent);
-        addRightView(action.view);
+        addRightView(action.view, index);
         return this;
     }
 
-    private void addRightView(View view) {
+    private void addRightView(View view, int index) {
         if (mRightParent == null) {
             mRightParent = (ViewGroup) mBinding.abcRightFrameStub.inflate();
         }
-        if (view.getParent() == null)
-            mRightParent.addView(view);
+        if (view.getParent() == null) {
+            if (index < -1) index = -1;
+            else if (index > mRightParent.getChildCount())
+                index = mRightParent.getChildCount();
+            mRightParent.addView(view, index);
+        }
     }
 
     public AppActionBar removeRightAction(Action action) {
