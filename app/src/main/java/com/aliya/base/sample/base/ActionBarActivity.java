@@ -20,10 +20,11 @@ public class ActionBarActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         mActionBar = onCreateActionBar();
         if (mActionBar != null) {
-            mActionBar.attachActionBar();
+            mActionBar.attachToWindow();
         }
     }
 
+    // 钩子函数，子类重写返回 null, 可抑制 ActionBar 的创建，实现 Lazy Loading
     protected AppActionBar onCreateActionBar() {
         return new AppActionBar(this);
     }

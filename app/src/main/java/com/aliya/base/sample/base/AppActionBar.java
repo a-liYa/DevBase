@@ -96,9 +96,11 @@ public class AppActionBar extends RebornActionBar {
     }
 
     public AppActionBar removeRightAction(Action action) {
-        View view = action.getView();
-        if (view != null && view.getParent() == mRightParent) {
-            if (mRightParent != null) mRightParent.removeView(view);
+        if (action != null) {
+            View view = action.getView();
+            if (view != null && view.getParent() == mRightParent) {
+                if (mRightParent != null) mRightParent.removeView(view);
+            }
         }
         return this;
     }

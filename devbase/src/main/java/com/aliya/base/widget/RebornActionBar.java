@@ -8,6 +8,8 @@ import android.view.ViewParent;
 
 import com.aliya.base.R;
 
+import androidx.core.view.ViewCompat;
+
 /**
  * 伪复兴的ActionBar
  * <p>
@@ -40,7 +42,7 @@ public abstract class RebornActionBar {
         }
     }
 
-    public void attachActionBar() {
+    public void attachToWindow() {
         if (mView == null) createView();
 
         if (mView != null && mView.getParent() == null) {
@@ -53,6 +55,7 @@ public abstract class RebornActionBar {
                 int indexOfViewStub = parent.indexOfChild(mActionBarStub);
                 parent.removeViewInLayout(mActionBarStub);
                 parent.addView(mView, indexOfViewStub);
+                ViewCompat.requestApplyInsets(mView);
             }
             mActionBarStub = null;
         }
