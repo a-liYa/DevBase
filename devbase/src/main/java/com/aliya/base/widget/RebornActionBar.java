@@ -23,33 +23,38 @@ public abstract class RebornActionBar {
 
     protected View mView;
     protected Activity mActivity;
+    private View mActionBarStub;
 
     public RebornActionBar(Activity activity) {
         mActivity = activity;
-        View viewStub = mActivity.findViewById(R.id.action_mode_bar_stub);
-        if (viewStub != null) {
-            ViewParent viewParent = viewStub.getParent();
-            if (viewParent != null && viewParent instanceof ViewGroup) {
-                mView = onCreateView(LayoutInflater.from(activity), (ViewGroup) viewParent);
-                onViewCreated(mView);
-            }
+    }
+
+    public void createView() {
+        if (mActionBarStub == null) {
+            mActionBarStub = mActivity.findViewById(R.id.action_mode_bar_stub);
+        }
+        ViewParent viewParent = mActionBarStub.getParent();
+        if (viewParent != null && viewParent instanceof ViewGroup) {
+            mView = onCreateView(mActivity.getLayoutInflater(), (ViewGroup) viewParent);
+            onViewCreated(mView);
         }
     }
 
-    public void inflateActionBar() {
+    public void attachActionBar() {
+        if (mView == null) createView();
+
         if (mView != null && mView.getParent() == null) {
-            View viewStub = mActivity.findViewById(R.id.action_mode_bar_stub);
-            if (viewStub == null)
-                throw new RuntimeException("找不到 R.id.action_mode_bar_stub 对应的 View");
-            if (viewStub != null) {
-                ViewParent viewParent = viewStub.getParent();
-                if (viewParent != null && viewParent instanceof ViewGroup) {
-                    ViewGroup parent = (ViewGroup) viewParent;
-                    int indexOfViewStub = parent.indexOfChild(viewStub);
-                    parent.removeViewInLayout(viewStub);
-                    parent.addView(mView, indexOfViewStub);
-                }
+            if (mActionBarStub == null) {
+                mActionBarStub = mActivity.findViewById(R.id.action_mode_bar_stub);
             }
+            ViewParent viewParent = mActionBarStub.getParent();
+            if (viewParent != null && viewParent instanceof ViewGroup) {
+                ViewGroup parent = (ViewGroup) viewParent;
+                int indexOfViewStub = parent.indexOfChild(mActionBarStub);
+                parent.removeViewInLayout(mActionBarStub);
+                parent.addView(mView, indexOfViewStub);
+            }
+            mActionBarStub = null;
         }
     }
 

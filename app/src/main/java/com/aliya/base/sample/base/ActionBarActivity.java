@@ -1,6 +1,7 @@
 package com.aliya.base.sample.base;
 
 import android.os.Bundle;
+
 import androidx.annotation.CallSuper;
 
 /**
@@ -19,7 +20,7 @@ public class ActionBarActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         mActionBar = onCreateActionBar();
         if (mActionBar != null) {
-            mActionBar.inflateActionBar();
+            mActionBar.attachActionBar();
         }
     }
 
