@@ -10,6 +10,7 @@
         android:id="@+id/abc_iv_back"
         android:layout_width="?attr/actionBarSize"
         android:layout_height="?attr/actionBarSize"
+        android:background="?actionBarItemBackground"
         android:scaleType="center"
         android:src="@mipmap/icon_navigation_back" />
 
@@ -21,8 +22,8 @@
         android:layout_marginLeft="?attr/actionBarSize"
         android:layout_marginRight="?attr/actionBarSize"
         android:ellipsize="end"
-        android:maxLines="1"
         android:gravity="center"
+        android:maxLines="1"
         android:textSize="18sp"
         tools:text="标题" />
 

@@ -1,6 +1,5 @@
 package com.aliya.base.sample.module.actionbar;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
@@ -50,7 +49,7 @@ public class SampleActionBarActivity extends ActionBarActivity implements View.O
             case R.id.tv_add_share:
                 setTitle("我是一个很长很长很长很长很长很长很长很长很长很长很长很长的标题");
                 mActionBar.addRightAction(mShareAction,0);
-                mShareAction.getView().setBackgroundColor(Color.parseColor("#f5f5f5"));
+//                mShareAction.getView().setBackgroundColor(Color.parseColor("#f5f5f5"));
                 break;
             case R.id.tv_remove_share:
                 mActionBar.removeRightAction(mShareAction);
@@ -58,7 +57,7 @@ public class SampleActionBarActivity extends ActionBarActivity implements View.O
             case R.id.tv_add_help:
                 mActionBar.addRightAction(mHelpAction, -1);
                 mHelpAction.getView().getLayoutParams().width = AppUtils.dp2px(35);
-                mHelpAction.getView().setBackgroundColor(Color.parseColor("#e5e5e5"));
+//                mHelpAction.getView().setBackgroundColor(Color.parseColor("#e5e5e5"));
                 break;
             case R.id.tv_remove_help:
                 mActionBar.removeRightAction(mHelpAction);

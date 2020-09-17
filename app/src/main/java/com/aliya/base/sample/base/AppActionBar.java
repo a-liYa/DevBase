@@ -1,18 +1,22 @@
 package com.aliya.base.sample.base;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 
 import com.aliya.base.sample.databinding.AbcActionModeBarLayoutBinding;
+import com.aliya.base.util.StatusBars;
 import com.aliya.base.widget.RebornActionBar;
 
 import androidx.annotation.Nullable;
 
 /**
- * ActionBar 简单实现：左返回 + 中间标题
+ * ActionBar 简单实现：左返回 + 中间标题 + 右边动态组合添加 action
+ * 主题白色：（状态栏透明文字暗色 / 状态栏半透明文字白色）
  *
  * @author a_liYa
  * @date 2019-10-08 19:13.
@@ -28,6 +32,11 @@ public class AppActionBar extends RebornActionBar {
 
     public AppActionBar(Activity activity, CharSequence title) {
         super(activity);
+        if (StatusBars.setDarkMode(activity.getWindow(), true)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
+            }
+        }
         createView();
         setTitle(title);
     }

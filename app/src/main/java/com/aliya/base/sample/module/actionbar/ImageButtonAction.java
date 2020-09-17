@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.aliya.base.sample.R;
 import com.aliya.base.sample.base.AppActionBar;
@@ -32,6 +33,10 @@ public class ImageButtonAction extends AppActionBar.Action {
     public ImageButtonAction(Drawable drawable, OnClickListener clickListener) {
         mSrcDrawable = drawable;
         mClickListener = clickListener;
+    }
+
+    public ImageView getImageView() {
+        return mBinding.ivButton;
     }
 
     @Override
