@@ -54,4 +54,5 @@ public class AppActionBar extends RebornActionBar {
         if (tvTitle != null)
             tvTitle.setText(title);
     }
+
 }

@@ -39,6 +39,8 @@ public abstract class RebornActionBar {
     public void inflateActionBar() {
         if (mView != null && mView.getParent() == null) {
             View viewStub = mActivity.findViewById(R.id.action_mode_bar_stub);
+            if (viewStub == null)
+                throw new RuntimeException("找不到 R.id.action_mode_bar_stub 对应的 View");
             if (viewStub != null) {
                 ViewParent viewParent = viewStub.getParent();
                 if (viewParent != null && viewParent instanceof ViewGroup) {
