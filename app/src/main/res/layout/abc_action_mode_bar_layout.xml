@@ -20,6 +20,8 @@
         android:layout_gravity="center"
         android:layout_marginLeft="?attr/actionBarSize"
         android:layout_marginRight="?attr/actionBarSize"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:gravity="center"
         android:textSize="18sp"
         tools:text="标题" />

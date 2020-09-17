@@ -48,6 +48,7 @@ public class SampleActionBarActivity extends ActionBarActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_add_share:
+                setTitle("我是一个很长很长很长很长很长很长很长很长很长很长很长很长的标题");
                 mActionBar.addRightAction(mShareAction,0);
                 mShareAction.getView().setBackgroundColor(Color.parseColor("#f5f5f5"));
                 break;
