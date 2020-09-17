@@ -1,4 +1,4 @@
-package com.aliya.base.sample.module.actionbar;
+package com.aliya.base.sample.base.actionbar;
 
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -7,8 +7,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.aliya.base.sample.R;
-import com.aliya.base.sample.base.AppActionBar;
 import com.aliya.base.sample.databinding.AbcActionModeBarImageItemBinding;
 
 /**
@@ -41,8 +39,7 @@ public class ImageButtonAction extends AppActionBar.Action {
 
     @Override
     protected View onCreateView(LayoutInflater inflater, ViewGroup parent) {
-        View inflate = inflater.inflate(R.layout.abc_action_mode_bar_image_item, parent, false);
-        mBinding = AbcActionModeBarImageItemBinding.bind(inflate);
+        mBinding = AbcActionModeBarImageItemBinding.inflate(inflater, parent, false);
         mBinding.ivButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +48,7 @@ public class ImageButtonAction extends AppActionBar.Action {
         });
         if (mSrcID > 0) mBinding.ivButton.setImageResource(mSrcID);
         else if (mSrcDrawable != null) mBinding.ivButton.setImageDrawable(mSrcDrawable);
-        return inflate;
+        return mBinding.getRoot();
     }
 
     public void dispatchClickListener(View v) {

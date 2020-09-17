@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="16dp"
-        android:text="ActionBar添加分享" />
+        android:text="添加分享 Action" />
 
     <TextView
         android:id="@+id/tv_remove_share"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="16dp"
-        android:text="ActionBar删除分享" />
+        android:text="删除分享 Action" />
 
     <TextView
         android:id="@+id/tv_add_help"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="16dp"
-        android:text="ActionBar添加帮助" />
+        android:text="r添加帮助 Action" />
 
     <TextView
         android:id="@+id/tv_remove_help"
@@ -38,6 +38,5 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="16dp"
-        android:text="ActionBar删除帮助" />
-
+        android:text="删除帮助 Action" />
 </LinearLayout>
