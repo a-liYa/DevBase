@@ -4,11 +4,12 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.view.ViewGroup.MarginLayoutParams;
 
-import com.aliya.base.sample.R;
+import com.aliya.base.sample.databinding.AbcActionModeBarLayoutBinding;
 import com.aliya.base.widget.RebornActionBar;
+
+import androidx.annotation.Nullable;
 
 /**
  * ActionBar 简单实现：左返回 + 中间标题
@@ -18,8 +19,8 @@ import com.aliya.base.widget.RebornActionBar;
  */
 public class AppActionBar extends RebornActionBar {
 
-    ImageView ivBack;
-    TextView tvTitle;
+    private AbcActionModeBarLayoutBinding mBinding;
+    private ViewGroup mRightParent;
 
     public AppActionBar(Activity activity) {
         this(activity, activity.getTitle());
@@ -27,21 +28,20 @@ public class AppActionBar extends RebornActionBar {
 
     public AppActionBar(Activity activity, CharSequence title) {
         super(activity);
+        createView();
         setTitle(title);
     }
 
     @Override
     protected View onCreateView(LayoutInflater inflater, ViewGroup parent) {
-        return inflater.inflate(R.layout.abc_action_mode_bar_layout, parent, false);
+        mBinding = AbcActionModeBarLayoutBinding.inflate(inflater, parent, false);
+        return mBinding.getRoot();
     }
 
     @Override
     protected void onViewCreated(View view) {
-        ivBack = view.findViewById(R.id.abc_iv_back);
-        tvTitle = view.findViewById(R.id.abc_tv_title);
-
-        if (ivBack != null) {
-            ivBack.setOnClickListener(new View.OnClickListener() {
+        if (mBinding.abcIvBack != null) {
+            mBinding.abcIvBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mActivity.onBackPressed();
@@ -51,7 +51,69 @@ public class AppActionBar extends RebornActionBar {
     }
 
     public void setTitle(CharSequence title) {
-        if (tvTitle != null)
-            tvTitle.setText(title);
+        if (mBinding.abcTvTitle != null)
+            mBinding.abcTvTitle.setText(title);
     }
+
+    /**
+     * 往右侧添加操作按钮
+     *
+     * @param index 0,表示最左边，-1 表示最右边
+     * @return this
+     */
+    public AppActionBar addRightAction(Action action, int index) {
+        if (mRightParent == null) {
+            inflateRightFrame();
+        }
+        if (action.view == null)
+            action.view = action.onCreateView(mActivity.getLayoutInflater(), mRightParent);
+        addRightView(action.view, index);
+        return this;
+    }
+
+    public ViewGroup inflateRightFrame() {
+        mRightParent = (ViewGroup) mBinding.abcRightFrameStub.inflate();
+        mRightParent.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom,
+                                       int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                MarginLayoutParams lp = (MarginLayoutParams) mBinding.abcTvTitle.getLayoutParams();
+                lp.leftMargin = lp.rightMargin =
+                        Math.max(v.getWidth(), mBinding.abcIvBack.getWidth());
+                mBinding.abcTvTitle.setLayoutParams(lp);
+            }
+        });
+        return mRightParent;
+    }
+
+    private void addRightView(View view, int index) {
+        if (view.getParent() == null) {
+            if (index < -1) index = -1;
+            else if (index > mRightParent.getChildCount())
+                index = mRightParent.getChildCount();
+            mRightParent.addView(view, index);
+        }
+    }
+
+    public AppActionBar removeRightAction(Action action) {
+        if (action != null) {
+            View view = action.getView();
+            if (view != null && view.getParent() == mRightParent) {
+                if (mRightParent != null) mRightParent.removeView(view);
+            }
+        }
+        return this;
+    }
+
+    public static abstract class Action {
+        View view;
+
+        @Nullable // 在 addRightAction 之前返回 null
+        public View getView() {
+            return view;
+        }
+
+        protected abstract View onCreateView(LayoutInflater inflater, ViewGroup parent);
+    }
+
 }

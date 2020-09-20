@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
+    android:background="@drawable/abc_action_bar_background"
     android:fitsSystemWindows="true">
 
     <ImageView
@@ -19,7 +20,17 @@
         android:layout_gravity="center"
         android:layout_marginLeft="?attr/actionBarSize"
         android:layout_marginRight="?attr/actionBarSize"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:gravity="center"
-        android:text="标题"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        tools:text="标题" />
+
+    <ViewStub
+        android:id="@+id/abc_right_frame_stub"
+        android:layout_width="wrap_content"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_gravity="right"
+        android:background="#000"
+        android:layout="@layout/abc_action_mode_bar_right_layout" />
 </FrameLayout>

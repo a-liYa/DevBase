@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context=".module.main.HomeFragment">
 
     <TextView
@@ -42,6 +42,14 @@
         android:padding="16dp"
         android:text="Handler" />
 
+    <TextView
+        android:id="@+id/tv_action_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="16dp"
+        android:text="ActionBar" />
+
     <com.aliya.base.sample.ui.widget.LoadWave
         android:id="@+id/load_wave"
         android:layout_width="93dp"
@@ -73,13 +81,13 @@
         android:paddingTop="6dp"
         android:paddingRight="8dp"
         android:paddingBottom="6dp"
+        android:text="Drawable实现文字排版"
         android:textColor="@android:color/white"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="Drawable实现文字排版" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/iv_text"

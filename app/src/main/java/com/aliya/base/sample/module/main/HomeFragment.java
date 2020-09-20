@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.aliya.base.AppUtils;
 import com.aliya.base.sample.R;
 import com.aliya.base.sample.databinding.FragmentHomeBinding;
+import com.aliya.base.sample.module.actionbar.SampleActionBarActivity;
 import com.aliya.base.sample.ui.activity.SecondActivity;
 import com.aliya.base.sample.ui.activity.handler.HandlerActivity;
 import com.aliya.base.sample.ui.activity.launch.SingleInstanceActivity;
@@ -53,6 +54,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mBinding.tvHandler.setOnClickListener(this);
         mBinding.tvIcon.setOnClickListener(this);
         mBinding.tvText.setOnClickListener(this);
+        mBinding.tvActionBar.setOnClickListener(this);
 
         LinearDrawable linearDrawable = new LinearDrawable();
         linearDrawable.addDrawable(ContextCompat.getDrawable(getContext(), R.mipmap.ic_icon_01));
@@ -73,10 +75,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getContext(), SingleInstanceActivity.class));
                 break;
             case R.id.tv_thread_pool:
-                getActivity().startActivity(new Intent(getContext(), ThreadPoolActivity.class));
+                startActivity(new Intent(getContext(), ThreadPoolActivity.class));
                 break;
             case R.id.tv_handler:
-                getActivity().startActivity(new Intent(getContext(), HandlerActivity.class));
+                startActivity(new Intent(getContext(), HandlerActivity.class));
+                break;
+            case R.id.tv_action_bar:
+                startActivity(new Intent(getContext(), SampleActionBarActivity.class));
                 break;
             case R.id.tv_icon:
                 Drawable[] drawables = mBinding.tvIcon.getCompoundDrawables();
