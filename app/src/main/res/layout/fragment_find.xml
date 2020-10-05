@@ -35,4 +35,11 @@
         android:gravity="center"
         android:text="LiveEvent" />
 
+    <TextView
+        android:id="@+id/tv_weak"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="弱引用" />
+
 </LinearLayout>
