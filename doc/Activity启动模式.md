@@ -32,7 +32,7 @@
 
 不同 Task id 开启Activity时，若被开启 Task id 已包含该Activity，此时只切换对应的 Task id 至前台。
 
-属性 - android:taskAffinity 默认为包名，配置不同的属性值，会开启对应不同的 Task id。
+属性 - android:taskAffinity 默认为包名，配置不同的属性值，会开启对应不同的 Task id, 必须配置 android:allowTaskReparenting="true" 抑或是调用方将Intent的flag添加FLAG_ACTIVITY_NEW_TASK属性时才会生效。
 Android 9.0 及以后 Stack id 一一对应 Task id；Android 9.0以前
     
 应用Activity栈查看命令：adb shell dumpsys activity activities
