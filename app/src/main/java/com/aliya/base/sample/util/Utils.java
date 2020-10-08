@@ -23,11 +23,10 @@ import java.util.Stack;
  */
 public class Utils {
 
-    public static void printViewTree(Window window) {
+    public static void printViewTree(View view) {
         Stack<View> stack = new Stack<>();
-        View decorView = window.getDecorView();
-        decorView.setTag(R.id.all, 0);
-        stack.add(decorView);
+        view.setTag(R.id.all, 0);
+        stack.add(view);
         while (!stack.isEmpty()) { // 深度优先遍历
             View pop = stack.pop();
             Integer depth = (Integer) pop.getTag(R.id.all);

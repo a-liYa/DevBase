@@ -1,4 +1,4 @@
-## Activity的四种启动模式
+# Activity的四种启动模式
 
 ### 1. Standard  
     默认启动模式，依附在调用方所在 Task id。

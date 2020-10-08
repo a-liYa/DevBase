@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/menu_home">
+    <!-- id 对应 menu/minor_main_menu.xml menu>item>id -->
+    <fragment
+        android:id="@+id/menu_home"
+        android:name="com.aliya.base.sample.module.main.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home"></fragment>
+    <fragment
+        android:id="@+id/menu_video"
+        android:name="com.aliya.base.sample.module.main.VideoFragment"
+        android:label="fragment_video"
+        tools:layout="@layout/fragment_video"></fragment>
+    <fragment
+        android:id="@+id/menu_find"
+        android:name="com.aliya.base.sample.module.main.FindFragment"
+        android:label="fragment_find"
+        tools:layout="@layout/fragment_find"></fragment>
+</navigation>
