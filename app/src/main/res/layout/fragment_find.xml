@@ -42,4 +42,11 @@
         android:gravity="center"
         android:text="弱引用" />
 
+    <TextView
+        android:id="@+id/tv_applet"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="小程序" />
+
 </LinearLayout>

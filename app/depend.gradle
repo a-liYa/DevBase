@@ -11,6 +11,7 @@ dependencies {
     implementation deps.androidx.appcompat
     implementation deps.androidx.recyclerview
     implementation deps.androidx.constraintlayout
+    implementation deps.android.material
 
     // Architecture components
     implementation deps.androidx.lifecycle_extensions
@@ -23,5 +24,4 @@ dependencies {
     implementation deps.aliya.fitwindow
     implementation deps.aliya.decoradapter
 
-    implementation project(':devbase')
 }

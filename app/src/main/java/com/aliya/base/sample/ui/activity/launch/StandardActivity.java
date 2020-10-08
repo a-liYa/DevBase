@@ -19,17 +19,17 @@ public class StandardActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.launch_activity_standard);
-       findViewById(R.id.open_single_task).setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               startActivity(new Intent(getApplicationContext(), SingleTaskActivity.class));
-           }
-       });
-       findViewById(R.id.open_single_top).setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               startActivity(new Intent(getApplicationContext(), SingleTopActivity.class));
-           }
-       });
+        findViewById(R.id.open_single_task).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), SingleTaskActivity.class));
+            }
+        });
+        findViewById(R.id.open_single_top).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), SingleTopActivity.class));
+            }
+        });
     }
 }

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.aliya.base.sample.R;
+import com.aliya.base.sample.applet.MinorMainActivity;
 import com.aliya.base.sample.databinding.FragmentFindBinding;
 import com.aliya.base.sample.module.listen.ListenNewsActivity;
 import com.aliya.base.sample.module.reference.WeakReferenceActivity;
@@ -42,6 +43,7 @@ public class FindFragment extends Fragment implements View.OnClickListener {
         mViewBinding.tvNotify.setOnClickListener(this);
         mViewBinding.tvEvent.setOnClickListener(this);
         mViewBinding.tvWeak.setOnClickListener(this);
+        mViewBinding.tvApplet.setOnClickListener(this);
     }
 
     @Override
@@ -61,6 +63,9 @@ public class FindFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tv_weak:
                 startActivity(new Intent(getContext(), WeakReferenceActivity.class));
+                break;
+            case R.id.tv_applet:
+                startActivity(new Intent(getContext(), MinorMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 break;
         }
     }
