@@ -2,6 +2,7 @@ package com.aliya.base.sample.ui.activity.launch;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.aliya.base.sample.R;
@@ -27,5 +28,11 @@ public class SingleInstanceActivity extends ActionBarActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.e("TAG", "SingleInstanceActivity#onNewIntent()");
     }
 }

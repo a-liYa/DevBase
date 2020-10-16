@@ -10,7 +10,7 @@
     如果当前任务栈已有该Activity实例，重用该实例，并移除其上的其他Activity。依附的 Task id 为 taskAffinity指定。
 
 ### 4. SingleInstance  
-    全局单例模式，并独占一个任务栈。不指定taskAffinity，会新开taskAffinity为包名的任务栈。
+    全局单例模式，并独占一个任务栈。一般同一个taskAffinity对应同一个task，此时会新开 Task，导致 affinity 一对多个 Task。
 
 ## Activity Intent 的 Flags  
 
@@ -30,9 +30,11 @@
      如果当前任务栈已有该Activity实例，重用该实例，但不会清空其上面Activity。eg: A,B,C,D D#startActivity(B) -> A,C,D,B
 
 
-不同 Task id 开启Activity时，若被开启 Task id 已包含该Activity，此时只切换对应的 Task id 至前台。
+注意：前台才存在叠加的多个 Task，在进入后台的第一时间就会被拆开。
+最近任务键，一个任务栈对应一个 taskAffinity，返回键是根据 Task 依次返回的。
 
-属性 - android:taskAffinity 默认为包名，配置不同的属性值，会开启对应不同的 Task id, 调用方必须将Intent的flag添加FLAG_ACTIVITY_NEW_TASK属性时才会生效。
+
+属性 - android:taskAffinity 默认为包名，配置不同的属性值，会开启对应不同的 Task id。
 Android 9.0 及以后 Stack id 一一对应 Task id；Android 9.0以前
     
 应用Activity栈查看命令：adb shell dumpsys activity activities
