@@ -13,16 +13,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".module.actionbar.SampleActionBarActivity"
+        <activity
+            android:name=".module.reference.WeakReferenceActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="弱引用示例"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.actionbar.SampleActionBarActivity"
             android:configChanges="orientation|screenSize"
             android:label="ActionBar演示"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.NotificationActivity"
             android:configChanges="orientation|screenSize"
             android:label="通知演示"
-            android:screenOrientation="portrait" /> <!-- 华为全屏适配使用刘海区显示，也可对Activity配置 -->
+            android:screenOrientation="portrait" />
+        <!-- 华为全屏适配使用刘海区显示，也可对Activity配置 -->
         <meta-data
             android:name="android.notch_support"
             android:value="true" />
@@ -58,7 +64,8 @@
         <activity
             android:name=".ui.activity.LiveEventActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait" /> <!-- 适配横竖屏、分屏切换时Activity不重建 -->
+            android:screenOrientation="portrait" />
+        <!-- 适配横竖屏、分屏切换时Activity不重建 -->
         <activity
             android:name=".viewmodel.CitySelectActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
@@ -108,10 +115,18 @@
 
         <receiver
             android:name=".ui.receiver.NotificationClickReceiver"
-            android:exported="false" /> <!-- 协助初始化Context -->
+            android:exported="false" />
+        <!-- 协助初始化Context -->
         <provider
             android:name=".db.AppInitInstaller"
             android:authorities="com.aliya.app.provider" />
+
+        <activity
+            android:name=".applet.MinorMainActivity"
+            android:icon="@mipmap/icon_minor_launcher"
+            android:label="小程序"
+            android:screenOrientation="portrait"
+            android:taskAffinity="com.aliya.applet"></activity>
     </application>
 
 </manifest>

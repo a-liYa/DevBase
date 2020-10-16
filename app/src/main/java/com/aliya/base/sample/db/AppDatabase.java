@@ -55,6 +55,7 @@ public abstract class AppDatabase extends RoomDatabase {
                         Log.e("TAG", "onOpen: database");
                     }
                 })
+                // .fallbackToDestructiveMigration() // 强制升级
                 .addMigrations(MIGRATION_1_2, MIGRATION_1_3, MIGRATION_2_3) // 数据库升级
                 .build();
     }

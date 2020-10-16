@@ -1,13 +1,13 @@
-## Activity的四种启动模式
+# Activity的四种启动模式
 
 ### 1. Standard  
-    默认启动模式。
+    默认启动模式，依附在调用方所在 Task id。
     
 ### 2. SingleTop  
-    需要启动的Activity刚好处于任务栈顶时，复用此Activity。
+    需要启动的Activity刚好处于任务栈顶时，复用此Activity。依附的 Task id 为 taskAffinity指定。
     
 ### 3. SingleTask  
-    如果当前任务栈已有该Activity实例，重用该实例，并移除其上的其他Activity。
+    如果当前任务栈已有该Activity实例，重用该实例，并移除其上的其他Activity。依附的 Task id 为 taskAffinity指定。
 
 ### 4. SingleInstance  
     全局单例模式，并独占一个任务栈。不指定taskAffinity，会新开taskAffinity为包名的任务栈。
@@ -32,7 +32,7 @@
 
 不同 Task id 开启Activity时，若被开启 Task id 已包含该Activity，此时只切换对应的 Task id 至前台。
 
-属性 - android:taskAffinity 默认为包名，配置不同的属性值，会开启对应不同的 Task id。
+属性 - android:taskAffinity 默认为包名，配置不同的属性值，会开启对应不同的 Task id, 调用方必须将Intent的flag添加FLAG_ACTIVITY_NEW_TASK属性时才会生效。
 Android 9.0 及以后 Stack id 一一对应 Task id；Android 9.0以前
     
 应用Activity栈查看命令：adb shell dumpsys activity activities
