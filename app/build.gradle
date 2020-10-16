@@ -21,6 +21,8 @@ android {
         ndk {
             abiFilters "armeabi", "x86"
         }
+
+        resConfigs 'en' // 配置国际化仅支持默认，英文是国际化最广泛语言，所以默认en
     }
     buildTypes {
         debug {
