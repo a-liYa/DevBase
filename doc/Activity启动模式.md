@@ -34,6 +34,7 @@
 
 注意：前台才存在叠加的多个 Task，在进入后台的第一时间就会被拆开。
 最近任务键，一个任务栈对应一个 taskAffinity，返回键是根据 Task 依次返回的。
+同一个 taskAffinity 可以被创建出多个 Task，但它们最多只能有一个显示在最近任务列表。
 
 
 属性 - android:taskAffinity 默认为包名，配置不同的属性值，会开启对应不同的 Task id。
