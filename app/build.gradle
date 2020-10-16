@@ -18,6 +18,7 @@ android {
             }
         }
 
+        // 参考大厂：一般仅配置一个通用架构
         ndk {
             abiFilters "armeabi", "x86"
         }
@@ -40,10 +41,12 @@ android {
 }
 
 dependencies {
-implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.navigation:navigation-ui:2.1.0'
-    implementation 'androidx.navigation:navigation-fragment:2.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation deps.androidx.appcompat
+    implementation deps.androidx.navigation_ui
+    implementation deps.androidx.navigation_fragment
+    implementation deps.androidx.constraintlayout
 
     implementation project(':devbase')
 }
