@@ -4,7 +4,9 @@
     默认启动模式，依附在调用方所在 Task id。
     
 ### 2. SingleTop  
-    需要启动的Activity刚好处于任务栈顶时，复用此Activity。依附的 Task id 为 taskAffinity指定。
+    需要启动的Activity刚好处于任务栈顶时，复用此Activity。 任务栈：
+        1. 若调用方配置FLAG_ACTIVITY_NEW_TASK，依附的 Task id 为 taskAffinity指定。
+        2. 否则，如同 Standard 模式。
     
 ### 3. SingleTask  
     如果当前任务栈已有该Activity实例，重用该实例，并移除其上的其他Activity。依附的 Task id 为 taskAffinity指定。
