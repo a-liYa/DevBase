@@ -49,4 +49,11 @@
         android:gravity="center"
         android:text="小程序" />
 
+    <TextView
+        android:id="@+id/tv_big_image"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="大图" />
+
 </LinearLayout>
