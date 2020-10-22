@@ -8,7 +8,21 @@
 
     <com.aliya.base.sample.ui.widget.BigImageView
         android:id="@+id/big_image"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="match_parent" />
+
+    <com.aliya.base.sample.ui.widget.BigImageView
+        android:id="@+id/big_image_1"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="155dp" />
+
+    <TextView
+        android:id="@+id/tv_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:padding="3dp"
+        android:text="request_layout" />
 
 </FrameLayout>

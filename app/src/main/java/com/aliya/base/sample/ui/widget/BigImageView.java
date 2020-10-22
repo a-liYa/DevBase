@@ -7,7 +7,9 @@ import android.graphics.BitmapRegionDecoder;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Rect;
+import android.os.SystemClock;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.Scroller;
@@ -40,6 +42,7 @@ public class BigImageView extends AppCompatImageView {
     private int mViewWidth;
     private float mScale;
     private Matrix mMatrix;
+    private float mMinBitmapScaleForView = 1; // 局部加载的Bitmap / View
 
     private Scroller mScroller;
 
@@ -137,32 +140,50 @@ public class BigImageView extends AppCompatImageView {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // 重置 top
+        mRect.top = 0;
+        if (getMeasuredHeight() != 0 && getMeasuredWidth() != 0) {
+            measureRect();
+        }
         invalidate();
+    }
+
+    public void setMinBitmapScaleForView(float scale) {
+        mMinBitmapScaleForView = scale;
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        measureRect();
+    }
+
+    // 测量局部区域相关信息
+    private void measureRect() {
         mViewHeight = getMeasuredHeight();
         mViewWidth = getMeasuredWidth();
 
-        mRect.left = 0;
-        mRect.top = 0;
         mRect.right = mImageWidth;
         mScale = (float) mViewWidth / mImageWidth;
-        mRect.bottom = round(mViewHeight / mScale);
-        mMatrix.setScale(mScale, mScale);
+
+        int sampleSize = Bitmaps.prevPowerOf2((int) (1 / (mMinBitmapScaleForView * mScale)));
+        mOptions.inSampleSize = sampleSize;
+        mRect.bottom = mRect.top + round(mViewHeight / mScale);
+
+        mMatrix.setScale(mScale * sampleSize, mScale * sampleSize);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        long upMs = SystemClock.uptimeMillis();
         if (mRegionDecoder != null) {
             mOptions.inBitmap = mRegionBitmap;
-//            mOptions.inSampleSize = 2;
+
             mRegionBitmap = mRegionDecoder.decodeRegion(mRect, mOptions);
             canvas.drawBitmap(mRegionBitmap, mMatrix, null);
         }
+        Log.e("TAG", "onDraw耗时: " + (SystemClock.uptimeMillis() - upMs)  + " - " + mMinBitmapScaleForView);
     }
 
     @Override
@@ -174,6 +195,18 @@ public class BigImageView extends AppCompatImageView {
                 mRect.bottom = mRect.top + round(mViewHeight / mScale);
                 invalidate();
             }
+        }
+    }
+
+
+    /**
+     * 参考：com.android.gallery3d.common.BitmapUtils
+     */
+    public static class Bitmaps {
+
+        public static int prevPowerOf2(int n) {
+            if (n <= 0) throw new IllegalArgumentException();
+            return Integer.highestOneBit(n);
         }
     }
 }

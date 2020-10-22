@@ -1,6 +1,7 @@
 package com.aliya.base.sample.module.image;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.aliya.base.sample.base.BaseActivity;
 import com.aliya.base.sample.databinding.ActivityBigImageBinding;
@@ -16,20 +17,30 @@ import java.io.InputStream;
  */
 public class BigImageActivity extends BaseActivity {
 
-    private ActivityBigImageBinding mImageBinding;
-    private InputStream mOpenIS;
+    private ActivityBigImageBinding mViewBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mImageBinding = ActivityBigImageBinding.inflate(getLayoutInflater());
-        setContentView(mImageBinding.getRoot());
+        mViewBinding = ActivityBigImageBinding.inflate(getLayoutInflater());
+        setContentView(mViewBinding.getRoot());
 
         try {
-            mOpenIS = getAssets().open("image/long_image_2019.jpg");
-            mImageBinding.bigImage.setImage(mOpenIS);
+            InputStream mOpenIS = getAssets().open("image/long_image_2019.jpg");
+            mViewBinding.bigImage.setImage(mOpenIS);
+            mViewBinding.bigImage1.setImage(getAssets().open("image/long_image_2019.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        mViewBinding.bigImage.setMinBitmapScaleForView(0.75f);
+
+        mViewBinding.tvLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewBinding.bigImage.requestLayout();
+                mViewBinding.bigImage.invalidate();
+            }
+        });
+
     }
 }
