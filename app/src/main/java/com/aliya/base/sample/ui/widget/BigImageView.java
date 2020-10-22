@@ -176,6 +176,7 @@ public class BigImageView extends AppCompatImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        // TODO 耗时待优化
         long upMs = SystemClock.uptimeMillis();
         if (mRegionDecoder != null) {
             mOptions.inBitmap = mRegionBitmap;
