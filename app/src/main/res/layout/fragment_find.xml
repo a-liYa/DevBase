@@ -56,4 +56,11 @@
         android:gravity="center"
         android:text="大图" />
 
+    <TextView
+        android:id="@+id/tv_nested"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:text="嵌套滑动" />
+
 </LinearLayout>

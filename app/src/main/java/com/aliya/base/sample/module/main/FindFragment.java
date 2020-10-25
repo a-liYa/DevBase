@@ -11,6 +11,7 @@ import com.aliya.base.sample.applet.MinorMainActivity;
 import com.aliya.base.sample.databinding.FragmentFindBinding;
 import com.aliya.base.sample.module.image.BigImageActivity;
 import com.aliya.base.sample.module.listen.ListenNewsActivity;
+import com.aliya.base.sample.module.nested.NestedViewActivity;
 import com.aliya.base.sample.module.reference.WeakReferenceActivity;
 import com.aliya.base.sample.ui.activity.LiveEventActivity;
 import com.aliya.base.sample.ui.activity.MineActivity;
@@ -46,6 +47,7 @@ public class FindFragment extends Fragment implements View.OnClickListener {
         mViewBinding.tvWeak.setOnClickListener(this);
         mViewBinding.tvApplet.setOnClickListener(this);
         mViewBinding.tvBigImage.setOnClickListener(this);
+        mViewBinding.tvNested.setOnClickListener(this);
     }
 
     @Override
@@ -71,6 +73,9 @@ public class FindFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tv_big_image:
                 startActivity(new Intent(getContext(), BigImageActivity.class));
+                break;
+            case R.id.tv_nested:
+                startActivity(new Intent(getContext(), NestedViewActivity.class));
                 break;
         }
     }

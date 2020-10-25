@@ -42,6 +42,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.2'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
 
     implementation deps.androidx.appcompat
     implementation deps.androidx.navigation_ui
