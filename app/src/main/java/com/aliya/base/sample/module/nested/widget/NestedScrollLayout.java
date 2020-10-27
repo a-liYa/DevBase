@@ -128,10 +128,10 @@ public class NestedScrollLayout extends NestedScrollView {
         for (int i = 0; i < viewGroup.getChildCount(); i++) {
             View view = viewGroup.getChildAt(i);
             if (view instanceof RecyclerView && view.getClass() == RecyclerView.class) {
-                return (RecyclerView) viewGroup.getChildAt(i);
-            } else if (viewGroup.getChildAt(i) instanceof ViewGroup) {
+                return (RecyclerView) view;
+            } else if (view instanceof ViewGroup) {
                 ViewGroup childRecyclerView =
-                        getChildRecyclerView((ViewGroup) viewGroup.getChildAt(i));
+                        getChildRecyclerView((ViewGroup) view);
                 if (childRecyclerView instanceof RecyclerView) {
                     return (RecyclerView) childRecyclerView;
                 }
