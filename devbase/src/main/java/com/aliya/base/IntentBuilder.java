@@ -101,4 +101,12 @@ public class IntentBuilder {
         return mIntent;
     }
 
+    public void startActivity(Context context) {
+        Intent intent = intent();
+        if (!(context instanceof Activity)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        context.startActivity(intent);
+    }
+
 }
