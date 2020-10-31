@@ -14,6 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ui.activity.UIDemoActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="UI"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".module.nested.NestedViewActivity"
             android:configChanges="orientation|screenSize"
             android:label="嵌套滑动"

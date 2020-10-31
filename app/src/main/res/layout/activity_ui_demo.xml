@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/abc_activity_background"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".ui.activity.UIDemoActivity">
+
+    <com.aliya.base.sample.ui.widget.LoadWave
+        android:id="@+id/load_wave"
+        android:layout_width="93dp"
+        android:layout_height="93dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:src="@mipmap/ic_loading_logo"
+        app:overColor="#e9e9e9" />
+
+    <TextView
+        android:id="@+id/tv_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:padding="16dp"
+        android:text="多个DrawableLeft, 文字超出显示点点点" />
+
+    <TextView
+        android:id="@+id/tv_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/subtitle_input_bg"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:paddingLeft="8dp"
+        android:paddingTop="6dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="6dp"
+        android:text="Drawable实现文字排版"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

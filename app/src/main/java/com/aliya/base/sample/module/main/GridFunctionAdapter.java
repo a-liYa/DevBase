@@ -1,4 +1,4 @@
-package com.aliya.base.sample.module;
+package com.aliya.base.sample.module.main;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +49,7 @@ public class GridFunctionAdapter extends RecyclerAdapter<FunctionBean> {
 
         @Override
         public void onItemClick(View itemView, int position) {
-            IntentBuilder.get(mData.activityClass).startActivity(itemView.getContext());
+            IntentBuilder.get(mData.activityClass).startActivity();
         }
     }
 }
