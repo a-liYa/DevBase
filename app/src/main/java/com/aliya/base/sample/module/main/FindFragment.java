@@ -40,21 +40,21 @@ public class FindFragment extends Fragment {
 
     {
         mFunctions.add(new FunctionBean(
-                "我的", MineActivity.class, R.mipmap.icon_function_home));
+                "我的", MineActivity.class, R.mipmap.icon_function_me));
         mFunctions.add(new FunctionBean(
-                "听新闻", ListenNewsActivity.class, R.mipmap.icon_function_launch));
+                "听新闻", ListenNewsActivity.class, R.mipmap.icon_function_listen));
         mFunctions.add(new FunctionBean(
-                "模拟通知", NotificationActivity.class, R.mipmap.icon_function_thread));
+                "模拟通知", NotificationActivity.class, R.mipmap.icon_function_notification));
         mFunctions.add(new FunctionBean(
-                "LiveEvent", LiveEventActivity.class, R.mipmap.icon_function_handler));
+                "LiveEvent", LiveEventActivity.class, R.mipmap.icon_function_event));
         mFunctions.add(new FunctionBean(
-                "弱引用", WeakReferenceActivity.class, R.mipmap.icon_function_bar));
+                "弱引用", WeakReferenceActivity.class, R.mipmap.icon_function_reference));
         mFunctions.add(new FunctionBean(
-                "小程序", MinorMainActivity.class, R.mipmap.icon_function_ui));
+                "小程序", MinorMainActivity.class, R.mipmap.icon_function_minor));
         mFunctions.add(new FunctionBean(
-                "大图", BigImageActivity.class, R.mipmap.icon_function_ui));
+                "大图", BigImageActivity.class, R.mipmap.icon_fucntion_image));
         mFunctions.add(new FunctionBean(
-                "嵌套滑动", NestedViewActivity.class, R.mipmap.icon_function_ui));
+                "嵌套滑动", NestedViewActivity.class, R.mipmap.icon_function_nested));
     }
 
     @Override

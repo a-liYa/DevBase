@@ -134,7 +134,7 @@
 
         <activity
             android:name=".applet.MinorMainActivity"
-            android:icon="@mipmap/icon_minor_launcher"
+            android:icon="@drawable/icon_minor_launcher"
             android:label="小程序"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
