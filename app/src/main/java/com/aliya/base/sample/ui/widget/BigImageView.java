@@ -20,8 +20,6 @@ import java.io.InputStream;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatImageView;
 
-import static java.lang.Math.round;
-
 /**
  * BigImageView
  *
@@ -30,7 +28,7 @@ import static java.lang.Math.round;
  */
 public class BigImageView extends AppCompatImageView {
 
-    private Rect mRect;
+    private Rect mRegionRect;
     private Bitmap mRegionBitmap;
     private BitmapFactory.Options mOptions;
     private GestureDetector mGestureDetector;
@@ -42,7 +40,7 @@ public class BigImageView extends AppCompatImageView {
     private int mViewWidth;
     private float mScale;
     private Matrix mMatrix;
-    private float mMinBitmapScaleForView = 1; // 局部加载的Bitmap / View
+    private float mMinBitmapScaleForView = 1; // 局部加载的 Bitmap / View
 
     private Scroller mScroller;
 
@@ -69,16 +67,16 @@ public class BigImageView extends AppCompatImageView {
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX,
                                 float distanceY) {
-            mRect.offset(0, round(distanceY));
+            mRegionRect.offset(0, Math.round(distanceY));
 
             // 移动超出范围，纠正
-            if (mRect.bottom > mImageHeight) {
-                mRect.bottom = mImageHeight;
-                mRect.top = mImageHeight - round(mViewHeight / mScale);
+            if (mRegionRect.bottom > mImageHeight) {
+                mRegionRect.bottom = mImageHeight;
+                mRegionRect.top = mImageHeight - Math.round(mViewHeight / mScale);
             }
-            if (mRect.top < 0) {
-                mRect.top = 0;
-                mRect.bottom = round(mViewHeight / mScale);
+            if (mRegionRect.top < 0) {
+                mRegionRect.top = 0;
+                mRegionRect.bottom = Math.round(mViewHeight / mScale);
             }
             invalidate();
             return true;
@@ -92,9 +90,9 @@ public class BigImageView extends AppCompatImageView {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
                                float velocityY) {
-            mScroller.fling(0, mRect.top, 0, round(-velocityY),
+            mScroller.fling(0, mRegionRect.top, 0, Math.round(-velocityY),
                     0, 0,
-                    0, mImageHeight - round(mViewHeight / mScale));
+                    0, mImageHeight - Math.round(mViewHeight / mScale));
             return false;
         }
 
@@ -111,7 +109,7 @@ public class BigImageView extends AppCompatImageView {
 
     public BigImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mRect = new Rect();
+        mRegionRect = new Rect();
         mOptions = new BitmapFactory.Options();
         mGestureDetector = new GestureDetector(context, mOnGestureListener);
         mScroller = new Scroller(context);
@@ -141,7 +139,7 @@ public class BigImageView extends AppCompatImageView {
             e.printStackTrace();
         }
         // 重置 top
-        mRect.top = 0;
+        mRegionRect.top = 0;
         if (getMeasuredHeight() != 0 && getMeasuredWidth() != 0) {
             measureRect();
         }
@@ -150,6 +148,8 @@ public class BigImageView extends AppCompatImageView {
 
     public void setMinBitmapScaleForView(float scale) {
         mMinBitmapScaleForView = scale;
+        measureRect();
+        invalidate();
     }
 
     @Override
@@ -163,12 +163,16 @@ public class BigImageView extends AppCompatImageView {
         mViewHeight = getMeasuredHeight();
         mViewWidth = getMeasuredWidth();
 
-        mRect.right = mImageWidth;
+        mRegionRect.right = mImageWidth;
         mScale = (float) mViewWidth / mImageWidth;
 
-        int sampleSize = Bitmaps.prevPowerOf2((int) (1 / (mMinBitmapScaleForView * mScale)));
-        mOptions.inSampleSize = sampleSize;
-        mRect.bottom = mRect.top + round(mViewHeight / mScale);
+        // 初步计算
+        int inSampleSize = (int) (1 / (mMinBitmapScaleForView * mScale));
+        if (inSampleSize < 1) inSampleSize = 1;
+
+        int sampleSize = Bitmaps.prevPowerOf2(inSampleSize);
+        mOptions.inSampleSize = sampleSize; // 四舍五入至2的幂的最终值
+        mRegionRect.bottom = mRegionRect.top + Math.round(mViewHeight / mScale);
 
         mMatrix.setScale(mScale * sampleSize, mScale * sampleSize);
     }
@@ -181,7 +185,7 @@ public class BigImageView extends AppCompatImageView {
         if (mRegionDecoder != null) {
             mOptions.inBitmap = mRegionBitmap;
 
-            mRegionBitmap = mRegionDecoder.decodeRegion(mRect, mOptions);
+            mRegionBitmap = mRegionDecoder.decodeRegion(mRegionRect, mOptions);
             canvas.drawBitmap(mRegionBitmap, mMatrix, null);
         }
         Log.e("TAG", "onDraw耗时: " + (SystemClock.uptimeMillis() - upMs)  + " - " + mMinBitmapScaleForView);
@@ -192,8 +196,8 @@ public class BigImageView extends AppCompatImageView {
         super.computeScroll();
         if (!mScroller.isFinished()) {
             if (mScroller.computeScrollOffset()) {
-                mRect.top = mScroller.getCurrY();
-                mRect.bottom = mRect.top + round(mViewHeight / mScale);
+                mRegionRect.top = mScroller.getCurrY();
+                mRegionRect.bottom = mRegionRect.top + Math.round(mViewHeight / mScale);
                 invalidate();
             }
         }
@@ -205,6 +209,11 @@ public class BigImageView extends AppCompatImageView {
      */
     public static class Bitmaps {
 
+        /**
+         * 获取 <= n 最接近 2 的幂值
+         * @param n
+         * @return return int <= n
+         */
         public static int prevPowerOf2(int n) {
             if (n <= 0) throw new IllegalArgumentException();
             return Integer.highestOneBit(n);

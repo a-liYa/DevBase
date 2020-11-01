@@ -3,6 +3,7 @@ package com.aliya.base.sample.module.image;
 import android.os.Bundle;
 import android.view.View;
 
+import com.aliya.base.sample.R;
 import com.aliya.base.sample.base.BaseActivity;
 import com.aliya.base.sample.databinding.ActivityBigImageBinding;
 
@@ -15,7 +16,7 @@ import java.io.InputStream;
  * @author a_liYa
  * @date 2020/10/20 23:19.
  */
-public class BigImageActivity extends BaseActivity {
+public class BigImageActivity extends BaseActivity implements View.OnClickListener {
 
     private ActivityBigImageBinding mViewBinding;
 
@@ -28,19 +29,50 @@ public class BigImageActivity extends BaseActivity {
         try {
             InputStream mOpenIS = getAssets().open("image/long_image_2019.jpg");
             mViewBinding.bigImage.setImage(mOpenIS);
-            mViewBinding.bigImage1.setImage(getAssets().open("image/long_image_2019.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        mViewBinding.bigImage.setMinBitmapScaleForView(0.75f);
 
-        mViewBinding.tvLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mViewBinding.bigImage.requestLayout();
-                mViewBinding.bigImage.invalidate();
-            }
-        });
+        mViewBinding.tvScaleAdd.setOnClickListener(this);
+        mViewBinding.tvScaleMinus.setOnClickListener(this);
 
+
+//        mViewBinding.tvLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mViewBinding.bigImage.requestLayout();
+//                mViewBinding.bigImage.invalidate();
+//            }
+//        });
+
+    }
+
+    private float mMinScale = 1;
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_scale_add:
+                mMinScale += 0.1f;
+                bindScale();
+                break;
+            case R.id.tv_scale_minus:
+                mMinScale -= 0.1f;
+                bindScale();
+                break;
+        }
+    }
+
+    private void bindScale() {
+        if (mMinScale < 0)
+            mMinScale = 0;
+        else if (mMinScale > 1)
+            mMinScale = 1;
+        else
+            mMinScale = (int) (mMinScale * 10) / 10f;
+
+        mViewBinding.bigImage.setMinBitmapScaleForView(mMinScale);
+        mViewBinding.tvScaleAdd.setText("+ 0.1\nscale=" + mMinScale);
+        mViewBinding.tvScaleMinus.setText("- 0.1\nscale=" + mMinScale);
     }
 }
