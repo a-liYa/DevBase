@@ -8,8 +8,14 @@
 
     <com.aliya.base.sample.ui.widget.BigImageView
         android:id="@+id/big_image"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="match_parent" />
+
+    <com.aliya.base.sample.ui.widget.ImageSurfaceView
+        android:id="@+id/big_surface"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right" />
 
     <TextView
         android:id="@+id/tv_scale_add"

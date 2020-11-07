@@ -29,21 +29,14 @@ public class BigImageActivity extends BaseActivity implements View.OnClickListen
         try {
             InputStream mOpenIS = getAssets().open("image/long_image_2019.jpg");
             mViewBinding.bigImage.setImage(mOpenIS);
+            InputStream mOpenIS1 = getAssets().open("image/long_image_2019.jpg");
+            mViewBinding.bigSurface.setImage(mOpenIS1);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         mViewBinding.tvScaleAdd.setOnClickListener(this);
         mViewBinding.tvScaleMinus.setOnClickListener(this);
-
-
-//        mViewBinding.tvLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mViewBinding.bigImage.requestLayout();
-//                mViewBinding.bigImage.invalidate();
-//            }
-//        });
 
     }
 

@@ -7,11 +7,14 @@ import android.graphics.BitmapRegionDecoder;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Rect;
-import android.os.SystemClock;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.widget.Scroller;
 
 import java.io.IOException;
@@ -25,10 +28,9 @@ import androidx.annotation.Nullable;
  * @author a_liYa
  * @date 2020/10/20 21:54.
  */
-public class BigImageView extends View {
+public class ImageSurfaceView extends SurfaceView{
 
     private Rect mRegionRect;
-    private Bitmap mRegionBitmap;
     private BitmapFactory.Options mOptions;
     private GestureDetector mGestureDetector;
     private BitmapRegionDecoder mRegionDecoder;
@@ -42,6 +44,9 @@ public class BigImageView extends View {
     private float mMinBitmapScaleForView = 1; // 局部加载的 Bitmap / View
 
     private Scroller mScroller;
+    private Handler mWorkHandler;
+
+    static final int WHAT_DRAW = 1;
 
     private GestureDetector.OnGestureListener
             mOnGestureListener = new GestureDetector.OnGestureListener() {
@@ -77,13 +82,12 @@ public class BigImageView extends View {
                 mRegionRect.top = 0;
                 mRegionRect.bottom = Math.round(mViewHeight / mScale);
             }
-            invalidate();
+            sendDrawMessage();
             return true;
         }
 
         @Override
         public void onLongPress(MotionEvent e) {
-
         }
 
         @Override
@@ -92,29 +96,81 @@ public class BigImageView extends View {
             mScroller.fling(0, mRegionRect.top, 0, Math.round(-velocityY),
                     0, 0,
                     0, mImageHeight - Math.round(mViewHeight / mScale));
+            invalidate();
             return false;
         }
 
     };
-    private long mUpMs;
 
+    private void sendDrawMessage() {
+        if (mWorkHandler != null) {
+            mWorkHandler.removeMessages(WHAT_DRAW);
+            mWorkHandler.sendEmptyMessage(WHAT_DRAW);
+        }
+    }
 
-    public BigImageView(Context context) {
+    public ImageSurfaceView(Context context) {
         this(context, null);
     }
 
-    public BigImageView(Context context, @Nullable AttributeSet attrs) {
+    public ImageSurfaceView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public BigImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ImageSurfaceView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        setWillNotDraw(false);
         mRegionRect = new Rect();
         mOptions = new BitmapFactory.Options();
         mGestureDetector = new GestureDetector(context, mOnGestureListener);
         mScroller = new Scroller(context);
         mMatrix = new Matrix();
+        getHolder().addCallback(new SurfaceHolder.Callback(){
+            Bitmap regionBitmap;
+            HandlerThread handlerThread;
+            @Override
+            public void surfaceCreated(SurfaceHolder holder) {
+                handlerThread = new HandlerThread(getClass().getName());
+                handlerThread.start();
+                mWorkHandler = new Handler(handlerThread.getLooper()) {
+                    final Rect rect = new Rect();
+
+                    @Override
+                    public void handleMessage(Message msg) {
+                        if (mRegionDecoder != null && !mRegionRect.equals(rect)) {
+
+                            Canvas canvas = null;
+                            try {
+                                mOptions.inBitmap = regionBitmap;
+                                rect.set(mRegionRect);
+                                regionBitmap = mRegionDecoder.decodeRegion(rect, mOptions);
+
+                                // 获得canvas对象
+                                canvas = getHolder().lockCanvas();
+                                canvas.drawBitmap(regionBitmap, mMatrix, null);
+                            } catch (Exception e) {
+
+                            } finally {
+                                if (canvas != null) {
+                                    // 释放canvas对象并提交画布
+                                    getHolder().unlockCanvasAndPost(canvas);
+                                }
+                            }
+                        }
+                    }
+                };
+                sendDrawMessage();
+            }
+
+            @Override
+            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+            }
+
+            @Override
+            public void surfaceDestroyed(SurfaceHolder holder) {
+                handlerThread.quit();
+            }
+        });
     }
 
     @Override
@@ -144,19 +200,20 @@ public class BigImageView extends View {
         if (getMeasuredHeight() != 0 && getMeasuredWidth() != 0) {
             measureRect();
         }
-        invalidate();
+        sendDrawMessage();
     }
 
     public void setMinBitmapScaleForView(float scale) {
         mMinBitmapScaleForView = scale;
         measureRect();
-        invalidate();
+        sendDrawMessage();
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         measureRect();
+        sendDrawMessage();
     }
 
     // 测量局部区域相关信息
@@ -178,17 +235,6 @@ public class BigImageView extends View {
         mMatrix.setScale(mScale * sampleSize, mScale * sampleSize);
     }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        // TODO 耗时待优化
-        if (mRegionDecoder != null) {
-            mOptions.inBitmap = mRegionBitmap;
-            mRegionBitmap = mRegionDecoder.decodeRegion(mRegionRect, mOptions);
-            mUpMs = SystemClock.uptimeMillis();
-            canvas.drawBitmap(mRegionBitmap, mMatrix, null);
-        }
-    }
 
     @Override
     public void computeScroll() {
@@ -197,11 +243,11 @@ public class BigImageView extends View {
             if (mScroller.computeScrollOffset()) {
                 mRegionRect.top = mScroller.getCurrY();
                 mRegionRect.bottom = mRegionRect.top + Math.round(mViewHeight / mScale);
-                invalidate();
+                invalidate(); // Scroller 固定用法
+                sendDrawMessage();
             }
         }
     }
-
 
     /**
      * 参考：com.android.gallery3d.common.BitmapUtils
