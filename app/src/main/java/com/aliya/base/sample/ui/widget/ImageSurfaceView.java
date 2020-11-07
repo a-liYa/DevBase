@@ -102,13 +102,6 @@ public class ImageSurfaceView extends SurfaceView{
 
     };
 
-    private void sendDrawMessage() {
-        if (mWorkHandler != null) {
-            mWorkHandler.removeMessages(WHAT_DRAW);
-            mWorkHandler.sendEmptyMessage(WHAT_DRAW);
-        }
-    }
-
     public ImageSurfaceView(Context context) {
         this(context, null);
     }
@@ -137,7 +130,6 @@ public class ImageSurfaceView extends SurfaceView{
                     @Override
                     public void handleMessage(Message msg) {
                         if (mRegionDecoder != null && !mRegionRect.equals(rect)) {
-
                             Canvas canvas = null;
                             try {
                                 mOptions.inBitmap = regionBitmap;
@@ -176,6 +168,13 @@ public class ImageSurfaceView extends SurfaceView{
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         return mGestureDetector.onTouchEvent(event);
+    }
+
+    private void sendDrawMessage() {
+        if (mWorkHandler != null) {
+            mWorkHandler.removeMessages(WHAT_DRAW);
+            mWorkHandler.sendEmptyMessage(WHAT_DRAW);
+        }
     }
 
     public void setImage(InputStream is) {
