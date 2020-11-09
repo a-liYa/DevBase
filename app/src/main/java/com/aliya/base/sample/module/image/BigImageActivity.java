@@ -6,6 +6,7 @@ import android.view.View;
 import com.aliya.base.sample.R;
 import com.aliya.base.sample.base.BaseActivity;
 import com.aliya.base.sample.databinding.ActivityBigImageBinding;
+import com.aliya.base.sample.util.FpsMonitor;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +20,7 @@ import java.io.InputStream;
 public class BigImageActivity extends BaseActivity implements View.OnClickListener {
 
     private ActivityBigImageBinding mViewBinding;
+    private FpsMonitor mFpsMonitor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,24 @@ public class BigImageActivity extends BaseActivity implements View.OnClickListen
         mViewBinding.tvScaleAdd.setOnClickListener(this);
         mViewBinding.tvScaleMinus.setOnClickListener(this);
 
+        mFpsMonitor = new FpsMonitor();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mFpsMonitor.startMonitor(new FpsMonitor.FpsCallback() {
+            @Override
+            public void invoke(int fps) {
+                mViewBinding.tvFps.setText("fps : " + fps);
+            }
+        });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mFpsMonitor.stopMonitor();
     }
 
     private float mMinScale = 1;

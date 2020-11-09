@@ -1,6 +1,8 @@
 package com.aliya.base.sample.ui.activity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ViewParent;
 
 import com.aliya.base.sample.R;
 import com.aliya.base.sample.base.ActionBarActivity;
@@ -17,5 +19,15 @@ public class MineActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mine);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ViewParent parent = findViewById(android.R.id.content);
+        do {
+            Log.e("TAG", "onCreate: " + parent);
+            parent = parent.getParent();
+        } while (parent != null);
     }
 }

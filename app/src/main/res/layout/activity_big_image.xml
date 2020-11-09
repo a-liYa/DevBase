@@ -18,6 +18,18 @@
         android:layout_gravity="right" />
 
     <TextView
+        android:id="@+id/tv_fps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="24dp"
+        android:background="#5f000000"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="fps:0"
+        android:textColor="@android:color/white" />
+
+    <TextView
         android:id="@+id/tv_scale_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
