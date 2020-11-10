@@ -2,6 +2,8 @@ package com.aliya.base.sample.util;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
+import android.os.SystemClock;
 import android.view.Choreographer;
 
 import java.util.ArrayList;
@@ -14,31 +16,79 @@ import java.util.List;
  * @date 2020/11/9 19:42.
  */
 public final class FpsMonitor {
-    private static final long FPS_INTERVAL_TIME = 1000L;
+    static final int WHAT_INTERVAL = 1;
+    static final int WHAT_START = 2;
+    static final int WHAT_STOP = 3;
+    static final long FPS_INTERVAL_TIME = 1000L;
     private int count = 0;
-    private boolean isFpsOpen = false;
     private FpsRunnable fpsRunnable = new FpsRunnable();
-    private Handler mainHandler = new Handler(Looper.getMainLooper());
-    private List<FpsCallback> listeners = new ArrayList<>();
+    private List<FpsListener> listeners = new ArrayList<>();
 
-    public void startMonitor(FpsCallback callback) {
-        // 防止重复开启
-        if (!isFpsOpen) {
-            isFpsOpen = true;
-            listeners.add(callback);
-            mainHandler.postDelayed(fpsRunnable, FPS_INTERVAL_TIME);
-            Choreographer.getInstance().postFrameCallback(fpsRunnable);
+    private Handler handler = new Handler(Looper.getMainLooper()) {
+
+        long timestamp;
+
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case WHAT_INTERVAL:
+                    int fps =
+                            Math.round((float) count * FPS_INTERVAL_TIME / (SystemClock.uptimeMillis() - timestamp));
+                    // 倒序遍历，防止 ConcurrentModificationException
+                    for (int i = listeners.size() - 1; i >= 0; i--) {
+                        if (i >= listeners.size()) // 防止 IndexOutOfBoundsException
+                            continue;
+                        listeners.get(i).invoke(fps);
+                    }
+                    count = 0;
+                    timestamp = SystemClock.uptimeMillis();
+                    handler.sendEmptyMessageDelayed(WHAT_INTERVAL, FPS_INTERVAL_TIME);
+                    break;
+                case WHAT_START:
+                    count = 0;
+                    timestamp = SystemClock.uptimeMillis();
+                    handler.sendEmptyMessageDelayed(WHAT_INTERVAL, FPS_INTERVAL_TIME);
+                    Choreographer.getInstance().postFrameCallback(fpsRunnable);
+                    break;
+                case WHAT_STOP:
+                    handler.removeMessages(WHAT_INTERVAL);
+                    Choreographer.getInstance().removeFrameCallback(fpsRunnable);
+                    break;
+
+            }
+        }
+    };
+
+    public static FpsMonitor get() {
+        return Singleton.sInstance;
+    }
+
+    private static class Singleton {
+        private static final FpsMonitor sInstance = new FpsMonitor();
+    }
+
+    private FpsMonitor() {
+    }
+
+    public void registerMonitor(FpsListener listener) {
+        synchronized (listeners) {
+            if (listeners.isEmpty()) {
+                handler.sendEmptyMessage(WHAT_START);
+            }
+            listeners.add(listener);
         }
     }
 
-    public void stopMonitor() {
-        count = 0;
-        mainHandler.removeCallbacks(fpsRunnable);
-        Choreographer.getInstance().removeFrameCallback(fpsRunnable);
-        isFpsOpen = false;
+    public void unregisterMonitor(FpsListener listener) {
+        synchronized (listeners) {
+            while (listeners.remove(listener)) ;
+            if (listeners.isEmpty()) {
+                handler.sendEmptyMessage(WHAT_STOP);
+            }
+        }
     }
 
-    class FpsRunnable implements Choreographer.FrameCallback, Runnable {
+    private class FpsRunnable implements Choreographer.FrameCallback {
 
         @Override
         public void doFrame(long frameTimeNanos) {
@@ -46,17 +96,9 @@ public final class FpsMonitor {
             Choreographer.getInstance().postFrameCallback(this);
         }
 
-        @Override
-        public void run() {
-            for (FpsCallback callback: listeners) {
-                callback.invoke(count);
-            }
-            count = 0;
-            mainHandler.postDelayed(this, FPS_INTERVAL_TIME);
-        }
     }
 
-    public interface FpsCallback {
+    public interface FpsListener {
 
         void invoke(int fps);
     }

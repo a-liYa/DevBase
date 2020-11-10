@@ -20,7 +20,14 @@ import java.io.InputStream;
 public class BigImageActivity extends BaseActivity implements View.OnClickListener {
 
     private ActivityBigImageBinding mViewBinding;
-    private FpsMonitor mFpsMonitor;
+
+    private FpsMonitor.FpsListener mFpsListener = new FpsMonitor.FpsListener() {
+        @Override
+        public void invoke(int fps) {
+            mViewBinding.tvFps.setText("fps : " + fps);
+            FpsMonitor.get().unregisterMonitor(this);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,24 +47,19 @@ public class BigImageActivity extends BaseActivity implements View.OnClickListen
         mViewBinding.tvScaleAdd.setOnClickListener(this);
         mViewBinding.tvScaleMinus.setOnClickListener(this);
 
-        mFpsMonitor = new FpsMonitor();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mFpsMonitor.startMonitor(new FpsMonitor.FpsCallback() {
-            @Override
-            public void invoke(int fps) {
-                mViewBinding.tvFps.setText("fps : " + fps);
-            }
-        });
+        FpsMonitor.get().registerMonitor(mFpsListener);
+        FpsMonitor.get().registerMonitor(mFpsListener);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mFpsMonitor.stopMonitor();
+        FpsMonitor.get().unregisterMonitor(mFpsListener);
     }
 
     private float mMinScale = 1;
