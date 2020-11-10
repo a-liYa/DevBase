@@ -7,9 +7,12 @@ import com.aliya.base.sample.R;
 import com.aliya.base.sample.base.BaseActivity;
 import com.aliya.base.sample.databinding.ActivityBigImageBinding;
 import com.aliya.base.sample.util.FpsMonitor;
+import com.aliya.base.sample.util.LifecycleFpsMonitorCompat;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import androidx.lifecycle.Lifecycle;
 
 /**
  * 大图展示 示例页
@@ -25,7 +28,6 @@ public class BigImageActivity extends BaseActivity implements View.OnClickListen
         @Override
         public void invoke(int fps) {
             mViewBinding.tvFps.setText("fps : " + fps);
-            FpsMonitor.get().unregisterMonitor(this);
         }
     };
 
@@ -47,19 +49,7 @@ public class BigImageActivity extends BaseActivity implements View.OnClickListen
         mViewBinding.tvScaleAdd.setOnClickListener(this);
         mViewBinding.tvScaleMinus.setOnClickListener(this);
 
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        FpsMonitor.get().registerMonitor(mFpsListener);
-        FpsMonitor.get().registerMonitor(mFpsListener);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        FpsMonitor.get().unregisterMonitor(mFpsListener);
+        LifecycleFpsMonitorCompat.addObserver(getLifecycle(), Lifecycle.State.RESUMED, mFpsListener);
     }
 
     private float mMinScale = 1;
