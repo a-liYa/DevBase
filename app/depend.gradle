@@ -14,7 +14,7 @@ dependencies {
     implementation deps.android.material
 
     // Architecture components
-    implementation deps.androidx.lifecycle_extensions
+//    implementation deps.androidx.lifecycle_extensions
     implementation deps.androidx.room_runtime
     annotationProcessor deps.androidx.room_compiler
 

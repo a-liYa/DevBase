@@ -23,7 +23,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     api deps.aliya.android_compat
-    compileOnly deps.androidx.lifecycle_extensions
+    compileOnly deps.androidx.annotation
 }
 
 apply from: "${rootDir}/publish.gradle"
