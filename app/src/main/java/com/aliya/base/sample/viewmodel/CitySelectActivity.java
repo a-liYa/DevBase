@@ -1,6 +1,5 @@
 package com.aliya.base.sample.viewmodel;
 
-import androidx.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -8,6 +7,8 @@ import com.aliya.base.sample.base.BaseActivity;
 import com.aliya.base.sample.viewmodel.bean.CityEntity;
 import com.aliya.base.sample.viewmodel.bean.ProvinceEntity;
 import com.aliya.base.sample.R;
+
+import androidx.lifecycle.ViewModelProvider;
 
 /**
  * 城市选择页面
@@ -23,7 +24,7 @@ public class CitySelectActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_select);
-        mViewModel = ViewModelProviders.of(this).get(AreaSelectViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(AreaSelectViewModel.class);
     }
 
     @Override
