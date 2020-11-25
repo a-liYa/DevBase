@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
         mFunctions.add(new FunctionBean(
                 "UI Demo", UIDemoActivity.class, R.mipmap.icon_function_ui));
         mFunctions.add(new FunctionBean(
-                "Work Manager", WorkManagerActivity.class, R.mipmap.icon_function_ui));
+                "Work Manager", WorkManagerActivity.class, R.mipmap.icon_function_work_manager));
     }
 
     public HomeFragment() {
