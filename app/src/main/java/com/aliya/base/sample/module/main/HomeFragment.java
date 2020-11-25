@@ -15,6 +15,7 @@ import com.aliya.base.sample.ui.activity.UIDemoActivity;
 import com.aliya.base.sample.ui.activity.handler.HandlerActivity;
 import com.aliya.base.sample.ui.activity.launch.SingleInstanceActivity;
 import com.aliya.base.sample.ui.activity.thread.ThreadPoolActivity;
+import com.aliya.base.sample.ui.activity.work.WorkManagerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,8 @@ public class HomeFragment extends Fragment {
                 "ActionBar", SampleActionBarActivity.class, R.mipmap.icon_function_bar));
         mFunctions.add(new FunctionBean(
                 "UI Demo", UIDemoActivity.class, R.mipmap.icon_function_ui));
+        mFunctions.add(new FunctionBean(
+                "Work Manager", WorkManagerActivity.class, R.mipmap.icon_function_ui));
     }
 
     public HomeFragment() {

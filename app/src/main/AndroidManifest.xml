@@ -19,6 +19,11 @@
             android:label="UI"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.activity.work.WorkManagerActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="Work Manager"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".module.nested.NestedViewActivity"
             android:configChanges="orientation|screenSize"
             android:label="嵌套滑动"
