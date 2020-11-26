@@ -14,6 +14,7 @@ import com.aliya.base.sample.ui.activity.SecondActivity;
 import com.aliya.base.sample.ui.activity.UIDemoActivity;
 import com.aliya.base.sample.ui.activity.handler.HandlerActivity;
 import com.aliya.base.sample.ui.activity.launch.SingleInstanceActivity;
+import com.aliya.base.sample.ui.activity.photo.PhotoActivity;
 import com.aliya.base.sample.ui.activity.thread.ThreadPoolActivity;
 import com.aliya.base.sample.ui.activity.work.WorkManagerActivity;
 
@@ -52,6 +53,8 @@ public class HomeFragment extends Fragment {
                 "UI Demo", UIDemoActivity.class, R.mipmap.icon_function_ui));
         mFunctions.add(new FunctionBean(
                 "Work Manager", WorkManagerActivity.class, R.mipmap.icon_function_work_manager));
+        mFunctions.add(new FunctionBean(
+                "相册", PhotoActivity.class, R.mipmap.icon_function_photo));
     }
 
     public HomeFragment() {

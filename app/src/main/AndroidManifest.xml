@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -17,6 +19,11 @@
             android:name=".ui.activity.UIDemoActivity"
             android:configChanges="orientation|screenSize"
             android:label="UI"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.photo.PhotoActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="相册"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.work.WorkManagerActivity"
@@ -144,6 +151,17 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:taskAffinity="com.aliya.applet" />
+
+        <!-- 文件选择 -->
+<!--        <provider-->
+<!--            android:name="androidx.core.content.FileProvider"-->
+<!--            android:authorities="${applicationId}.fileProvider"-->
+<!--            android:exported="false"-->
+<!--            android:grantUriPermissions="true">-->
+<!--            <meta-data-->
+<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
+<!--                android:resource="@xml/provider_paths" />-->
+<!--        </provider>-->
     </application>
 
 </manifest>
