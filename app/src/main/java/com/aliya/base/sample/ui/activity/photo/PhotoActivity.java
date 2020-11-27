@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 
@@ -40,6 +41,11 @@ public class PhotoActivity extends ActionBarActivity implements View.OnClickList
         setContentView(mViewBinding.getRoot());
 
         mViewBinding.tvOpenAlbum.setOnClickListener(this);
+
+        File storageDirectory = Environment.getExternalStorageDirectory();
+        Log.e("TAG", "内置外部存储: " + storageDirectory.getAbsolutePath());
+        Log.e("TAG", "不可移动的外部存储: " + Storages.getStoragePath(this, false));
+        Log.e("TAG", "可移动的外部存储: " + Storages.getStoragePath(this, true));
     }
 
     @Override
