@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 参考
+            FileProvider#TAG_ROOT_PATH
+            FileProvider#TAG_FILES_PATH
+            FileProvider#TAG_CACHE_PATH
+            FileProvider#TAG_EXTERNAL
+            FileProvider#TAG_EXTERNAL_FILES
+            FileProvider#TAG_EXTERNAL_CACHE
+            FileProvider#TAG_EXTERNAL_MEDIA
+     -->
+    <paths>
+        <!-- Environment.getExternalStorageDirectory() 返回的路径 "/storage/emulated/0" -->
+        <external-path
+            name="external"
+            path="" />
+        <!-- 适配路径 "/" Android设备的根目录 -->
+        <root-path
+            name="root_path"
+            path="" />
+    </paths>
+</resources>

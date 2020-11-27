@@ -5,6 +5,7 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
@@ -28,14 +29,23 @@ class Uris {
         String filePath = null;
         if (DocumentsContract.isDocumentUri(context, uri)) {
             // 如果是document类型的 uri, 则通过document id来进行处理
-            String documentId = DocumentsContract.getDocumentId(uri);
-            if (isMediaDocument(uri)) {
+            if (isExternalStorageDocument(uri)) {
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+                if ("primary".equalsIgnoreCase(type)) {
+                    return "file:///" + Environment.getExternalStorageDirectory() + "/" + split[1];
+                }
+            }
+            else if (isMediaDocument(uri)) {
                 // 使用':'分割
+                String documentId = DocumentsContract.getDocumentId(uri);
                 String id = documentId.split(":")[1];
                 String selection = MediaStore.Images.Media._ID + "=?";
                 String[] selectionArgs = {id};
                 filePath = getDataColumn(context, MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection, selectionArgs);
             } else if (isDownloadsDocument(uri)) {
+                String documentId = DocumentsContract.getDocumentId(uri);
                 Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(documentId));
                 filePath = getDataColumn(context, contentUri, null, null);
             }
@@ -47,6 +57,15 @@ class Uris {
             filePath = uri.getPath();
         }
         return filePath;
+    }
+
+    /**
+     * @param uri
+     *         The Uri to check.
+     * @return Whether the Uri authority is ExternalStorageProvider.
+     */
+    private static boolean isExternalStorageDocument(Uri uri) {
+        return "com.android.externalstorage.documents".equals(uri.getAuthority());
     }
 
     /**

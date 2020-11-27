@@ -2,8 +2,8 @@ package com.aliya.base.sample.ui.activity.photo;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 
@@ -14,10 +14,12 @@ import com.aliya.permission.Permission;
 import com.aliya.permission.PermissionCallback;
 import com.aliya.permission.PermissionManager;
 
+import java.io.File;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 
 /**
  * PhotoActivity
@@ -61,8 +63,12 @@ public class PhotoActivity extends ActionBarActivity implements View.OnClickList
     }
 
     private void openAlbum() {
-        Intent intent =
-                new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//        Intent intent =
+//                new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Intent intent = new Intent();
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
         startActivityForResult(intent, SELECT_PHOTO);
     }
 
@@ -73,9 +79,20 @@ public class PhotoActivity extends ActionBarActivity implements View.OnClickList
             case SELECT_PHOTO:
                 Uri uri = data.getData();
                 String imagePath = Uris.getRealPathFromUriAboveApiAndroidK(this, uri);
-                Log.e("TAG", "onActivityResult: " + imagePath);
+                Uri imageUri = fileToUri(new File(imagePath));
+                Log.e("TAG", "onActivityResult: " + imageUri);
                 break;
         }
+    }
+
+    public Uri fileToUri(File file) {
+        Uri uri;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            uri = FileProvider.getUriForFile(this, getPackageName() + ".fileProvider", file);
+        } else {
+            uri = Uri.parse(file.getAbsolutePath());
+        }
+        return uri;
     }
 
 }
