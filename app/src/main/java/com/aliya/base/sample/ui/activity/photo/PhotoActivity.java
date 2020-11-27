@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 
@@ -31,6 +33,7 @@ import androidx.core.content.FileProvider;
 public class PhotoActivity extends ActionBarActivity implements View.OnClickListener {
 
     private static final int SELECT_PHOTO = 100;
+    private static final int PICK_CONTACT = 101;
 
     private ActivityPhotoBinding mViewBinding;
 
@@ -40,37 +43,49 @@ public class PhotoActivity extends ActionBarActivity implements View.OnClickList
         mViewBinding = ActivityPhotoBinding.inflate(getLayoutInflater());
         setContentView(mViewBinding.getRoot());
 
-        mViewBinding.tvOpenAlbum.setOnClickListener(this);
+        mViewBinding.tvOpenDocument.setOnClickListener(this);
+        mViewBinding.tvOpenPhoto.setOnClickListener(this);
+        mViewBinding.tvOpenContract.setOnClickListener(this);
 
         File storageDirectory = Environment.getExternalStorageDirectory();
         Log.e("TAG", "内置外部存储: " + storageDirectory.getAbsolutePath());
         Log.e("TAG", "不可移动的外部存储: " + Storages.getStoragePath(this, false));
         Log.e("TAG", "可移动的外部存储: " + Storages.getStoragePath(this, true));
+        PermissionManager.request(this, new PermissionCallback() {
+            @Override
+            public void onGranted(boolean isAlready) {
+            }
+
+            @Override
+            public void onDenied(@NonNull List<String> deniedPermissions,
+                                 @Nullable List<String> neverAskPermissions) {
+                finish();
+            }
+        }, Permission.STORAGE_WRITE, Permission.STORAGE_WRITE);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_open_album:
-                PermissionManager.request(this, new PermissionCallback() {
-                    @Override
-                    public void onGranted(boolean isAlready) {
-                        openAlbum();
-                    }
-
-                    @Override
-                    public void onDenied(@NonNull List<String> deniedPermissions,
-                                         @Nullable List<String> neverAskPermissions) {
-
-                    }
-                }, Permission.STORAGE_WRITE, Permission.STORAGE_WRITE);
+            case R.id.tv_open_document:
+                openDocumentImage();
                 break;
+            case R.id.tv_open_photo: {
+                Intent intent = new Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, SELECT_PHOTO);
+            }
+            break;
+            case R.id.tv_open_contract: {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+                startActivityForResult(intent, PICK_CONTACT);
+            }
+            break;
         }
     }
 
-    private void openAlbum() {
-//        Intent intent =
-//                new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+    private void openDocumentImage() {
         Intent intent = new Intent();
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("image/*");
@@ -83,10 +98,12 @@ public class PhotoActivity extends ActionBarActivity implements View.OnClickList
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case SELECT_PHOTO:
-                Uri uri = data.getData();
-                String imagePath = Uris.getRealPathFromUriAboveApiAndroidK(this, uri);
-                Uri imageUri = fileToUri(new File(imagePath));
-                Log.e("TAG", "onActivityResult: " + imageUri);
+                if (resultCode == RESULT_OK) {
+                    Uri uri = data.getData();
+                    String imagePath = Uris.getRealPathFromUriAboveApiAndroidK(this, uri);
+                    Uri imageUri = fileToUri(new File(imagePath));
+                    Log.e("TAG", "onActivityResult: " + imageUri);
+                }
                 break;
         }
     }
@@ -100,5 +117,4 @@ public class PhotoActivity extends ActionBarActivity implements View.OnClickList
         }
         return uri;
     }
-
 }
