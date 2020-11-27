@@ -6,11 +6,26 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/tv_open_album"
+        android:id="@+id/tv_open_document"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="开启系统相册" />
+        android:text="开启文档选择（image/*）" />
 
+    <TextView
+        android:id="@+id/tv_open_photo"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="开启手机相册" />
+
+    <TextView
+        android:id="@+id/tv_open_contract"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="调用手机联系人" />
 </LinearLayout>
