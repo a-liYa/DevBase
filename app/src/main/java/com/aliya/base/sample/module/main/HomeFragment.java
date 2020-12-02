@@ -10,6 +10,7 @@ import com.aliya.base.sample.R;
 import com.aliya.base.sample.databinding.FragmentRecyclerLayoutBinding;
 import com.aliya.base.sample.entity.FunctionBean;
 import com.aliya.base.sample.module.actionbar.SampleActionBarActivity;
+import com.aliya.base.sample.module.font.FontActivity;
 import com.aliya.base.sample.ui.activity.SecondActivity;
 import com.aliya.base.sample.ui.activity.UIDemoActivity;
 import com.aliya.base.sample.ui.activity.handler.HandlerActivity;
@@ -55,6 +56,8 @@ public class HomeFragment extends Fragment {
                 "Work Manager", WorkManagerActivity.class, R.mipmap.icon_function_work_manager));
         mFunctions.add(new FunctionBean(
                 "相册", PhotoActivity.class, R.mipmap.icon_function_photo));
+        mFunctions.add(new FunctionBean(
+                "字体", FontActivity.class, R.mipmap.icon_function_font));
     }
 
     public HomeFragment() {

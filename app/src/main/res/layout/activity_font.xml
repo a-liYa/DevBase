@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/abc_activity_background"
+    android:orientation="vertical"
+    android:theme="@style/FontFamilySystem"
+    tools:context=".module.font.FontActivity">
+
+    <!--字体风格：常规；字体类型：等宽-->
+    <TextView
+        android:id="@+id/tv_1_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:text="Android 工程师(style:normal,typeface:monospace)"
+        android:textStyle="normal"
+        android:typeface="monospace" />
+
+    <!--字体风格：常规；字体类型：sans-->
+    <TextView
+        android:id="@+id/tv_1_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:text="Android 工程师(style:normal,typeface:sans)"
+        android:textStyle="normal"
+        android:typeface="sans" />
+
+    <!--字体风格：常规；字体类型：serif-->
+    <TextView
+        android:id="@+id/tv_1_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:text="Android 工程师(style:normal,typeface:serif)"
+        android:textStyle="normal"
+        android:typeface="serif" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:background="@color/color_divider" />
+
+    <TextView
+        android:id="@+id/tv_1_0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:text="Android 工程师(style:normal)"
+        android:textStyle="normal"
+        android:typeface="normal" />
+
+    <TextView
+        android:id="@+id/tv_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:text="Android 工程师(style:中粗)" />
+
+    <TextView
+        android:id="@+id/tv_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:text="Android 工程师(style:bold)"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/letter_numerals"
+        android:padding="3dp"
+        android:text="Android 工程师(style:italic)"
+        android:textStyle="italic" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="方正标雅宋楷"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:theme="@style/FontFamilyFangZheng">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="注意：typeface(字体类型)在自定义字体中可能无效，textStyle(字体风格)有效"
+            android:textColor="@color/color_divider"
+            android:textSize="10sp" />
+
+        <!--字体风格：常规；字体类型：等宽-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="Android 工程师(style:normal,typeface:monospace)"
+            android:textStyle="normal"
+            android:typeface="monospace" />
+
+        <!--字体风格：常规；字体类型：sans-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="Android 工程师(style:normal,typeface:sans)"
+            android:textStyle="normal"
+            android:typeface="sans" />
+
+        <!--字体风格：常规；字体类型：serif-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="Android 工程师(style:normal,typeface:serif)"
+            android:textStyle="normal"
+            android:typeface="serif" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="@color/color_divider" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="Android 工程师(style:normal)"
+            android:textStyle="normal"
+            android:typeface="normal" />
+
+        <TextView
+            android:id="@+id/tv_2_0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="Android 工程师(style:中粗)" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="Android 工程师(style:bold)"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/letter_numerals"
+            android:padding="3dp"
+            android:text="Android 工程师(style:italic)"
+            android:textStyle="italic" />
+    </LinearLayout>
+</LinearLayout>
