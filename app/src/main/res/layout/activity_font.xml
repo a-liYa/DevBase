@@ -82,7 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center"
-        android:text="方正标雅宋楷"
+        android:text="@string/font_name_fzbiaoyasong"
         android:textSize="16sp" />
 
     <LinearLayout

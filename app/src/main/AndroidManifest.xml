@@ -16,12 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".module.locale.LanguageActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize|uiMode"
+            android:label="@string/activity_label_language"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".module.font.FontActivity"
             android:configChanges="orientation|screenSize"
             android:label="字体"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.UIDemoActivity"
             android:configChanges="orientation|screenSize"
