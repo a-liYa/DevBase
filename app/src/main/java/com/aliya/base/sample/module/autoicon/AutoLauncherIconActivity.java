@@ -12,6 +12,7 @@ import com.aliya.base.sample.databinding.ActivityAutoLauncherIconBinding;
  * 自动替换启动图标 - 示例页
  *
  * 采用 activity-alias 方案，切换图标不杀死进程，会延迟到 launcher 刷新，延迟期间点击旧图标未安装该应用。
+ * 建议在应用切后台之后执行替换，此时就算进程杀死，用户感知的概率也小。
  *
  * Android 10 会杀死进程，大概2秒左右更新图标，位置不变；
  * Android 9 不会杀死进程，原生位置变化，三星位置不变；
