@@ -10,6 +10,7 @@ import com.aliya.base.sample.R;
 import com.aliya.base.sample.databinding.FragmentRecyclerLayoutBinding;
 import com.aliya.base.sample.entity.FunctionBean;
 import com.aliya.base.sample.module.actionbar.SampleActionBarActivity;
+import com.aliya.base.sample.module.autoicon.AutoLauncherIconActivity;
 import com.aliya.base.sample.module.font.FontActivity;
 import com.aliya.base.sample.module.locale.LanguageActivity;
 import com.aliya.base.sample.ui.activity.SecondActivity;
@@ -61,6 +62,8 @@ public class HomeFragment extends Fragment {
                 "字体", FontActivity.class, R.mipmap.icon_function_font));
         mFunctions.add(new FunctionBean(
                 "多语言", LanguageActivity.class, R.mipmap.icon_function_language));
+        mFunctions.add(new FunctionBean(
+                "切换启动图标", AutoLauncherIconActivity.class, R.mipmap.icon_function_switch));
     }
 
     public HomeFragment() {
