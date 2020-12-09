@@ -16,6 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".module.autoicon.AutoLauncherIconActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/activity_label_language"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".module.locale.LanguageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize|uiMode"
             android:label="@string/activity_label_language"
@@ -64,7 +69,9 @@
             android:name=".ui.activity.NotificationActivity"
             android:configChanges="orientation|screenSize"
             android:label="通知演示"
-            android:screenOrientation="portrait" /> <!-- 华为全屏适配使用刘海区显示，也可对Activity配置 -->
+            android:screenOrientation="portrait" />
+
+        <!-- 华为全屏适配使用刘海区显示，也可对Activity配置 -->
         <meta-data
             android:name="android.notch_support"
             android:value="true" />
@@ -80,6 +87,32 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 双11专属Activity别名 -->
+        <activity-alias
+            android:name=".Splash11Activity"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_double_11"
+            android:targetActivity=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+        <!-- 双12专属Activity别名 -->
+        <activity-alias
+            android:name=".Splash12Activity"
+            android:enabled="false"
+            android:icon="@mipmap/ic_launcher_double_12"
+            android:targetActivity=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
@@ -100,7 +133,9 @@
         <activity
             android:name=".ui.activity.LiveEventActivity"
             android:configChanges="orientation|screenSize"
-            android:screenOrientation="portrait" /> <!-- 适配横竖屏、分屏切换时Activity不重建 -->
+            android:screenOrientation="portrait" />
+
+        <!-- 适配横竖屏、分屏切换时Activity不重建 -->
         <activity
             android:name=".viewmodel.CitySelectActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
@@ -149,7 +184,9 @@
 
         <receiver
             android:name=".ui.receiver.NotificationClickReceiver"
-            android:exported="false" /> <!-- 协助初始化Context -->
+            android:exported="false" />
+
+        <!-- 协助初始化Context -->
         <provider
             android:name=".db.AppInitInstaller"
             android:authorities="com.aliya.app.provider" />
