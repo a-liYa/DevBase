@@ -14,6 +14,7 @@ import com.aliya.base.gather.WebPools;
 import com.aliya.base.sample.base.ColorSaturation;
 import com.aliya.base.sample.module.listen.SideFloatHelper;
 import com.aliya.compat.CrashCompat;
+import com.bumptech.glide.Glide;
 
 import androidx.core.content.res.ResourcesCompat;
 import androidx.multidex.MultiDexApplication;
@@ -45,6 +46,7 @@ public class App extends MultiDexApplication {
                     Class clazz = SplashActivity.class;
 
                     // 此处 - 第三方初始化
+                    Glide.with(App.this).load("");
 
                     // Application应用字体Style
                     getTheme().applyStyle(R.style.FontFamilyCustom, false);
