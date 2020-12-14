@@ -1,7 +1,5 @@
 package com.aliya.base.sample.entity;
 
-import android.app.Activity;
-
 import java.io.Serializable;
 
 import androidx.annotation.DrawableRes;
@@ -17,14 +15,14 @@ public final class FunctionBean implements Serializable {
     @DrawableRes
     public int icon;
     public String title;
-    public Class<? extends Activity> activityClass;
+    public Class clazz;
 
     public FunctionBean() {
     }
 
-    public FunctionBean(String title, Class<? extends Activity> activityClass, int icon) {
+    public FunctionBean(String title, Class clazz, int icon) {
         this.icon = icon;
         this.title = title;
-        this.activityClass = activityClass;
+        this.clazz = clazz;
     }
 }

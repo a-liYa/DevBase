@@ -1,5 +1,7 @@
 package com.aliya.base.sample.module.main;
 
+import android.app.Activity;
+import android.app.Service;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -49,7 +51,11 @@ public class GridFunctionAdapter extends RecyclerAdapter<FunctionBean> {
 
         @Override
         public void onItemClick(View itemView, int position) {
-            IntentBuilder.get(mData.activityClass).startActivity();
+            if (Activity.class.isAssignableFrom(mData.clazz)) {
+                IntentBuilder.get(mData.clazz).startActivity();
+            } else if (Service.class.isAssignableFrom(mData.clazz)) {
+                itemView.getContext().startService(IntentBuilder.get(mData.clazz).intent());
+            }
         }
     }
 }

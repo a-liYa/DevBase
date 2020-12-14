@@ -1,4 +1,4 @@
-package com.aliya.base.sample.util;
+package com.aliya.monitor;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
