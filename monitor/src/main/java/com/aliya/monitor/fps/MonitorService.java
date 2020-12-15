@@ -1,4 +1,4 @@
-package com.aliya.monitor;
+package com.aliya.monitor.fps;
 
 import android.app.AppOpsManager;
 import android.app.Service;
@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 
+import com.aliya.monitor.R;
 import com.aliya.monitor.databinding.MonitorLayoutMonitorOverlayBinding;
 
 import java.lang.reflect.Field;

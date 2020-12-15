@@ -6,17 +6,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.aliya.monitor.fps.MonitorService;
+
 /**
  * AppMonitor
  *
  * @author a_liYa
  * @date 2020/12/14 14:15.
  */
-public final class AppMonitor {
+public final class AppFpsMonitor {
 
     static Context sContext;
 
-    private AppMonitor() {
+    private AppFpsMonitor() {
     }
 
     public static void init(Context context) {
@@ -70,10 +72,10 @@ public final class AppMonitor {
     }
 
     private static class Singleton {
-        static AppMonitor sInstance = new AppMonitor();
+        static AppFpsMonitor sInstance = new AppFpsMonitor();
     }
 
-    public static AppMonitor get() {
+    public static AppFpsMonitor get() {
         return Singleton.sInstance;
     }
 

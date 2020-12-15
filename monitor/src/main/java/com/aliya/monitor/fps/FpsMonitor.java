@@ -1,4 +1,4 @@
-package com.aliya.monitor;
+package com.aliya.monitor.fps;
 
 import android.os.Handler;
 import android.os.Looper;

@@ -10,7 +10,7 @@
             android:exported="false" />
 
         <service
-            android:name="com.aliya.monitor.MonitorService"
+            android:name="com.aliya.monitor.fps.MonitorService"
             android:enabled="true"
             android:exported="false" />
     </application>

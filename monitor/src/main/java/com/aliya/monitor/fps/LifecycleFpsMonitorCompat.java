@@ -1,4 +1,4 @@
-package com.aliya.monitor;
+package com.aliya.monitor.fps;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;

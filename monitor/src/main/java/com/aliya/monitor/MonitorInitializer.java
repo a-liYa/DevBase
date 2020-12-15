@@ -11,7 +11,7 @@ public class MonitorInitializer extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        AppMonitor.init(getContext());
+        AppFpsMonitor.init(getContext());
         return false;
     }
 
