@@ -64,8 +64,8 @@ public class MonitorService extends Service implements FpsMonitor.FpsListener {
         } else {
             layoutParams.type = LayoutParams.TYPE_PHONE;
         }
-        layoutParams.format = PixelFormat.RGBA_8888;//设置图片格式
-        layoutParams.flags = LayoutParams.FLAG_NOT_TOUCH_MODAL;
+        layoutParams.format = PixelFormat.RGBA_8888;
+        layoutParams.flags = LayoutParams.FLAG_NOT_FOCUSABLE;
         layoutParams.gravity = Gravity.LEFT | Gravity.BOTTOM;
         // 初始位置坐标, 相对于Gravity而言，eg：Gravity = LEFT|TOP 坐标原点在左上角； Gravity = LEFT|BOTTOM 坐标原点在左下角。
         // layoutParams.x = ;
