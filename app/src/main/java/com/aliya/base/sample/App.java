@@ -13,6 +13,7 @@ import com.aliya.base.AppUtils;
 import com.aliya.base.gather.WebPools;
 import com.aliya.base.sample.base.ColorSaturation;
 import com.aliya.base.sample.module.listen.SideFloatHelper;
+import com.aliya.base.sample.test.matrix.MatrixInit;
 import com.aliya.compat.CrashCompat;
 import com.bumptech.glide.Glide;
 
@@ -37,6 +38,8 @@ public class App extends MultiDexApplication {
         sMillis = SystemClock.uptimeMillis();
 
         isMainProcess = TextUtils.equals(getPackageName(), AppUtils.getProcessName());
+
+        MatrixInit.init(this);
 
         if (isMainProcess) { // 主进程需初始化
             new Thread(new Runnable() {
