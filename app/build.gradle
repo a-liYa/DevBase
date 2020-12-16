@@ -50,5 +50,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
     implementation project(':devbase')
-    debugImplementation project(':monitor')
+//    debugImplementation project(':monitor')
 }

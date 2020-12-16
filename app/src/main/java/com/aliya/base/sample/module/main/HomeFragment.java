@@ -13,6 +13,7 @@ import com.aliya.base.sample.module.actionbar.SampleActionBarActivity;
 import com.aliya.base.sample.module.autoicon.AutoLauncherIconActivity;
 import com.aliya.base.sample.module.font.FontActivity;
 import com.aliya.base.sample.module.locale.LanguageActivity;
+import com.aliya.base.sample.module.power.PowerSampleActivity;
 import com.aliya.base.sample.ui.activity.SecondActivity;
 import com.aliya.base.sample.ui.activity.UIDemoActivity;
 import com.aliya.base.sample.ui.activity.handler.HandlerActivity;
@@ -20,7 +21,6 @@ import com.aliya.base.sample.ui.activity.launch.SingleInstanceActivity;
 import com.aliya.base.sample.ui.activity.photo.PhotoActivity;
 import com.aliya.base.sample.ui.activity.thread.ThreadPoolActivity;
 import com.aliya.base.sample.ui.activity.work.WorkManagerActivity;
-import com.aliya.monitor.fps.MonitorService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment {
         mFunctions.add(new FunctionBean(
                 "切换启动图标", AutoLauncherIconActivity.class, R.mipmap.icon_function_switch));
         mFunctions.add(new FunctionBean(
-                "Service", MonitorService.class, R.mipmap.icon_function_switch));
+                "Service", PowerSampleActivity.class, R.mipmap.icon_function_screen_off));
     }
 
     public HomeFragment() {

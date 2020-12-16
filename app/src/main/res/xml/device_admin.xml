@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<device-admin>
+    <uses-policies>
+        <limit-password />      // 设置密码规则
+        <reset-password />      // 更改屏幕解锁密码
+        <force-lock />          // 设备自动解锁
+    </uses-policies>
+</device-admin>
