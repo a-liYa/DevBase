@@ -24,4 +24,5 @@ configurations.all {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     compileOnly deps.androidx.appcompat
+//    implementation 'com.github.markzhai:blockcanary-android:1.5.0'
 }

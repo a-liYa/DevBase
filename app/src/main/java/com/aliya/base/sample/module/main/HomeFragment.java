@@ -20,7 +20,7 @@ import com.aliya.base.sample.ui.activity.launch.SingleInstanceActivity;
 import com.aliya.base.sample.ui.activity.photo.PhotoActivity;
 import com.aliya.base.sample.ui.activity.thread.ThreadPoolActivity;
 import com.aliya.base.sample.ui.activity.work.WorkManagerActivity;
-import com.aliya.monitor.MonitorService;
+import com.aliya.monitor.fps.MonitorService;
 
 import java.util.ArrayList;
 import java.util.List;

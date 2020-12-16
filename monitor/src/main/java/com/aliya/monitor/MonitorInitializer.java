@@ -2,8 +2,14 @@ package com.aliya.monitor;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
+
+import com.aliya.monitor.block.BlockCanary;
+import com.aliya.monitor.block.BlockCanaryContext;
+import com.aliya.monitor.block.BlockInfo;
 
 public class MonitorInitializer extends ContentProvider {
     public MonitorInitializer() {
@@ -11,7 +17,23 @@ public class MonitorInitializer extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        AppFpsMonitor.init(getContext());
+//        AppFpsMonitor.init(getContext());
+//        AppBlockCanaryContext.init(getContext());
+        BlockCanary.install(getContext(), new BlockCanaryContext() {
+
+            public int provideBlockThreshold() {
+                return 100;
+            }
+
+            public void onBlock(Context context, BlockInfo blockInfo) {
+                Log.e("TAG", "onBlock: " + blockInfo);
+            }
+
+            @Override
+            public boolean stopWhenDebugging() {
+                return false;
+            }
+        }).start();
         return false;
     }
 

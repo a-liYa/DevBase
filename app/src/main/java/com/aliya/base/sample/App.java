@@ -13,7 +13,6 @@ import com.aliya.base.AppUtils;
 import com.aliya.base.gather.WebPools;
 import com.aliya.base.sample.base.ColorSaturation;
 import com.aliya.base.sample.module.listen.SideFloatHelper;
-import com.aliya.base.sample.test.matrix.MatrixInit;
 import com.aliya.compat.CrashCompat;
 import com.bumptech.glide.Glide;
 
@@ -39,7 +38,7 @@ public class App extends MultiDexApplication {
 
         isMainProcess = TextUtils.equals(getPackageName(), AppUtils.getProcessName());
 
-        MatrixInit.init(this);
+//        MatrixInit.init(this);
 
         if (isMainProcess) { // 主进程需初始化
             new Thread(new Runnable() {
@@ -54,6 +53,7 @@ public class App extends MultiDexApplication {
                     // Application应用字体Style
                     getTheme().applyStyle(R.style.FontFamilyCustom, false);
                     // 加载字体耗时 150ms
+//                    new TextView(App.this).setTypeface(ResourcesCompat.getFont(App.this, R.font.fzbiaoysk_zbjt));
                     ResourcesCompat.getFont(App.this, R.font.fzbiaoysk_zbjt);
                 }
             }).start();

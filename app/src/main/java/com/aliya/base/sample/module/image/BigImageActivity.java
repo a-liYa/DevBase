@@ -6,8 +6,8 @@ import android.view.View;
 import com.aliya.base.sample.R;
 import com.aliya.base.sample.base.BaseActivity;
 import com.aliya.base.sample.databinding.ActivityBigImageBinding;
-import com.aliya.monitor.LifecycleFpsMonitorCompat;
-import com.aliya.monitor.FpsMonitor;
+import com.aliya.monitor.fps.LifecycleFpsMonitorCompat;
+import com.aliya.monitor.fps.FpsMonitor;
 
 import java.io.IOException;
 import java.io.InputStream;

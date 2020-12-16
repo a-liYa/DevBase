@@ -20,9 +20,9 @@ android {
         }
 
         // 参考大厂：一般仅配置一个通用架构
-//        ndk {
-//            abiFilters "armeabi"
-//        }
+        ndk {
+            abiFilters "armeabi"
+        }
 
         resConfigs 'en' // 配置国际化仅支持默认，英文是国际化最广泛语言，所以默认en
     }

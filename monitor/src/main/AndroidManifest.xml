@@ -2,6 +2,8 @@
     package="com.aliya.monitor">
     <!-- 应用可出现在顶部 -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application>
         <provider
