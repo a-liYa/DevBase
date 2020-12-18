@@ -8,9 +8,8 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Build;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -21,7 +20,12 @@ import android.view.WindowManager;
 import com.aliya.base.manager.AppManager;
 import com.aliya.compat.CrashCompat;
 
+import java.io.File;
 import java.util.List;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 
 /**
  * 工具类
@@ -242,6 +246,31 @@ public final class AppUtils {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             sContext.startActivity(intent);
         }
+    }
+
+    /**
+     * 安装应用apk
+     *
+     * @param file
+     */
+    public static void installApk(File file) {
+        if (!file.exists()) {
+            return;
+        }
+        Context context = getContext();
+        // 官方提供的API:安装App
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri apkUri;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) { // 适配 7.0 私有文件权限
+            apkUri = FileProvider.getUriForFile(context,
+                    context.getPackageName() +".fileProvider", file);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // 解决解析软件包时出现问题
+        } else {
+            apkUri = Uri.fromFile(file);
+        }
+        intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
+        context.startActivity(intent);
     }
 
     /**
