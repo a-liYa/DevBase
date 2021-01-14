@@ -38,13 +38,14 @@ public class WeakReferenceActivity extends ActionBarActivity implements View.OnC
         mViewBinding.tvGet.setOnClickListener(this);
 
         mReferenceQueue = new ReferenceQueue();
-        mWeakReference = new WeakReference<>(mObject = new Object(), mReferenceQueue);
+        mWeakReference = new WeakReference<>(mObject = new FinalizeObject(), mReferenceQueue);
         Log.e("TAG", "弱引用，引用对象: " + mObject);
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
+                    Log.e("TAG", "Thread: run 阻塞");
                     // 阻塞remove
                     Reference<?> remove = mReferenceQueue.remove();
                     Log.e("TAG", "弱引用引用对象准备回收: " + remove.get() + " - " + mWeakReference.get());
@@ -65,6 +66,14 @@ public class WeakReferenceActivity extends ActionBarActivity implements View.OnC
             case R.id.tv_get:
                 Log.e("TAG", "获取引用: " + mObject + " - " + mWeakReference.get());
                 break;
+        }
+    }
+
+    private class FinalizeObject {
+        @Override
+        protected void finalize() throws Throwable {
+            super.finalize();
+            Log.e("TAG", "finalize: " + Thread.currentThread().getName());
         }
     }
 }
