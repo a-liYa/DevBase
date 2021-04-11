@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/abc_activity_background"
+    tools:context=".module.anim.AnimationActivity">
+
+    <View
+        android:id="@+id/view_target_1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:background="@color/blue" />
+
+    <View
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="10dp"
+        android:alpha="0.2"
+        android:background="@color/blue"
+        android:contentDescription="动画中间执行的位置" />
+
+    <TextView
+        android:id="@+id/tv_perform_anim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="10dp"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="执行动画" />
+</FrameLayout>

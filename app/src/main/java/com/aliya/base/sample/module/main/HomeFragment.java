@@ -10,6 +10,7 @@ import com.aliya.base.sample.R;
 import com.aliya.base.sample.databinding.FragmentRecyclerLayoutBinding;
 import com.aliya.base.sample.entity.FunctionBean;
 import com.aliya.base.sample.module.actionbar.SampleActionBarActivity;
+import com.aliya.base.sample.module.anim.AnimationActivity;
 import com.aliya.base.sample.module.autoicon.AutoLauncherIconActivity;
 import com.aliya.base.sample.module.download.DownloadActivity;
 import com.aliya.base.sample.module.font.FontActivity;
@@ -70,6 +71,8 @@ public class HomeFragment extends Fragment {
                 "熄屏亮屏", PowerSampleActivity.class, R.mipmap.icon_function_screen_off));
         mFunctions.add(new FunctionBean(
                 "下载器", DownloadActivity.class, R.mipmap.icon_function_download));
+        mFunctions.add(new FunctionBean(
+                "动画展示", AnimationActivity.class, R.mipmap.icon_function_animation));
     }
 
     public HomeFragment() {
