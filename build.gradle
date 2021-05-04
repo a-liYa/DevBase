@@ -1,15 +1,13 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
-        apply from: "https://gitee.com/a_liYa/gradleconfig/raw/master/dependency/versions.gradle"
+        apply from: "https://gitee.com/a_liYa/gradleconfig/raw/master/dependency/latest_versions.gradle"
         addAliyunRepos(repositories)
 //        addRepos(repositories)
     }
     dependencies {
         classpath deps.gradle_plugin
-        classpath deps.novoda_bintray
 //        classpath 'com.android.tools.build:gradle:3.5.4'
-        classpath ("com.tencent.matrix:matrix-gradle-plugin:${MATRIX_VERSION}") { changing = true }
     }
 }
 

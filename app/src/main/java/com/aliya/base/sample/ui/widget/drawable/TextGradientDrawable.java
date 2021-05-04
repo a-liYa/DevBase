@@ -190,7 +190,7 @@ public class TextGradientDrawable extends GradientDrawable {
     }
 
     private Layout.Alignment getLayoutAlignment(TextView referTo) {
-        Layout.Alignment alignment = null;
+        Layout.Alignment alignment;
         switch (referTo.getTextAlignment()) {
             case View.TEXT_ALIGNMENT_GRAVITY:
                 switch (referTo.getGravity() & Gravity.RELATIVE_HORIZONTAL_GRAVITY_MASK) {
@@ -201,14 +201,12 @@ public class TextGradientDrawable extends GradientDrawable {
                         alignment = Layout.Alignment.ALIGN_OPPOSITE;
                         break;
                     case Gravity.LEFT:
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                            alignment = Layout.Alignment.ALIGN_LEFT;
-                        }
+                        /*alignment = Layout.Alignment.ALIGN_LEFT;*/
+                        alignment = Layout.Alignment.ALIGN_NORMAL;
                         break;
                     case Gravity.RIGHT:
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                            alignment = Layout.Alignment.ALIGN_RIGHT;
-                        }
+                        /*alignment = Layout.Alignment.ALIGN_RIGHT;*/
+                        alignment = Layout.Alignment.ALIGN_NORMAL;
                         break;
                     case Gravity.CENTER_HORIZONTAL:
                         alignment = Layout.Alignment.ALIGN_CENTER;
@@ -228,16 +226,14 @@ public class TextGradientDrawable extends GradientDrawable {
                 alignment = Layout.Alignment.ALIGN_CENTER;
                 break;
             case View.TEXT_ALIGNMENT_VIEW_START:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    alignment = (referTo.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL)
-                            ? Layout.Alignment.ALIGN_RIGHT : Layout.Alignment.ALIGN_LEFT;
-                }
+                /*alignment = (referTo.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL)
+                        ? Layout.Alignment.ALIGN_RIGHT : Layout.Alignment.ALIGN_LEFT;*/
+                alignment = Layout.Alignment.ALIGN_NORMAL;
                 break;
             case View.TEXT_ALIGNMENT_VIEW_END:
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    alignment = (referTo.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL)
-                            ? Layout.Alignment.ALIGN_LEFT : Layout.Alignment.ALIGN_RIGHT;
-                }
+                /*alignment = (referTo.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL)
+                        ? Layout.Alignment.ALIGN_LEFT : Layout.Alignment.ALIGN_RIGHT;*/
+                alignment = Layout.Alignment.ALIGN_NORMAL;
                 break;
             case View.TEXT_ALIGNMENT_INHERIT:
                 // This should never happen as we have already resolved the text alignment

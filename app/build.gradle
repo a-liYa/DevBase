@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply from: 'depend.gradle'
-apply from: 'matrix.gradle'
 
 android {
     compileSdkVersion build_versions.compile_sdk
