@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion build_versions.compile_sdk
@@ -10,8 +11,8 @@ android {
         versionName "1.0"
     }
 
-    viewBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding = true
     }
 }
 
@@ -24,5 +25,6 @@ configurations.all {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     compileOnly deps.androidx.appcompat
+    compileOnly deps.kotlin_stdlib
 //    implementation 'com.github.markzhai:blockcanary-android:1.5.0'
 }

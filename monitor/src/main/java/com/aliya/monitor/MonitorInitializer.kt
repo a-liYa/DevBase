@@ -1,25 +1,15 @@
-package com.aliya.monitor;
+package com.aliya.monitor
 
-import android.content.ContentProvider;
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
-import android.util.Log;
+import android.content.ContentProvider
+import android.content.ContentValues
+import android.database.Cursor
+import android.net.Uri
 
-import com.aliya.monitor.block.BlockCanary;
-import com.aliya.monitor.block.BlockCanaryContext;
-import com.aliya.monitor.block.BlockInfo;
-
-public class MonitorInitializer extends ContentProvider {
-    public MonitorInitializer() {
-    }
-
-    @Override
-    public boolean onCreate() {
-//        AppFpsMonitor.init(getContext());
-//        AppBlockCanaryContext.init(getContext());
-        BlockCanary.install(getContext(), new BlockCanaryContext() {
+class MonitorInitializer : ContentProvider() {
+    override fun onCreate(): Boolean {
+        AppFpsMonitor.init(context!!)
+        //        AppBlockCanaryContext.init(getContext());
+        /*BlockCanary.install(getContext(), new BlockCanaryContext() {
 
             public int provideBlockThreshold() {
                 return 100;
@@ -33,34 +23,28 @@ public class MonitorInitializer extends ContentProvider {
             public boolean stopWhenDebugging() {
                 return false;
             }
-        }).start();
-        return false;
+        }).start();*/return false
     }
 
-    @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs) {
-        return 0;
+    override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
+        return 0
     }
 
-    @Override
-    public String getType(Uri uri) {
-        return null;
+    override fun getType(uri: Uri): String? {
+        return null
     }
 
-    @Override
-    public Uri insert(Uri uri, ContentValues values) {
-        return null;
+    override fun insert(uri: Uri, values: ContentValues?): Uri? {
+        return null
     }
 
-    @Override
-    public Cursor query(Uri uri, String[] projection, String selection,
-                        String[] selectionArgs, String sortOrder) {
-       return null;
+    override fun query(uri: Uri, projection: Array<String>?, selection: String?,
+                       selectionArgs: Array<String>?, sortOrder: String?): Cursor? {
+        return null
     }
 
-    @Override
-    public int update(Uri uri, ContentValues values, String selection,
-                      String[] selectionArgs) {
-        return 0;
+    override fun update(uri: Uri, values: ContentValues?, selection: String?,
+                        selectionArgs: Array<String>?): Int {
+        return 0
     }
 }

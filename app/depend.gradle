@@ -12,6 +12,7 @@ dependencies {
     implementation deps.androidx.recyclerview
     implementation deps.androidx.constraintlayout
     implementation deps.android.material
+    implementation deps.androidx.viewpager2
 
     implementation deps.androidx.navigation_ui
     implementation deps.androidx.navigation_fragment
@@ -21,6 +22,8 @@ dependencies {
     // implementation deps.androidx.lifecycle_extensions
     implementation deps.androidx.room_runtime
     annotationProcessor deps.androidx.room_compiler
+
+    implementation deps.kotlin_stdlib
 
     implementation deps.gson
 
