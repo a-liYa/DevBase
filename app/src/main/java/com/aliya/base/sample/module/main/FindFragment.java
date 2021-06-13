@@ -12,6 +12,7 @@ import com.aliya.base.sample.databinding.FragmentRecyclerLayoutBinding;
 import com.aliya.base.sample.entity.FunctionBean;
 import com.aliya.base.sample.module.image.BigImageActivity;
 import com.aliya.base.sample.module.listen.ListenNewsActivity;
+import com.aliya.base.sample.module.mvvm.UserListActivity;
 import com.aliya.base.sample.module.nested.NestedViewActivity;
 import com.aliya.base.sample.module.reference.WeakReferenceActivity;
 import com.aliya.base.sample.ui.activity.LiveEventActivity;
@@ -55,6 +56,8 @@ public class FindFragment extends Fragment {
                 "大图", BigImageActivity.class, R.mipmap.icon_fucntion_image));
         mFunctions.add(new FunctionBean(
                 "嵌套滑动", NestedViewActivity.class, R.mipmap.icon_function_nested));
+        mFunctions.add(new FunctionBean(
+                "MVVM", UserListActivity.class, R.drawable.icon_function_mode));
     }
 
     @Override

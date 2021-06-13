@@ -1,5 +1,6 @@
 package com.aliya.base.util;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -51,6 +52,10 @@ public final class Views {
     @IntDef({View.VISIBLE, View.INVISIBLE, View.GONE})
     @Retention(RetentionPolicy.SOURCE)
     public @interface Visibility {
+    }
+
+    public static View inflate(ViewGroup parent, int resource, boolean attachToRoot) {
+        return LayoutInflater.from(parent.getContext()).inflate(resource, parent, attachToRoot);
     }
 
 }
