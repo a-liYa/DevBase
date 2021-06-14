@@ -54,6 +54,15 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
+    // kotlin 相关
+    implementation deps.kotlin.stdlib
+    // 协程支持库
+    implementation deps.kotlinx.coroutines_core
+    implementation deps.kotlinx.coroutines_android
+
+    implementation deps.androidx.core_ktx
+    implementation 'androidx.activity:activity-ktx:1.2.3'
+
     implementation project(':devbase')
     debugImplementation project(':monitor')
 }

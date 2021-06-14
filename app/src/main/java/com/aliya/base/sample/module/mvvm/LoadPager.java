@@ -100,7 +100,6 @@ public class LoadPager {
             mViewBinding.getRoot().animate().alpha(0).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    Log.e(TAG, "onAnimationEnd: " + mPageViewLayoutParams);
                     parent.removeView(mViewBinding.getRoot());
                     mViewBinding.getRoot().setAlpha(1);
                 }

@@ -17,6 +17,9 @@ android {
         consumerProguardFiles 'proguard-rules.pro'
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
