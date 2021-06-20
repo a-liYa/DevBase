@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context="com.aliya.base.sample.module.snap.PagerSnapActivity">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="230dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:alpha="0.4"-->
+<!--        android:background="@color/green"-->
+<!--        android:textColor="@android:color/white"-->
+<!--        android:gravity="center_vertical"-->
+<!--        android:text="RecyclerView 中间位置" />-->
+</FrameLayout>

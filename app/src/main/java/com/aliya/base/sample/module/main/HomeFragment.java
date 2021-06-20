@@ -16,7 +16,7 @@ import com.aliya.base.sample.module.download.DownloadActivity;
 import com.aliya.base.sample.module.font.FontActivity;
 import com.aliya.base.sample.module.locale.LanguageActivity;
 import com.aliya.base.sample.module.power.PowerSampleActivity;
-import com.aliya.base.sample.ui.activity.SecondActivity;
+import com.aliya.base.sample.module.snap.PagerSnapActivity;
 import com.aliya.base.sample.ui.activity.UIDemoActivity;
 import com.aliya.base.sample.ui.activity.handler.HandlerActivity;
 import com.aliya.base.sample.ui.activity.launch.SingleInstanceActivity;
@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment {
 
     {
         mFunctions.add(new FunctionBean(
-                "主页", SecondActivity.class, R.mipmap.icon_function_home));
+                "PagerSnap", PagerSnapActivity.class, R.drawable.icon_function_snap));
         mFunctions.add(new FunctionBean(
                 "启动模式", SingleInstanceActivity.class, R.mipmap.icon_function_launch));
         mFunctions.add(new FunctionBean(

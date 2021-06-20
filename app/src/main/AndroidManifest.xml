@@ -159,8 +159,9 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.SecondActivity"
+            android:name=".module.snap.PagerSnapActivity"
             android:configChanges="orientation|screenSize"
+            android:label="PagerSnap"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.NormalPageActivity"
