@@ -23,6 +23,8 @@ android {
         ndk {
             abiFilters "armeabi"
         }
+        // useSupportLibrary 为 true 时，打包编译不会转换对应 png 资源
+        vectorDrawables.useSupportLibrary = true
 
         resConfigs 'en' // 配置国际化仅支持默认，英文是国际化最广泛语言，所以默认en
     }
